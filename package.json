@@ -1,0 +1,24 @@
+{
+  "name": "via",
+  "version": "0.0.0",
+  "description": "scheme connectivity service",
+  "main": "via.js",
+  "author": "Martin Meadows <martin@netconfigs.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/mhmeadows63/appello-via.git"
+  },
+  "dependencies": {
+    "replify": "^1.2.0"
+  },
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/mhmeadows63/appello-via/issues"
+  },
+  "homepage": "https://github.com/mhmeadows63/appello-via#readme",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "UNLICENSED"
+}
