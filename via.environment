@@ -1,0 +1,8 @@
+# /etc/sysconfig/appello-via
+## Type:                string
+## Default:             ""
+## Config:              ""
+## ServiceRestart:      via
+#
+#NAME=VALUE
+DEBUG=running
