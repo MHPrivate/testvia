@@ -30,12 +30,17 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="lib\mesh.io.js" />
+    <Compile Include="lib\mysql.js" />
     <Compile Include="lib\replify.js" />
     <Compile Include="lib\running.js" />
+    <Compile Include="lib\web.js" />
     <Compile Include="via.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
     <Content Include="secrets.json" />
+    <Content Include="systemd.environment" />
+    <Content Include="systemd.service" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="lib\" />

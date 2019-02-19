@@ -9,7 +9,14 @@
     "url": "git+ssh://git@github.com/mhmeadows63/appello-via.git"
   },
   "dependencies": {
-    "replify": "^1.2.0"
+    "callsites": "^3.0.0",
+    "http-close": "0.0.2",
+    "mysql": "^2.16.0",
+    "node.extend": "^2.0.2",
+    "replify": "^1.2.0",
+    "scope-chain": "^1.2.0",
+    "socket.io": "^2.2.0",
+    "x509.js": "^1.0.0"
   },
   "private": true,
   "bugs": {

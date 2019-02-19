@@ -5,7 +5,7 @@ After=network.service
 #Requires=network.service
 
 [Service]
-EnvironmentFile=/opt/appello-via/via.environment
+EnvironmentFile=/opt/appello-via/systemd.environment
 ExecStart=/opt/appello-via/via.js
 ExecReload=/usr/sbin/fuser -HUP -ks /run/via.pid
 TimeoutStopSec=20

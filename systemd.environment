@@ -4,5 +4,5 @@
 ## Config:              ""
 ## ServiceRestart:      via
 #
-#NAME=VALUE
-DEBUG=running
+DEBUG_HIDE_DATE=yes
+PORT=443
