@@ -12,7 +12,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>1ca7e54b-aaa6-40ad-99e4-f8a0e1d67e78</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>via.js</StartupFile>
+    <StartupFile>appello.js</StartupFile>
     <StartWebBrowser>False</StartWebBrowser>
     <SearchPath>
     </SearchPath>
@@ -30,12 +30,16 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="appello.js" />
+    <Compile Include="lib\app.js" />
     <Compile Include="lib\mesh.io.js" />
+    <Compile Include="lib\mesh\larcs.js" />
+    <Compile Include="lib\mesh\index.js" />
+    <Compile Include="lib\mesh\peers.js" />
     <Compile Include="lib\mysql.js" />
     <Compile Include="lib\replify.js" />
     <Compile Include="lib\running.js" />
     <Compile Include="lib\web.js" />
-    <Compile Include="via.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
     <Content Include="secrets.json" />
@@ -44,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="lib\" />
+    <Folder Include="lib\mesh\" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />

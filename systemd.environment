@@ -1,8 +1,9 @@
-# /etc/sysconfig/appello-via
+# /etc/sysconfig/appello
 ## Type:                string
 ## Default:             ""
 ## Config:              ""
-## ServiceRestart:      via
+## ServiceRestart:      appello
 #
 DEBUG_HIDE_DATE=yes
 PORT=443
+DEBUG=mysql,mesh,mesh:peers,mesh.io

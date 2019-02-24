@@ -2,7 +2,7 @@
   "name": "via",
   "version": "0.0.0",
   "description": "scheme connectivity service",
-  "main": "via.js",
+  "main": "appello.js",
   "author": "Martin Meadows <martin@netconfigs.com>",
   "repository": {
     "type": "git",
@@ -11,6 +11,8 @@
   "dependencies": {
     "callsites": "^3.0.0",
     "http-close": "0.0.2",
+    "ipaddr.js": "^1.9.0",
+    "jsonwebtoken": "^8.5.0",
     "mysql": "^2.16.0",
     "node.extend": "^2.0.2",
     "replify": "^1.2.0",

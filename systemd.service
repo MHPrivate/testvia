@@ -1,14 +1,14 @@
-# /etc/systemd/system/via.service
+# /etc/systemd/system/appello.service
 [Unit]
-Description=Appello 'via' service
+Description=Appello service
 After=network.service
 #Requires=network.service
 
 [Service]
 EnvironmentFile=/opt/appello-via/systemd.environment
-ExecStart=/opt/appello-via/via.js
-ExecReload=/usr/sbin/fuser -HUP -ks /run/via.pid
-TimeoutStopSec=20
+ExecStart=/opt/appello-via/appello.js
+ExecReload=/usr/sbin/fuser -HUP -ks /run/appello.sock
+TimeoutStopSec=15
 Restart=always
 
 [Install]

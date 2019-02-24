@@ -2,14 +2,14 @@
 process.env.DEBUG || (process.env.DEBUG = 'mysql');
 //process.setMaxListeners(20);
 
-require('./lib/running').running = undefined; // causes main.running set _true_ once running AND _false_ while terminating
+require('./lib/running').running = undefined; // causes main.running set _true_ once running AND _false_ when terminating
 require('./lib/replify')(!process.stdin.isTTY); // starts either a console:repl OR a daemon:replify (/run/<main>.sock)
 
 var callsites = require('callsites');
 var extend = require('node.extend');
 var fs = require('fs');
 
-var main = extend(exports, {
+var main = extend(exports,{
     secrets: JSON.parse(fs.readFileSync(__dirname + '/secrets.json', 'utf8')),
     setup: { // static instance settings variations that allow multiple instances on the same host e.g. port numbers
         https: +process.env.PORT || 8443,
@@ -21,7 +21,11 @@ var main = extend(exports, {
     debug: require('debug'),    // logging module administration
     global: global, // the core global object
     modules: {      // accessibility convenience
+        app: require('./lib/app'),
+        larcs: require('./lib/mesh/larcs'),
+        mesh: require('./lib/mesh'),
         mysql: require('./lib/mysql'),
+        peers: require('./lib/mesh/peers'),
         web: require('./lib/web'),
     },
 });
