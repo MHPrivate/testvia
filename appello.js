@@ -18,9 +18,10 @@ var main = extend(exports,{
     control: {},    // dynamic runtime settings that broadly vary behaviour e.g. on/off site
     state: {},      // fast-dynamic runtime context for detail tracking
     cache: {},      // slow-dynamic runtime context - e.g. SSL certificate(s)
+    hack: {},       // diagnostic runtime settings - usually empty
     debug: require('debug'),    // logging module administration
-    global: global, // the core global object
-    modules: {      // accessibility convenience
+    global: global, // the core global object - otherwise different for each replify client
+    modules: {      // only for diagnostic accessibility - must not be used by code - use require(s) only
         app: require('./lib/app'),
         larcs: require('./lib/mesh/larcs'),
         mesh: require('./lib/mesh'),
