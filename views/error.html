@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <h1>Error Page <%= status %></h1>
+    <h2>Oops! Something went wrong.</h2>
+<%  if (!error) { %>
+    <h3><%= message %></h3>
+<%  } else { %>
+    <pre><%= error.stack %></pre>
+<%  } %>
+</body>
+</html>

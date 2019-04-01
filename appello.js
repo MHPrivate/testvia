@@ -21,7 +21,7 @@ var main = extend(exports,{
     hack: {},       // diagnostic runtime settings - usually empty
     debug: require('debug'),    // logging module administration
     global: global, // the core global object - otherwise different for each replify client
-    modules: {      // only for diagnostic accessibility - must not be used by code - use require(s) only
+    modules: {      // only for diagnostic accessibility - not to be used by code - use require(s) only
         app: require('./lib/app'),
         larcs: require('./lib/mesh/larcs'),
         mesh: require('./lib/mesh'),

@@ -6,4 +6,4 @@
 #
 DEBUG_HIDE_DATE=yes
 PORT=443
-DEBUG=mysql,mesh:peers
+DEBUG=mysql,mesh,mesh:*

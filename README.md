@@ -8,11 +8,16 @@ The functionality consists of a service to run under NodeJS on multiple cooperat
 - R is a number of (R)eserve/standby servers ready to adopt the active IP of a failed Live/operational server.
 
 To maintain loose coupling between functional areas, this codebase uses the 'running' module to publish _running_ and
-_terminate_ events on the process Emitter to signal:
+_terminate_ events on the process Emitter that signals:
 - running - all code loaded - begin operation
 - terminate - process terminating - cleanup all event-loop participation
 
 When run from the command-line (where STDIN is a TTY), a console-repl is started.
 
-When run as a service (where STDIN is not a TTY), a _replify_ unix-socket is placed at /run/appello.sock for use by with
-the replify-client, allowing interaction with the service daemon.
+When run as a service (where STDIN is not a TTY), a _replify_ unix-socket is placed at /run/appello.sock for use with
+the replify-client to allow interaction with the service/daemon.
+
+## Required configuration files (HIGHLY SENSITIVE - these files absolutely must NOT be committed to GitHub)
+../secrets.json - mandatory config
+/etc/named.ddns.key - necessary for ./bash/nsupdate.sh to function
+
