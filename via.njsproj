@@ -36,6 +36,7 @@
     <Compile Include="lib\app.js" />
     <Compile Include="lib\crc32.js" />
     <Compile Include="lib\firebase.js" />
+    <Compile Include="lib\ipsets.js" />
     <Compile Include="lib\ipv4fqdn.js" />
     <Compile Include="lib\locals.js" />
     <Compile Include="lib\mesh.io.js" />

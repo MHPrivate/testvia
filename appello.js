@@ -9,7 +9,7 @@ var callsites = require('callsites');
 var extend = require('node.extend');
 var fs = require('fs');
 
-var main = extend(exports,{
+var main = extend(exports, {
     secrets: JSON.parse(fs.readFileSync(__dirname + '/secrets.json', 'utf8')),
     setup: { // static instance settings variations that allow multiple instances on the same host e.g. port numbers
         https: +process.env.PORT || 8443,
@@ -19,10 +19,11 @@ var main = extend(exports,{
     state: {},      // fast-dynamic runtime context for detail tracking
     cache: {},      // slow-dynamic runtime context - e.g. SSL certificate(s)
     hack: {},       // diagnostic runtime settings - usually empty
-    debug: require('debug'),    // logging module administration
     global: global, // the core global object - otherwise different for each replify client
     modules: {      // only for diagnostic accessibility - not to be used by code - use require(s) only
         app: require('./lib/app'),
+        debug: require('debug'),    // for logging module administration
+        ipsets: require('./lib/ipsets'),
         larcs: require('./lib/mesh/larcs'),
         mesh: require('./lib/mesh'),
         mysql: require('./lib/mysql'),
