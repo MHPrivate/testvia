@@ -54,6 +54,8 @@
     <Compile Include="routes\v1\larc.js" />
     <Compile Include="routes\v1\mosh.js" />
     <Compile Include="routes\v1\sshkeys.js" />
+    <Content Include="bash\ipset-restore.sh" />
+    <Content Include="bash\nsupdate.sh" />
     <Content Include="package.json" />
     <Content Include="README.md" />
     <Content Include="secrets.json" />
@@ -61,6 +63,7 @@
     <Content Include="systemd.service" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="bash\" />
     <Folder Include="lib\" />
     <Folder Include="lib\mesh\" />
     <Folder Include="routes\" />

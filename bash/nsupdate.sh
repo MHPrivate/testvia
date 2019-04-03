@@ -2,5 +2,5 @@
 key=/etc/named.ddns.key
 nsupdate=/usr/bin/nsupdate
 
-#$nsupdate -l
-$nsupdate -k $key
+#exec $nsupdate -l
+exec $nsupdate -k $key
