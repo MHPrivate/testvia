@@ -38,7 +38,7 @@ process.once('terminate', function _main() {
     }, setTimeout = global.setTimeout;
     global.setTimeout = function (cb, ms) { // intercept & unref particular timeout(s) set during shutdown
         if (ms && !unref[cb.name])
-            console.log.apply(console, ['setTimeout00:', cb.name].concat(Array.from(arguments)).concat('' + callsites()[1]));
+            console.log.apply(console, ['setTimeout:', '"' + cb.name + '"'].concat(Array.from(arguments)).concat('' + callsites()[1]));
         var timeout = setTimeout.apply(global, arguments); // set the timeout as requested
         return unref[cb.name] ? timeout.unref() : timeout; // unref specific timeouts
     };
