@@ -19,6 +19,7 @@
     "http-close": "0.0.2",
     "ipaddr.js": "^1.9.0",
     "jsonwebtoken": "^8.5.0",
+    "modesl": "^1.2.0",
     "morgan": "^1.9.1",
     "mysql": "^2.16.0",
     "node.extend": "^2.0.2",
