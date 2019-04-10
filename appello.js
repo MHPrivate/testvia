@@ -3,7 +3,7 @@ process.env.DEBUG || (process.env.DEBUG = 'mysql');
 //process.setMaxListeners(20);
 
 require('./lib/running').running = undefined; // causes main.running set _true_ once running AND _false_ when terminating
-require('./lib/replify')(!process.stdin.isTTY); // starts either a console:repl OR a daemon:replify (/run/<main>.sock)
+require('./lib/repletion')(!process.stdin.isTTY); // starts either a console:repl OR a daemon:replify (/run/<main>.sock)
 
 var callsites = require('callsites');
 var extend = require('node.extend');
