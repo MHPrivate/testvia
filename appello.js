@@ -21,7 +21,6 @@ var main = extend(exports, {
     hack: {},       // diagnostic runtime settings - usually empty
     global: global, // the core global object - otherwise different for each replify client
     modules: {      // only for diagnostic accessibility - not to be used by code - use require(s) only
-        app: require('./lib/app'),
         debug: require('debug'),    // for logging module administration
         esl: require('./lib/esl'),
         ipsets: require('./lib/ipsets'),
