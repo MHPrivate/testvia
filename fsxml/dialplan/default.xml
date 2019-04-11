@@ -1,0 +1,93 @@
+<context name="default" >
+    <extension name="unloop">
+        <condition field="${unroll_loops}" expression="^true$"/>
+        <condition field="${sip_looped_call}" expression="^true$">
+            <action application="deflect" data="${destination_number}"/>
+        </condition>
+    </extension>
+
+    <extension name="global" continue="true">
+        <condition field="${call_debug}" expression="^true$" break="never">
+            <action application="info"/>
+        </condition>
+
+        <condition field="${default_password}" expression="^1234$" break="never">
+            <action application="log" data="CRIT WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING "/>
+            <action application="log" data="CRIT Open $${conf_dir}/vars.xml and change the default_password."/>
+            <action application="log" data="CRIT Once changed type 'reloadxml' at the console."/>
+            <action application="log" data="CRIT WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING "/>
+            <action application="sleep" data="10000"/>
+        </condition>
+        <!--
+            This is an example of how to auto detect if telephone-event is missing and activate inband detection 
+        -->
+        <!--
+        <condition field="${switch_r_sdp}" expression="a=rtpmap:(\d+)\stelephone-event/8000" break="never">
+            <action application="set" data="rtp_payload_number=$1"/>
+            <anti-action application="start_dtmf"/>
+        </condition>
+        -->
+        <condition field="${rtp_has_crypto}" expression="^($${rtp_sdes_suites})$" break="never">
+            <action application="set" data="rtp_secure_media=true"/>
+            <!-- Offer SRTP on outbound legs if we have it on inbound. -->
+            <!-- <action application="export" data="rtp_secure_media=true"/> -->
+        </condition>
+
+        <!--
+            Since we have inbound-late-negotation on by default now the
+            above behavior isn't the same so you have to do one extra step.
+        -->
+        <condition field="${endpoint_disposition}" expression="^(DELAYED NEGOTIATION)"/>
+        <condition field="${switch_r_sdp}" expression="(AES_CM_128_HMAC_SHA1_32|AES_CM_128_HMAC_SHA1_80)" break="never">
+            <action application="set" data="rtp_secure_media=true"/>
+            <!-- Offer SRTP on outbound legs if we have it on inbound. -->
+            <!-- <action application="export" data="rtp_secure_media=true"/> -->
+        </condition>
+
+        <condition>
+            <action application="hash" data="insert/${domain_name}-spymap/${caller_id_number}/${uuid}"/>
+            <action application="hash" data="insert/${domain_name}-last_dial/${caller_id_number}/${destination_number}"/>
+            <action application="hash" data="insert/${domain_name}-last_dial/global/${uuid}"/>
+            <action application="export" data="RFC2822_DATE=${strftime(%a, %d %b %Y %T %z)}"/>
+        </condition>
+    </extension>
+
+    <extension name="scheme">
+        <condition field="destination_number" expression="^4\d{8}$"/>
+        <condition field="${user_exists(id ${destination_number:0:6} $${domain})}" expression="^true$" break="never">
+            <action application="set" data="bridge=${sofia_contact(user/${destination_number:0:6}" inline="true"/>
+            <anti-action  application="set" data="bridge=${sofia_contact(user/${destination_number:0:7}" inline="true"/>
+        </condition>
+        <condition>
+            <action application="set" data="hangup_after_bridge=true"/>
+            <action application="set" data="continue_on_fail=true"/>
+            <!-- Offer SRTP on outbound legs if the contact contains 'transport=tls'. -->
+            <action application="bridge" data="{rtp_secure_media=${regex(${bridge}|transport=tls)}}${lua(~stream:write(tostring(string.gsub('${bridge}','gw%+[^@]+','${destination_number}'))))}"/>
+        </condition>
+    </extension>
+
+    <extension name="park">
+        <condition field="destination_number" expression="^(park|7275)$">
+            <action application="info"/>
+            <action application="answer"/>
+            <action application="park"/>
+        </condition>
+    </extension>
+
+<%-
+    (function (base, dir, sub) {
+        var basedir = `${base}/${dir}`, fpath = `${basedir}/${sub}.xml`;
+        if (!sub) {
+            return fs.statSync(basedir).isDirectory() ? fs.readdirSync(basedir).filter(sub=>fs.statSync(`${basedir}/${sub}`).isFile()).map(sub=>include(`${dir}/${sub}`)).join('') : undefined
+        } else if (fs.existsSync(fpath) && fs.statSync(fpath).isFile()) {
+            return include(`${dir}/${sub}.xml`)
+        }
+    })(path.dirname(__filename), 'default', query['Caller-Destination-Number']) // __dirname, 'default', '1000'
+ %>
+
+    <extension name="catchall">
+        <condition>
+            <action application="bridge" data="group/default"/>
+        </condition>
+    </extension>
+</context>

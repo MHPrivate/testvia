@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<document type="freeswitch/xml">
+<section  name="directory" description="User Directory">
+    <domain name="$${domain}">
+        <params>
+            <!-- endpoints:
+                sofia/_profile_/_user_@_domain_ 
+                sofia/gateway/_gatewayname_/_user_
+                user/_userid_ 
+                group/_groupname_
+                loopback/_dest_ 
+                freetdm/_span_/_chan_/_number_ 
+            -->
+
+            <!-- dial-strings:
+                ^^:                                                     colon-seperator
+                <variable_scope=super-global>
+                    {variable_scope=thread1}
+                        [variable_scope=leg1a]<target_endpoint>[,       comma-simultaneous
+                        [variable_scope=leg1b]<target_endpoint>][|      pipe-sequential
+                        <target_endpoint>]:_:                           enterprise-simultaneous
+                    {variable_scope=thread2}
+                        [variable_scope=leg2a]<target_endpoint>[,       comma-simultaneous
+                        [variable_scope=leg2b]<target_endpoint>][|      pipe-sequential
+                        <target_endpoint>]
+            -->
+            <param name="dial-string" value="{sip_invite_domain=${dialed_domain},presence_id=${dialed_user}@${dialed_domain},rtp_secure_media=${regex(${sofia_contact(${dialed_user}@${dialed_domain})}|transport=tls)}}${sofia_contact(*/${dialed_user}@${dialed_domain})},${verto_contact(${dialed_user}@${dialed_domain})}"/>
+            <!-- These are required for Verto to function properly -->
+            <param name="jsonrpc-allowed-methods" value="verto"/>
+            <!-- <param name="jsonrpc-allowed-event-channels" value="demo,conference,presence"/> -->
+            <param name="password" value="$${default_password}"/>
+        </params>
+        <variables>
+            <variable name="record_stereo" value="true"/>
+            <variable name="default_gateway" value="$${default_provider}"/>
+            <variable name="default_areacode" value="$${default_areacode}"/>
+            <variable name="transfer_fallback_extension" value="operator"/>
+        </variables>
+        <!-- groups:group:users:user:[params:param|variables:variable] -->
+        <groups>
+            <group name="default">
+                <users>
+                    <user id="martin">
+                        <params>
+                            <!-- <param name="password" value="gewifejenoroxidi"/> -->
+                            <!-- <param name="a1-hash" value="md5(username:domain:password)"/> -->
+                            <param name="a1-hash" value="0dd1f7435dddde9cda9fd4de18921055"/>
+                            <param name="vm-password" value="627846"/>
+                        </params>
+                        <variables>
+                            <variable name="user_context" value="default"/>
+                            <variable name="callgroup" value="techsupport"/>
+                            <variable name="effective_caller_id_name" value="Martin Meadows"/>
+                            <!-- <variable name="effective_caller_id_number" value="martin"/> -->
+
+                            <variable name="toll_allow" value="domestic,international,local"/>
+                            <variable name="accountcode" value="martin"/>
+                            <variable name="outbound_caller_id_name" value="$${outbound_caller_name}"/>
+                            <variable name="outbound_caller_id_number" value="$${outbound_caller_id}"/>
+                        </variables>
+                    </user>
+                </users>
+            </group>
+            <group name="schemes">
+                <params>
+                    <param name="vm-password" value="2773556"/>
+                </params>
+                <variables>
+                    <variable name="sip-force-contact" value="NDLB-connectile-dysfunction-2.0"/>
+                    <variable name="sip-force-expires" value="3600"/>
+                    <!-- <variable name="outbound_caller_id_name" value="$${outbound_caller_id_name}"/> -->
+                    <!-- <variable name="outbound_caller_id_number" value="$${outbound_caller_id_number}"/> -->
+                </variables>
+                <users>
+                    <user id="4019900">
+                        <params>
+                            <param name="password" value="23h1otuA4YzvtBFEFhsSt0pyiHls6Q1v"/>
+                        </params>
+                        <variables>
+                            <variable name="user_context" value="default"/>
+                            <variable name="callgroup" value="scheme"/>
+                            <variable name="effective_caller_id_name" value="DigDem"/>
+                            <variable name="accountcode" value="appello"/>
+                        </variables>
+                    </user>
+                    <user id="4019901">
+                        <params>
+                            <param name="password" value="JoBPnbYETxY1sU1TIi_UYf0xaZVXncBd"/>
+                        </params>
+                        <variables>
+                            <variable name="user_context" value="default"/>
+                            <variable name="callgroup" value="scheme"/>
+                            <variable name="effective_caller_id_name" value="Wrinkly Bottom"/>
+                            <variable name="accountcode" value="appello"/>
+                        </variables>
+                    </user>
+                    <user id="4019902">
+                        <params>
+                            <param name="password" value="rvGZFgxx6UFaRE1eSZfQ6ULMk31M7HfU"/>
+                        </params>
+                        <variables>
+                            <variable name="user_context" value="default"/>
+                            <variable name="callgroup" value="scheme"/>
+                            <variable name="effective_caller_id_name" value="Fishbowl"/>
+                            <variable name="accountcode" value="appello"/>
+                        </variables>
+                    </user>
+                    <user id="4019903">
+                        <params>
+                            <param name="password" value="GDu0XKG1JUNGjeYWuOOM1EryNdnrj1bU"/>
+                        </params>
+                        <variables>
+                            <variable name="user_context" value="default"/>
+                            <variable name="callgroup" value="scheme"/>
+                            <variable name="effective_caller_id_name" value="Solcom UAT"/>
+                            <variable name="accountcode" value="appello"/>
+                        </variables>
+                    </user>
+                    <user id="4019904">
+                        <params>
+                            <param name="password" value="0EhOwQnMUMY0y8NTIDGhnVR0y5VXg6AK"/>
+                        </params>
+                        <variables>
+                            <variable name="user_context" value="default"/>
+                            <variable name="callgroup" value="scheme"/>
+                            <variable name="effective_caller_id_name" value="DemoRig#1"/>
+                            <variable name="accountcode" value="appello"/>
+                        </variables>
+                    </user>
+                    <user id="4019905">
+                        <params>
+                            <param name="password" value="HIWYE0R97jbiF1wMtSs3I9o0WfCTzoao"/>
+                        </params>
+                        <variables>
+                            <variable name="user_context" value="default"/>
+                            <variable name="callgroup" value="scheme"/>
+                            <variable name="effective_caller_id_name" value="DemoRig#2"/>
+                            <variable name="accountcode" value="appello"/>
+                        </variables>
+                    </user>
+                    <user id="4019906">
+                        <params>
+                            <param name="password" value="s3G2KtGSGycB4UYgCZZTbVks1xCB9jup"/>
+                        </params>
+                        <variables>
+                            <variable name="user_context" value="default"/>
+                            <variable name="callgroup" value="scheme"/>
+                            <variable name="effective_caller_id_name" value="Oregon Technical"/>
+                            <variable name="accountcode" value="appello"/>
+                        </variables>
+                    </user>
+                    <user id="4019909">
+                        <params>
+                            <param name="password" value="NaWG29bnERCfh3vWG6s_OQ5vdOveRvog"/>
+                        </params>
+                        <variables>
+                            <variable name="user_context" value="default"/>
+                            <variable name="callgroup" value="scheme"/>
+                            <variable name="effective_caller_id_name" value="Oregon Training"/>
+                            <variable name="accountcode" value="appello"/>
+                        </variables>
+                    </user>
+                    <user id="4019910">
+                        <params>
+                            <param name="password" value="1eTqxVri6jRYN1hZk1GJeNkHoN7HLhTC"/>
+                        </params>
+                        <variables>
+                            <variable name="user_context" value="default"/>
+                            <variable name="callgroup" value="scheme"/>
+                            <variable name="effective_caller_id_name" value="DemoRig#3"/>
+                            <variable name="accountcode" value="appello"/>
+                        </variables>
+                    </user>
+                    <user id="4019911">
+                        <params>
+                            <param name="password" value="toWmXLomoh_BM6Rx8JwFPqOex1WhH0vt"/>
+                        </params>
+                        <variables>
+                            <variable name="user_context" value="default"/>
+                            <variable name="callgroup" value="scheme"/>
+                            <variable name="effective_caller_id_name" value="DemoRig#4"/>
+                            <variable name="accountcode" value="appello"/>
+                        </variables>
+                    </user>
+                    <user id="4019912">
+                        <params>
+                            <param name="password" value="w4JOpweptV6OLLQb_bE8NhTmJtQl76AH"/>
+                        </params>
+                        <variables>
+                            <variable name="user_context" value="default"/>
+                            <variable name="callgroup" value="scheme"/>
+                            <variable name="effective_caller_id_name" value="Ocean House"/>
+                            <variable name="accountcode" value="appello"/>
+                        </variables>
+                    </user>
+                    <user id="4019913">
+                        <params>
+                            <param name="password" value="rZqih7YnqA7zvmfFcBJMfCnDCZxbSmA5"/>
+                        </params>
+                        <variables>
+                            <variable name="user_context" value="default"/>
+                            <variable name="callgroup" value="scheme"/>
+                            <variable name="effective_caller_id_name" value="Sonin"/>
+                            <variable name="accountcode" value="appello"/>
+                        </variables>
+                    </user>
+                    <user id="4019918">
+                        <params>
+                            <param name="password" value="EbFnR6P9iIdwXVXvqdAEQQAJMZfmvXp_"/>
+                        </params>
+                        <variables>
+                            <variable name="user_context" value="default"/>
+                            <variable name="callgroup" value="scheme"/>
+                            <variable name="effective_caller_id_name" value="Gary3B+"/>
+                            <variable name="accountcode" value="appello"/>
+                        </variables>
+                    </user>
+                    <user id="401996">
+                        <params>
+                            <param name="password" value="V4fDCCcm20T5XkpgmiEuv6vkMBz_vrW4"/>
+                        </params>
+                        <variables>
+                            <variable name="user_context" value="default"/>
+                            <variable name="callgroup" value="scheme"/>
+                            <variable name="effective_caller_id_name" value="Soggy Bottom"/>
+                            <variable name="accountcode" value="appello"/>
+                        </variables>
+                    </user>
+                </users>
+            </group>
+        </groups>
+    </domain>
+</section>
+</document>

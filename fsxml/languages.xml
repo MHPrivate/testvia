@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<document type="freeswitch/xml">
+    <!-- __filename -->
+    <section name="result">
+        <result status="not found"/>
+    </section>
+</document>

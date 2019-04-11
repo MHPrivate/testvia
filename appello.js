@@ -23,6 +23,7 @@ var main = extend(exports, {
     modules: {      // only for diagnostic accessibility - not to be used by code - use require(s) only
         debug: require('debug'),    // for logging module administration
         esl: require('./lib/esl'),
+        fsxml: require('./lib/fsxml'),
         ipsets: require('./lib/ipsets'),
         larcs: require('./lib/mesh/larcs'),
         mesh: require('./lib/mesh'),

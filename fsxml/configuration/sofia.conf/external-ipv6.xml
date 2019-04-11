@@ -1,0 +1,119 @@
+<profile name="external-ipv6">
+    <!-- http://wiki.freeswitch.org/wiki/Sofia_Configuration_Files -->
+    <!-- This profile is only for outbound registrations to providers -->
+    <gateways>
+        <!--<gateway name="asterlink.com">-->
+            <!--/// account username *required* ///-->
+            <!--<param name="username" value="cluecon"/>-->
+            <!--/// auth realm: *optional* same as gateway name, if blank ///-->
+            <!--<param name="realm" value="asterlink.com"/>-->
+            <!--/// username to use in from: *optional* same as  username, if blank ///-->
+            <!--<param name="from-user" value="cluecon"/>-->
+            <!--/// domain to use in from: *optional* same as  realm, if blank ///-->
+            <!--<param name="from-domain" value="asterlink.com"/>-->
+            <!--/// account password *required* ///-->
+            <!--<param name="password" value="2007"/>-->
+            <!--/// extension for inbound calls: *optional* same as username, if blank ///-->
+            <!--<param name="extension" value="cluecon"/>-->
+            <!--/// proxy host: *optional* same as realm, if blank ///-->
+            <!--<param name="proxy" value="asterlink.com"/>-->
+            <!--/// send register to this proxy: *optional* same as proxy, if blank ///-->
+            <!--<param name="register-proxy" value="mysbc.com"/>-->
+            <!--/// expire in seconds: *optional* 3600, if blank ///-->
+            <!--<param name="expire-seconds" value="60"/>-->
+            <!--/// do not register ///-->
+            <!--<param name="register" value="false"/>-->
+            <!-- which transport to use for register -->
+            <!--<param name="register-transport" value="udp"/>-->
+            <!--How many seconds before a retry when a failure or timeout occurs -->
+            <!--<param name="retry-seconds" value="30"/>-->
+            <!--Use the callerid of an inbound call in the from field on outbound calls via this gateway -->
+            <!--<param name="caller-id-in-from" value="false"/>-->
+            <!--extra sip params to send in the contact-->
+            <!--<param name="contact-params" value=""/>-->
+            <!-- Put the extension in the contact -->
+            <!--<param name="extension-in-contact" value="true"/>-->
+            <!--send an options ping every x seconds, failure will unregister and/or mark it down-->
+            <!--<param name="ping" value="25"/>-->
+            <!--<param name="cid-type" value="rpid"/>-->
+            <!--rfc5626 : Abilitazione rfc5626 ///-->
+            <!--<param name="rfc-5626" value="true"/>-->
+            <!--rfc5626 : extra sip params to send in the contact-->
+            <!--<param name="reg-id" value="1"/>-->
+        <!--</gateway>-->
+    </gateways>
+
+    <aliases>
+        <!--
+        <alias name="outbound"/>
+        <alias name="nat"/>
+        -->
+    </aliases>
+
+    <domains>
+        <!--<domain name="all" alias="false" parse="true"/>-->
+    </domains>
+
+    <settings>
+        <param name="debug" value="0"/>
+        <!-- If you want FreeSWITCH to shutdown if this profile fails to load, uncomment the next line. -->
+        <!-- <param name="shutdown-on-fail" value="true"/> -->
+        <param name="sip-trace" value="no"/>
+        <param name="sip-capture" value="no"/>
+        <param name="rfc2833-pt" value="101"/>
+        <!-- RFC 5626 : Send reg-id and sip.instance -->
+        <!--<param name="enable-rfc-5626" value="true"/> -->
+        <param name="sip-port" value="$${external_sip_port}"/>
+        <param name="dialplan" value="XML"/>
+        <param name="context" value="public"/>
+        <param name="dtmf-duration" value="2000"/>
+        <param name="inbound-codec-prefs" value="$${global_codec_prefs}"/>
+        <param name="outbound-codec-prefs" value="$${global_codec_prefs}"/>
+        <param name="hold-music" value="$${hold_music}"/>
+        <param name="rtp-timer-name" value="soft"/>
+        <!--<param name="enable-100rel" value="true"/>-->
+        <!--<param name="disable-srv503" value="true"/>-->
+        <!-- This could be set to "passive" -->
+        <param name="local-network-acl" value="localnet.auto"/>
+        <param name="manage-presence" value="false"/>
+
+        <!-- used to share presence info across sofia profiles
+             manage-presence needs to be set to passive on this profile
+             if you want it to behave as if it were the internal profile
+             for presence.
+        -->
+        <!-- Name of the db to use for this profile -->
+        <!--<param name="dbname" value="share_presence"/>-->
+        <!--<param name="presence-hosts" value="$${domain}"/>-->
+        <!--<param name="force-register-domain" value="$${domain}"/>-->
+        <!--all inbound reg will stored in the db using this domain -->
+        <!--<param name="force-register-db-domain" value="$${domain}"/>-->
+        <!-- ************************************************* -->
+
+        <!--<param name="aggressive-nat-detection" value="true"/>-->
+        <param name="inbound-codec-negotiation" value="generous"/>
+        <param name="nonce-ttl" value="60"/>
+        <param name="auth-calls" value="$${external_auth_calls}"/>
+        <param name="inbound-late-negotiation" value="true"/>
+        <param name="inbound-zrtp-passthru" value="true"/>
+        <!-- (also enables late negotiation) -->
+        <!--
+            DO NOT USE HOSTNAMES, ONLY IP ADDRESSES IN THESE SETTINGS!
+        -->
+        <param name="rtp-ip" value="$${local_ip_v6}"/>
+        <param name="sip-ip" value="$${local_ip_v6}"/>
+        <!-- Shouldn't set these on IPv6 -->
+        <!--<param name="ext-rtp-ip" value="auto-nat"/>-->
+        <!--<param name="ext-sip-ip" value="auto-nat"/>-->
+        <param name="rtp-timeout-sec" value="300"/>
+        <param name="rtp-hold-timeout-sec" value="1800"/>
+        <!--<param name="enable-3pcc" value="true"/>-->
+
+        <!-- TLS: disabled by default, set to "true" to enable -->
+        <param name="tls" value="$${external_ssl_enable}"/>
+        <!-- Set to true to not bind on the normal sip-port but only on the TLS port -->
+        <param name="tls-only" value="false"/>
+        <!-- Port to listen on for TLS requests. (5081 will be used if unspecified) -->
+        <param name="tls-sip-port" value="$${external_tls_port}"/>
+    </settings>
+</profile>
