@@ -3,7 +3,7 @@ process.env.DEBUG || (process.env.DEBUG = 'mysql');
 process.setMaxListeners(15);
 
 require('./lib/running').running = undefined; // causes main.running set _true_ once running AND _false_ when terminating
-require('./lib/repletion')(!process.stdin.isTTY); // starts either a console:repl OR a daemon:replify (/run/<main>.sock)
+require('./lib/repletion')({ processGlobal: true, always: !process.stdin.isTTY }); // starts either a console:repl OR a daemon:replify (/run/<main>.sock)
 
 var callsites = require('callsites');
 var extend = require('node.extend');
@@ -19,7 +19,6 @@ var main = extend(exports, {
     state: {},      // fast-dynamic runtime context for detail tracking
     cache: {},      // slow-dynamic runtime context - e.g. SSL certificate(s)
     hack: {},       // diagnostic runtime settings - usually empty
-    global: global, // the core global object - otherwise different for each replify client
     modules: {      // only for diagnostic accessibility - not to be used by code - use require(s) only
         debug: require('debug'),    // for logging module administration
         esl: require('./lib/esl'),
