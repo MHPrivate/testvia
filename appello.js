@@ -1,6 +1,6 @@
 #! /usr/bin/env node-strict
 process.env.DEBUG || (process.env.DEBUG = 'mysql');
-//process.setMaxListeners(20);
+process.setMaxListeners(15);
 
 require('./lib/running').running = undefined; // causes main.running set _true_ once running AND _false_ when terminating
 require('./lib/repletion')(!process.stdin.isTTY); // starts either a console:repl OR a daemon:replify (/run/<main>.sock)
