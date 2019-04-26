@@ -2,6 +2,27 @@
 <document type="freeswitch/xml">
 <section  name="directory" description="User Directory">
     <domain name="$${domain}">
+        <!-- endpoints:
+            sofia/_profile_/_user_@_domain_ 
+            sofia/gateway/_gatewayname_/_user_
+            user/_userid_ 
+            group/_groupname_
+            loopback/_dest_ 
+            freetdm/_span_/_chan_/_number_ 
+        -->
+
+        <!-- dial-strings:
+            ^^:                                                     colon-seperator
+            <variable_scope=super-global>
+                {variable_scope=thread1}
+                    [variable_scope=leg1a]<target_endpoint>[,       comma-simultaneous
+                    [variable_scope=leg1b]<target_endpoint>][|      pipe-sequential
+                    <target_endpoint>]:_:                           enterprise-simultaneous
+                {variable_scope=thread2}
+                    [variable_scope=leg2a]<target_endpoint>[,       comma-simultaneous
+                    [variable_scope=leg2b]<target_endpoint>][|      pipe-sequential
+                    <target_endpoint>]
+        -->
 <%  if (req.locals.domain.param) { %>
         <params>
 <%    for (var name in req.locals.domain.param) { %>

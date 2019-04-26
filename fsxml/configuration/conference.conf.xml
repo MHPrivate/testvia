@@ -4,8 +4,8 @@
         <room name="3001@$${domain}" status="FreeSWITCH"/>
     </advertise>
 
-    <!-- These are the default keys that map when you do not specify a caller control group -->    
-    <!-- Note: none and default are reserved names for group names.  Disabled if dist-dtmf member flag is set. -->    
+    <!-- These are the default keys that map when you do not specify a caller control group -->
+    <!-- Note: none and default are reserved names for group names.  Disabled if dist-dtmf member flag is set. -->
     <caller-controls>
         <group name="default">
             <control action="mute" digits="0"/>
@@ -27,7 +27,7 @@
     <profiles>
         <!--If no profile is specified it will default to "default"-->
         <profile name="default">
-            <!-- Directory to drop CDR's 
+            <!-- Directory to drop CDR's
                 'auto' means $PREFIX/logs/conference_cdr/<confernece_uuid>.cdr.xml
                 a non-absolute path means $PREFIX/logs/<value>/<confernece_uuid>.cdr.xml
                 absolute path means <value>/<confernece_uuid>.cdr.xml
@@ -249,7 +249,7 @@
             <param name="caller-id-number" value="0000000000"/>
             <param name="comfort-noise" value="false"/>
             <param name="conference-flags" value="video-floor-only|rfc-4579|livearray-sync|minimize-video-encoding"/>
-            <param name="video-mode" value="mux"/> 
+            <param name="video-mode" value="mux"/>
             <param name="video-layout-name" value="3x3"/>
             <param name="video-layout-name" value="group:grid"/>
             <param name="video-canvas-size" value="1920x1080"/>
