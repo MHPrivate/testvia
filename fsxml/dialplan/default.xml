@@ -19,7 +19,7 @@
             <action application="sleep" data="10000"/>
         </condition>
         <!--
-            This is an example of how to auto detect if telephone-event is missing and activate inband detection 
+            This is an example of how to auto detect if telephone-event is missing and activate inband detection
         -->
         <!--
         <condition field="${switch_r_sdp}" expression="a=rtpmap:(\d+)\stelephone-event/8000" break="never">

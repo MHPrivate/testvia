@@ -3,12 +3,12 @@
 <section  name="directory" description="User Directory">
     <domain name="$${domain}">
         <!-- endpoints:
-            sofia/_profile_/_user_@_domain_ 
+            sofia/_profile_/_user_@_domain_
             sofia/gateway/_gatewayname_/_user_
-            user/_userid_ 
+            user/_userid_
             group/_groupname_
-            loopback/_dest_ 
-            freetdm/_span_/_chan_/_number_ 
+            loopback/_dest_
+            freetdm/_span_/_chan_/_number_
         -->
 
         <!-- dial-strings:
