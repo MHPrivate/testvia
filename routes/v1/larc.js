@@ -53,6 +53,8 @@ exports.post('/', function (req, res, next) { // POST /larc - create/update larc
             ipv4x: locals.ipv6.isIPv4MappedAddress() ? locals.ipv6.toIPv4Address().toString() : undefined,
             ipv6: req.body.ipv6,
             jsonConfigIds: null, // reset be each ping request
+            master: req.body.master,
+            nodejs: req.body.nodejs,
             password: locals.credentials.pass,
             seen: req._startTime,
             started: req.body.started && new Date(req.body.started),
