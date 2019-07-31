@@ -14,6 +14,13 @@
             <param name="register" value="false"/>
             <param name="ping" value="25"/>
         </gateway>
+        <gateway name="simwood">
+            <param name="username" value="930409-ApelloLtd"/>
+            <param name="password" value="c19df6fe65e4b3fd4d20c4ff"/>
+            <param name="realm" value="out.simwood.com"/>
+            <param name="register" value="false"/>
+            <param name="ping" value="25"/>
+        </gateway>
     </gateways>
 
     <aliases>
@@ -44,6 +51,7 @@
         <param name="outbound-codec-prefs" value="$${global_codec_prefs}"/>
         <param name="hold-music" value="$${hold_music}"/>
         <param name="rtp-timer-name" value="soft"/>
+        <param name="rtp-digit-delay" value="8"/> <!-- 80ms -->
         <!--<param name="enable-100rel" value="true"/>-->
         <!--<param name="disable-srv503" value="true"/>-->
         <!-- This could be set to "passive" -->

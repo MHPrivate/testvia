@@ -1,0 +1,20 @@
+<extension name="caretech-gloria" >
+    <!--e.g. 10:56pm-->
+    <condition field="destination_number" expression="^443338805247$">
+        <action application="set" data="continue_on_fail=true"/>
+        <action application="set" data="hangup_after_bridge=true"/>
+        <!-- <action application="bridge" data="user/martin"/> -->
+        <action application="answer"/>
+        <action application="set" data="RECORD_TITLE=Recording ${destination_number} ${caller_id_number} ${strftime(%Y-%m-%d %H:%M)}"/>
+        <action application="set" data="RECORD_STEREO=true"/>
+        <action application="record_session" data="/tmp/gloria-${strftime(%Y-%m-%d-%H-%M-%S)}.wav"/>
+        <action application="sleep" data="1000"/>
+        <action application="send_dtmf" data="db@80"/>
+        <action application="play_and_get_digits" data="24 24 2 5000 A '' ''"/>
+        <action application="sleep" data="150"/>
+        <action application="send_dtmf" data="db@80"/>
+        <action application="sleep" data="150"/>
+        <action application="send_dtmf" data="4w1@80"/>
+        <action application="playback" data="local_stream://moh"/>
+    </condition>
+</extension>
