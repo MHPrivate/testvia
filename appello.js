@@ -28,6 +28,7 @@ var main = extend(exports, {
         mesh: require('./lib/mesh'),
         mysql: require('./lib/mysql'),
         peers: require('./lib/mesh/peers'),
+        scabs: require('./lib/mesh/scabs'),
         web: require('./lib/web'),
     },
 });
