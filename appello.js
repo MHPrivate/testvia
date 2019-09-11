@@ -9,18 +9,14 @@ var callsites = require('callsites');
 var extend = require('node.extend');
 var fs = require('fs');
 
-var main = extend(exports, {
-    secrets: JSON.parse(fs.readFileSync(__dirname + '/secrets.json', 'utf8')),
-    setup: { // static instance settings variations that allow multiple instances on the same host e.g. port numbers
-        https: +process.env.PORT || 8443,
-    },
+var main = Object.defineProperties(extend(exports, {
+    cache: {},      // slow-dynamic runtime context - e.g. SSL certificate(s)
     config: {},     // static global settings that are common between multiple instances on the same host
     control: {},    // dynamic runtime settings that broadly vary behaviour e.g. on/off site
-    state: {},      // fast-dynamic runtime context for detail tracking
-    cache: {},      // slow-dynamic runtime context - e.g. SSL certificate(s)
+    debug: require('debug'),    // for logging module administration
+    global: global, // expose process global for repl-client connections
     hack: {},       // diagnostic runtime settings - usually empty
-    modules: {      // only for diagnostic accessibility - not to be used by code - use require(s) only
-        debug: require('debug'),    // for logging module administration
+    modules: { // only for diagnostic accessibility - not to be used by code - use require(s) only
         esl: require('./lib/esl'),
         fsxml: require('./lib/fsxml'),
         ipsets: require('./lib/ipsets'),
@@ -31,6 +27,18 @@ var main = extend(exports, {
         scabs: require('./lib/mesh/scabs'),
         web: require('./lib/web'),
     },
+    secrets: require('./secrets.json'),
+    setup: { // static instance settings variations that allow multiple instances on the same host e.g. port numbers
+        https: +process.env.PORT || 8443,
+    },
+    state: {},      // fast-dynamic runtime context for detail tracking
+    uuidv1: null,   // will be require('uuid').v1 bound to the primary system mac-address
+}),{
+    cluster: { enumerable: false },
+    debug: { enumerable: false },
+    global: { enumerable: false },
+    modules: { enumerable: false },
+    secrets: { enumerable: false },
 });
 
 process.once('terminate', function _main() {
@@ -39,7 +47,7 @@ process.once('terminate', function _main() {
     }, setTimeout = global.setTimeout;
     global.setTimeout = function (cb, ms) { // intercept & unref particular timeout(s) set during shutdown
         if (ms && !unref[cb.name])
-            console.log.apply(console, ['setTimeout:', '"' + cb.name + '"'].concat(Array.from(arguments)).concat('' + callsites()[1]));
+            console.log.apply(null, ['setTimeout:', '"' + cb.name + '"'].concat(Array.from(arguments)).concat('' + callsites()[1]));
         var timeout = setTimeout.apply(global, arguments); // set the timeout as requested
         return unref[cb.name] ? timeout.unref() : timeout; // unref specific timeouts
     };
@@ -60,3 +68,10 @@ process.once('terminate', function _main() {
         });
     }, 10000).unref();
 });
+
+process.nextTick(function (nics) {
+    for (var nic in nics) // lo, ens160, ens192
+        for (var idx in nics[nic]) // 0, 1, 2, ...
+            if (!nics[nic][idx].internal) // external
+                return main.uuidv1 = require('uuid/v1').bind(null, { node: Buffer.from(nics[nic][idx].mac.replace(/:/g, ''), 'hex') });
+}, require('os').networkInterfaces());

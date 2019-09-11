@@ -29,6 +29,13 @@
         <param name="apply-inbound-acl" value="domains"/>
         <!--<param name="apply-register-acl" value="domains"/>-->
         <!--<param name="dtmf-type" value="info"/>-->
+
+        <!-- 'true' means every time 'first-only' means on the first register -->
+        <param name="send-message-query-on-register" value="false"/>
+
+        <!-- 'true' means every time 'first-only' means on the first register -->
+        <!--<param name="send-presence-on-register" value="first-only"/>-->
+
         <param name="record-path" value="$${recordings_dir}"/>
         <param name="record-template" value="${caller_id_number}.${strftime(%Y-%m-%d-%H-%M-%S)}.wav"/>
         <!--enable to use presence and mwi -->
@@ -51,7 +58,7 @@
         <!-- TLS: disabled by default, set to "true" to enable -->
         <param name="tls" value="$${internal_ssl_enable}"/>
         <!-- Set to true to not bind on the normal sip-port but only on the TLS port -->
-        <param name="tls-only" value="false"/>
+        <param name="tls-only" value="true"/>
         <!-- Port to listen on for TLS requests. (5061 will be used if unspecified) -->
         <param name="tls-sip-port" value="$${internal_tls_port}"/>
 

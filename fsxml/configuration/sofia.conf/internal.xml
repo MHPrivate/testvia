@@ -133,7 +133,7 @@
 
 
         <!-- 'true' means every time 'first-only' means on the first register -->
-        <!--<param name="send-message-query-on-register" value="true"/>-->
+        <param name="send-message-query-on-register" value="false"/>
 
         <!-- 'true' means every time 'first-only' means on the first register -->
         <!--<param name="send-presence-on-register" value="first-only"/> -->
@@ -188,7 +188,7 @@
         <!-- TLS: disabled by default, set to "true" to enable -->
         <param name="tls" value="$${internal_ssl_enable}"/>
         <!-- Set to true to not bind on the normal sip-port but only on the TLS port -->
-        <param name="tls-only" value="false"/>
+        <param name="tls-only" value="true"/>
         <!-- Port to listen on for TLS requests. (5061 will be used if unspecified) -->
         <param name="tls-sip-port" value="$${internal_tls_port}"/>
 

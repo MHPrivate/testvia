@@ -37,4 +37,9 @@
     })(path.dirname(__filename), 'public', query['Caller-Destination-Number']) // __dirname, 'public', '1000'
  %>
 
+    <extension name="catchall">
+        <condition>
+            <action application="bridge" data="group/default"/>
+        </condition>
+    </extension>
 </context>

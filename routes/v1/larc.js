@@ -10,7 +10,7 @@ var mosh = require('../../lib/mosh');
 var mysql = require('../../lib/mysql');
 var nsupdate = require('../../lib/nsupdate');
 var os = require('os');
-var uuid = require('uuid');
+var uuidv4 = require('uuid/v4');
 
 module.exports = exports = express.Router();
 
@@ -98,7 +98,7 @@ exports.post('/', function (req, res, next) { // POST /larc - create/update larc
 
         if (locals.scheme.secret)
             return this();
-        mysql(mysql.mksql('schemes', { secret: uuid.v1() }, locals.scheme), this);
+        mysql(mysql.mksql('schemes', { secret: uuidv4() }, locals.scheme), this);
 
     }, function (status) { // check the public DNS name
         if (!locals.scheme || !locals.larc.ipv4x)
