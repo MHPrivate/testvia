@@ -32,6 +32,19 @@
   <ItemGroup>
     <Compile Include="appello.js" />
     <Compile Include="lib\args-map.js" />
+    <Compile Include="lib\jsonerr.js" />
+    <Compile Include="lib\scaber\communicator-scaip.js" />
+    <Compile Include="lib\scaber\communicator-nowip.js" />
+    <Compile Include="lib\scaber\communicator.js" />
+    <Compile Include="lib\scaber\consumer-nowip-jontek.js" />
+    <Compile Include="lib\scaber\consumer-nowip-volt.js" />
+    <Compile Include="lib\scaber\master.js" />
+    <Compile Include="lib\scaber\session.js" />
+    <Compile Include="lib\scaber\task.js" />
+    <Compile Include="lib\scaber\webio.js" />
+    <Compile Include="lib\scaber\worker.js" />
+    <Compile Include="lib\socket.io-track.js" />
+    <Compile Include="scaber.js" />
     <Compile Include="lib\apns-sub.js" />
     <Compile Include="lib\apns.js" />
     <Compile Include="lib\app.js" />
@@ -53,6 +66,7 @@
     <Compile Include="lib\nsupdate.js" />
     <Compile Include="lib\repletion.js" />
     <Compile Include="lib\running.js" />
+    <Compile Include="lib\state-machine.js" />
     <Compile Include="lib\web.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\v1\index.js" />
@@ -116,6 +130,7 @@
     <Folder Include="fsxml\dialplan\public\" />
     <Folder Include="lib\" />
     <Folder Include="lib\mesh\" />
+    <Folder Include="lib\scaber\" />
     <Folder Include="routes\" />
     <Folder Include="routes\v1\" />
     <Folder Include="static\" />
