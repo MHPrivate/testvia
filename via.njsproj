@@ -33,9 +33,9 @@
     <Compile Include="appello.js" />
     <Compile Include="lib\args-map.js" />
     <Compile Include="lib\jsonerr.js" />
+    <Compile Include="lib\scaber\communicator-assist.js" />
     <Compile Include="lib\scaber\communicator-scaip.js" />
     <Compile Include="lib\scaber\communicator-nowip.js" />
-    <Compile Include="lib\scaber\communicator.js" />
     <Compile Include="lib\scaber\consumer-nowip-jontek.js" />
     <Compile Include="lib\scaber\consumer-nowip-volt.js" />
     <Compile Include="lib\scaber\master.js" />
@@ -47,7 +47,6 @@
     <Compile Include="scaber.js" />
     <Compile Include="lib\apns-sub.js" />
     <Compile Include="lib\apns.js" />
-    <Compile Include="lib\app.js" />
     <Compile Include="lib\crc32.js" />
     <Compile Include="lib\esl.js" />
     <Compile Include="lib\firebase.js" />
@@ -118,6 +117,7 @@
     <Content Include="systemd.environment" />
     <Content Include="systemd.service" />
     <Content Include="views\error.html" />
+    <Content Include="views\webauthn.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bash\" />

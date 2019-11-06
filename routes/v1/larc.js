@@ -168,6 +168,7 @@ exports.post('/', function (req, res, next) { // POST /larc - create/update larc
         locals.config && console.log('config:', JSON.stringify(locals.config));
         res.json(locals.json = {
             accessJwt: locals.accessJwt,
+            arcStall: (locals.scheme || {}).arcStall, // prevent arc-failure retry cycling
             authority: main.cache.tls.cert, // used by larcs to verify user-credential cookies
             cert: locals.cert || undefined,
             chain: locals.chain || undefined,

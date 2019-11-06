@@ -37,6 +37,15 @@
     })(path.dirname(__filename), 'public', query['Caller-Destination-Number']) // __dirname, 'public', '1000'
  %>
 
+<!--
+    <extension name="public-trusted">
+      <condition field="${acl(${network_addr} public.trusted)}" expression="^true$">
+      <action application="set" data="domain_name=$${domain}"/>
+      <action application="transfer" data="${destination_number} XML default"/>
+      </condition>
+    </extension>
+-->
+
     <extension name="catchall">
         <condition>
             <action application="bridge" data="group/default"/>
