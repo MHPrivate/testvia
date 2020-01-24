@@ -33,6 +33,7 @@
     <Compile Include="appello.js" />
     <Compile Include="lib\args-map.js" />
     <Compile Include="lib\jsonerr.js" />
+    <Compile Include="lib\minut.js" />
     <Compile Include="lib\scaber\communicator-assist.js" />
     <Compile Include="lib\scaber\communicator-scaip.js" />
     <Compile Include="lib\scaber\communicator-nowip.js" />
@@ -44,6 +45,8 @@
     <Compile Include="lib\scaber\webio.js" />
     <Compile Include="lib\scaber\worker.js" />
     <Compile Include="lib\socket.io-track.js" />
+    <Compile Include="routes\minuty.js" />
+    <Compile Include="routes\minutz.js" />
     <Compile Include="scaber.js" />
     <Compile Include="lib\apns-sub.js" />
     <Compile Include="lib\apns.js" />

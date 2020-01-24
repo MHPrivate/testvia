@@ -6,6 +6,8 @@ var mysql = require('../lib/mysql');
 
 module.exports = exports = express.Router();
 
+exports.use('/minuty', require('./minuty'));
+exports.use('/minutz', require('./minutz'));
 exports.use('/v1', require('./v1')); // service RESTful APIs v1
 
 exports.get('/webauthn', function (req, res, next) {

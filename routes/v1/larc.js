@@ -123,8 +123,7 @@ exports.post('/', function (req, res, next) { // POST /larc - create/update larc
             locals.jsonConfigIds.unshift(2); // deliver live/non-live config fragment (usually mailto only)
         if (!locals.jsonConfigIds.length)
             return this();
-        var qmks = locals.jsonConfigIds.map(function (id, idx, arr) { return '?' }).join();
-        mysql('select * from jsonConfigs where id in (' + qmks + ')', locals.jsonConfigIds, this);
+        mysql('select * from jsonConfigs where id in (' + mysql.qmks(locals.jsonConfigIds) + ')', locals.jsonConfigIds, this);
 
     }, function (jsonConfigs, meta) { // merge config fragments in order
         if (!jsonConfigs)

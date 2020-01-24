@@ -22,6 +22,7 @@ var main = Object.defineProperties(extend(exports, {
         ipsets: require('./lib/ipsets'),
         larcs: require('./lib/mesh/larcs'),
         mesh: require('./lib/mesh'),
+        minut: require('./lib/minut'),
         mysql: require('./lib/mysql'),
         peers: require('./lib/mesh/peers'),
         scabs: require('./lib/mesh/scabs'),
