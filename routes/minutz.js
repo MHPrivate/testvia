@@ -16,7 +16,7 @@ process.once('running', function () {
 });
 
 exports.get('/callback', function (req, res, next) { // GET /minutz/callback?code=...
-    if (!(main.secrets.minut || {}).z || !req.user || !req.query.code)
+    if (!exports.clientId || !req.user || !req.query.code)
         return res.redirect('https://appello.care/minut/linkage');
     next.index = req.index;
     var locals = req.locals;

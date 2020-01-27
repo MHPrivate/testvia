@@ -14,7 +14,7 @@ process.once('running', function () {
 });
 
 exports.get('/callback', function (req, res, next) { // GET /minuty/callback?code=...
-    if (!(main.secrets.minut || {}).y || !req.user || !req.query.code)
+    if (!exports.clientId || !req.user || !req.query.code)
         return next();
     var locals = req.locals;
     chain(next, function () {
