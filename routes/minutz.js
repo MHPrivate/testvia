@@ -246,10 +246,8 @@ exports.all('/webhook/:type', function (req, res, next) { // GET /minutz/webhook
     }, function (owners, meta) {
         locals.refresh = (locals.owners = owners).filter(function (owner, idx, arr) { // build a Map of ownerIds=>owners
             this.set(owner.ownerId, owner);
-            var renew = locals.now - owner.accessExpires > 60000;
-            pirProbe.debug('renew:', owner.ownerId, locals.now, '-', owner.accessExpires, '> 60000', renew);
-            return renew;
-        }, locals.ownerIds = new Map); // create a list of owners required a new access_token
+            return locals.now - owner.accessExpires > 60000;
+        }, locals.ownerIds = new Map); // create a list of owners requiring a new access_token
         if (!owners.length)
             return next();
 
