@@ -105,8 +105,14 @@ exports.post('/', function (req, res, next) { // POST /larc - create/update larc
             return this();
 
         // check the external IPv4 address is in the DNS
-        locals.fqdn = locals.scheme.dialPrefix + '.hq.appello.care';
+        locals.fqdn = locals.scheme.dialPrefix + '.hq.' + main.secrets.fqdn;
         nsupdate.fqdnCheck(locals.fqdn, 'a', locals.larc.ipv4x, this);
+
+    }, function (cert, privkey, chain, noChange) { // apply pending DNS updates from the database
+        if (!locals.scheme || !locals.larc.ipv4x)
+            return this();
+
+        nsupdate.fqdnCheck(locals.scheme.dialPrefix + '.ua.' + main.secrets.fqdn, 'cname', locals.fqdn, this);
 
     }, function (cert, privkey, chain, noChange) { // apply pending DNS updates from the database
         locals.noChange = locals.noChange && noChange;
