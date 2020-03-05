@@ -109,16 +109,16 @@ exports.post('/', function (req, res, next) { // POST /larc - create/update larc
         nsupdate.fqdnCheck(locals.fqdn, 'a', locals.larc.ipv4x, this);
 
     }, function (cert, privkey, chain, noChange) { // apply pending DNS updates from the database
+        locals.noChange = locals.noChange && noChange;
+        locals.cert = cert;
+        locals.privkey = privkey;
+        locals.chain = chain;
         if (!locals.scheme || !locals.larc.ipv4x)
             return this();
 
         nsupdate.fqdnCheck(locals.scheme.dialPrefix + '.ua.' + main.secrets.fqdn, 'cname', locals.fqdn, this);
 
     }, function (cert, privkey, chain, noChange) { // apply pending DNS updates from the database
-        locals.noChange = locals.noChange && noChange;
-        locals.cert = cert;
-        locals.privkey = privkey;
-        locals.chain = chain;
         nsupdate.flush(this);
 
     }, function () { // process jsonConfigIds if present
