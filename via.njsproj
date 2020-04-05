@@ -35,6 +35,14 @@
     <Compile Include="lib\jsonerr.js" />
     <Compile Include="lib\limit.js" />
     <Compile Include="lib\minut.js" />
+    <Compile Include="lib\redis\certificate.js" />
+    <Compile Include="lib\redis\drop2.js" />
+    <Compile Include="lib\redis\find2.js" />
+    <Compile Include="lib\redis\index.js" />
+    <Compile Include="lib\redis\larc2.js" />
+    <Compile Include="lib\redis\mosh.js" />
+    <Compile Include="lib\redis\mosh2.js" />
+    <Compile Include="lib\redis\proxy2.js" />
     <Compile Include="lib\rpscb.js" />
     <Compile Include="lib\scaber\communicator-assist.js" />
     <Compile Include="lib\scaber\communicator-scaip.js" />
@@ -135,6 +143,7 @@
     <Folder Include="fsxml\dialplan\public\" />
     <Folder Include="lib\" />
     <Folder Include="lib\mesh\" />
+    <Folder Include="lib\redis\" />
     <Folder Include="lib\scaber\" />
     <Folder Include="routes\" />
     <Folder Include="routes\v1\" />
