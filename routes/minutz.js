@@ -9,7 +9,7 @@ var request = require('request');
 
 module.exports = exports = express.Router();
 
-process.once('running', function () {
+process.running.then(function () {
     exports.clientId = Object.keys(main.secrets.minut).filter(function (key, idx, arr) {
         return this[key].clientSecret;
     }, main.secrets.minut)[0];
