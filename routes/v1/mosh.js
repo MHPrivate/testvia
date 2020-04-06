@@ -4,6 +4,7 @@ var chain = require('scope-chain');
 var express = require('express');
 var main = require.main.exports;
 var mysql = require('../../lib/mysql');
+var os = require('os');
 var peers = require('../../lib/mesh/peers');
 
 module.exports = exports = express.Router();
@@ -24,8 +25,9 @@ exports.post('/', function (req, res, next) { // POST /v1/mosh {moshPort, moshSe
     }, function (larcs, meta) { // prepare the database row
         if (!larcs.length)
             return this('route');
-        main.emit('mosh', req.body.moshPort, req.body.moshSecret);
-        peers.emit('mosh', { port: req.body.moshPort, secret: req.body.moshSecret });
+        process.emit('rpscb', 'mosh', req.body.moshPort, req.body.moshSecret, os.hostname());
+        //process.emit('mosh', req.body.moshPort, req.body.moshSecret, os.hostname());
+        //peers.emit('mosh', { port: req.body.moshPort, secret: req.body.moshSecret, host: os.hostname() });
         res.json({});
 
     });
