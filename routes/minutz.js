@@ -129,7 +129,7 @@ exports.get('/callback', function (req, res, next) { // GET /minutz/callback?cod
                     //'battery_empty',                      // user+admin
 
                     //'smoke_detected',                     // admin
-                    //'pir_motion',                         // user+admin
+                    'pir_motion',                           // user+admin
                     //'battery_charging_complete',          // admin
                 ],
             },
@@ -240,31 +240,18 @@ exports.all('/webhook/:type', function (req, res, next) { // GET /minutz/webhook
     var locals = req.locals;
     next.index = req.index;
     chain(next, function () {
-        locals.owner = {};
-        mysql('select * from minutOwners where clientId=?', [req.headers.authorization], this);
+        mysql('select d.* from minutOwners o join minutDevices d on o.ownerId=d.ownerId where o.clientId=? and d.deviceId=?', [req.headers.authorization, req.body.event.device_id], this);
 
-    }, function (owners, meta) {
-        locals.refresh = (locals.owners = owners).filter(function (owner, idx, arr) { // build a Map of ownerIds=>owners
-            this.set(owner.ownerId, owner);
-            return locals.now - owner.accessExpires > 60000;
-        }, locals.ownerIds = new Map); // create a list of owners requiring a new access_token
-        if (!owners.length)
-            return next();
+    }, function (devices, meta) {
+        var device = (locals.devices = devices)[0];
+        if (!device || req.body.event.type !== 'pir_motion')
+            return res.sendStatus(200);
 
-        locals.owner.callbackHost = os.hostname();
-        minut.refresh(locals.refresh, this);
-
-    }, function () {
-        Object.assign(locals.owner, locals.oauth && {
-            accessExpires: locals.expires,
-            accessToken: locals.oauth.resp.body.access_token,
-            refreshToken: locals.oauth.resp.body.refresh_token,
-        });
-        mysql(mysql.mksql('minutOwners', locals.owner, locals.owners[0]), this);
-
-    }, function (status) { // {fieldCount,affectedRows,insertId,serverStatus,warningCount,message,protocol,changedRows}
-        locals.status = status;
         console.log('minutz-webhook:', JSON.stringify({ type: req.params.type, query: req.query, headers: req.headers, body: req.body }));
+        if (req.body.event.type !== 'pir_motion')
+            return res.sendStatus(200);
+
+        process.emit('rpscb', 'scheme:' + device.schemeId, 'pirMotion', { unit: device.schemeUnit, origin: 'minut' });
         res.end();
 
     });
@@ -292,31 +279,31 @@ exports.all('/subscription/:type', function (req, res, next) { // GET /minutz/su
 });
 
 /// utility functions
-function minutRefresh(locals, next) { //- refresh OAuth refresh/access tokens
-    chain(next, function () {
-        request(locals.oauth = {
-            method: 'POST',
-            uri: main.secrets.minut.tokenUri,
-            headers: {
-                'cache-control': 'no-cache',
-            },
-            json: true,
-            body: {
-                client_id: exports.clientId,
-                client_secret: main.secrets.minut[exports.clientId].clientSecret,
-                refresh_token: locals.owners[0].refreshToken,
-                grant_type: 'refresh_token',
-            },
-        }, this);
-
-    }, function (resp, body) {
-        locals.oauth.resp = resp; // body===resp.body
-        if (resp.statusCode < 200 || resp.statusCode >= 300)
-            return next(new Error(['failed to refresh Minut access_token:', resp.statusCode, resp.statusMessage].join(' ')));
-
-        locals.access = jwt.decode(body.access_token);
-        locals.expires = new Date(locals.access ? locals.access.exp * 1000 : body.expires_in * 1000 + Date.now());
-        this();
-
-    });
-}
+//function minutRefresh(locals, next) { //- refresh OAuth refresh/access tokens
+//    chain(next, function () {
+//        request(locals.oauth = {
+//            method: 'POST',
+//            uri: main.secrets.minut.tokenUri,
+//            headers: {
+//                'cache-control': 'no-cache',
+//            },
+//            json: true,
+//            body: {
+//                client_id: exports.clientId,
+//                client_secret: main.secrets.minut[exports.clientId].clientSecret,
+//                refresh_token: locals.owners[0].refreshToken,
+//                grant_type: 'refresh_token',
+//            },
+//        }, this);
+//
+//    }, function (resp, body) {
+//        locals.oauth.resp = resp; // body===resp.body
+//        if (resp.statusCode < 200 || resp.statusCode >= 300)
+//            return next(new Error(['failed to refresh Minut access_token:', resp.statusCode, resp.statusMessage].join(' ')));
+//
+//        locals.access = jwt.decode(body.access_token);
+//        locals.expires = new Date(locals.access ? locals.access.exp * 1000 : body.expires_in * 1000 + Date.now());
+//        this();
+//
+//    });
+//}

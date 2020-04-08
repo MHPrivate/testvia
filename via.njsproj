@@ -35,6 +35,7 @@
     <Compile Include="lib\jsonerr.js" />
     <Compile Include="lib\limit.js" />
     <Compile Include="lib\minut.js" />
+    <Compile Include="lib\redis\scheme.js" />
     <Compile Include="lib\redis\server2.js" />
     <Compile Include="lib\redis\certificate.js" />
     <Compile Include="lib\redis\drop2.js" />
