@@ -16,6 +16,7 @@ var main = Object.defineProperties(extend(exports, {
     debug: require('debug'),    // for logging module administration
     global: global, // expose process global for repl-client connections
     hack: {},       // diagnostic runtime settings - usually empty
+    identity: null, // typically https://<hostname>:<port> of this service instance
     modules: { // only for diagnostic accessibility - not to be used by code - use require(s) only
         esl: require('./lib/esl'),
         fsxml: require('./lib/fsxml'),

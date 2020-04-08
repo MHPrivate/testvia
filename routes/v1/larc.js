@@ -180,7 +180,7 @@ exports.post('/', function (req, res, next) { // POST /larc - create/update larc
             config: locals.config || undefined, // optional assembled config fragments to master only
             fqdn: locals.fqdn, // for TLS certificate creation
             lastCdrMs: locals.lastCdrMs, // enables incremental CDR upload
-            mainurl: mesh.identity, // hostname : port
+            mainurl: main.identity, // hostname : port
             moshHost: os.hostname(), // ensure packet relay via this host
             moshPort: locals.moshPort || null, // optional nexus liason port
             periodS: locals.moshPort ? 600 : 3600,
