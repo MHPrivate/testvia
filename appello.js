@@ -25,7 +25,6 @@ var main = Object.defineProperties(extend(exports, {
         mesh: require('./lib/mesh'),
         minut: require('./lib/minut'),
         mysql: require('./lib/mysql'),
-        peers: require('./lib/mesh/peers'),
         rpscb: require('./lib/redis'), // redis -> rpscb (redis-pub-sub-callback)
         scabs: require('./lib/mesh/scabs'),
         web: require('./lib/web'),

@@ -73,7 +73,6 @@
     <Compile Include="lib\mesh\larcs.js" />
     <Compile Include="lib\mesh\index.js" />
     <Compile Include="lib\mesh\scabs.js" />
-    <Compile Include="lib\mesh\peers.js" />
     <Compile Include="lib\mosh.js" />
     <Compile Include="lib\mysql.js" />
     <Compile Include="lib\name-function.js" />
