@@ -5,7 +5,7 @@ After=network.service
 #Requires=network.service
 
 [Service]
-EnvironmentFile=/opt/appello-via/systemd.environment
+EnvironmentFile=/opt/appello-via/systemd/appello.environment
 ExecStart=/opt/appello-via/appello.js
 ExecReload=/usr/sbin/fuser -HUP -ks /run/appello.sock
 TimeoutStopSec=15
