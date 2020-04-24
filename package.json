@@ -15,6 +15,7 @@
     "callsites": "^3.0.0",
     "command-line-args": "^5.1.1",
     "cookie-parser": "^1.4.4",
+    "debug": "^4.1.1",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "http-close": "0.0.2",
