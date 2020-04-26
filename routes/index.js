@@ -6,6 +6,7 @@ var mysql = require('../lib/mysql');
 
 module.exports = exports = express.Router();
 
+exports.use('/maintain', require('./maintain'));
 exports.use('/minuty', require('./minuty'));
 exports.use('/minutz', require('./minutz'));
 exports.use('/v1', require('./v1')); // service RESTful APIs v1
