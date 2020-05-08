@@ -58,6 +58,7 @@
     <Compile Include="lib\scaber\webio.js" />
     <Compile Include="lib\scaber\worker.js" />
     <Compile Include="lib\socket.io-track.js" />
+    <Compile Include="routes\maintain.js" />
     <Compile Include="routes\minuty.js" />
     <Compile Include="routes\minutz.js" />
     <Compile Include="scaber.js" />
