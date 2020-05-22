@@ -93,8 +93,10 @@
     <Content Include="fsxml\chatplan.xml" />
     <Content Include="fsxml\configuration.xml" />
     <Content Include="fsxml\configuration\acl.conf.xml" />
+    <Content Include="fsxml\configuration\amr.conf.xml" />
     <Content Include="fsxml\configuration\cdr_csv.conf.xml" />
     <Content Include="fsxml\configuration\conference.conf.xml" />
+    <Content Include="fsxml\configuration\curl.conf.xml" />
     <Content Include="fsxml\configuration\db.conf.xml" />
     <Content Include="fsxml\configuration\enum.conf.xml" />
     <Content Include="fsxml\configuration\event_socket.conf.xml" />
@@ -103,10 +105,12 @@
     <Content Include="fsxml\configuration\hash.conf.xml" />
     <Content Include="fsxml\configuration\httapi.conf.xml" />
     <Content Include="fsxml\configuration\local_stream.conf.xml" />
+    <Content Include="fsxml\configuration\loopback.conf.xml" />
     <Content Include="fsxml\configuration\lua.conf.xml" />
     <Content Include="fsxml\configuration\opus.conf.xml" />
     <Content Include="fsxml\configuration\post_load_modules.conf.xml" />
     <Content Include="fsxml\configuration\post_load_switch.conf.xml" />
+    <Content Include="fsxml\configuration\sndfile.conf.xml" />
     <Content Include="fsxml\configuration\sofia.conf.xml" />
     <Content Include="fsxml\configuration\sofia.conf\external-ipv6.xml" />
     <Content Include="fsxml\configuration\sofia.conf\external.xml" />
@@ -127,11 +131,10 @@
     <Content Include="fsxml\dialplan\public.xml" />
     <Content Include="fsxml\directory.xml" />
     <Content Include="fsxml\languages.xml" />
+    <Content Include="package-lock.json" />
     <Content Include="package.json" />
     <Content Include="README.md" />
     <Content Include="secrets.json" />
-    <Content Include="systemd.environment" />
-    <Content Include="systemd.service" />
     <Content Include="views\error.html" />
     <Content Include="views\webauthn.html" />
   </ItemGroup>
