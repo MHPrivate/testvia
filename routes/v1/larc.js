@@ -139,7 +139,7 @@ exports.post('/', function (req, res, next) { // POST /larc - create/update larc
             return wksp;
         }, {});
         this(null, locals.jsonConfigIds.reduce(function (wksp, id, idx, arr) {
-            return this[id] ? extend(true, wksp, this[id]) : wksp;
+            return this[id] ? extend(true, wksp, this[id]) : wksp; // deep merge
         }.bind(jsonConfigs), {}));
 
     }, function (config) { // consider requesting a mosh session
@@ -154,7 +154,7 @@ exports.post('/', function (req, res, next) { // POST /larc - create/update larc
 
     }, function (cdrs, meta) {
         locals.lastCdrMs = !cdrs ? null : !cdrs[0] ? 0 : JSON.parse(cdrs[0].json).startUtcMs; // null means disabled
-        locals.access = extend({
+        locals.access = Object.assign({
             larcId: locals.larc.id,
             name: locals.larc.username,
         }, locals.scheme && {

@@ -6,10 +6,9 @@ require('./lib/running').running = undefined; // causes main.running set _true_ 
 require('./lib/repletion')({ processGlobal: true, always: !process.stdin.isTTY }); // starts either a console:repl OR a daemon:replify (/run/<main>.sock)
 
 var callsites = require('callsites');
-var extend = require('node.extend');
 var fs = require('fs');
 
-var main = Object.defineProperties(extend(exports, {
+var main = Object.defineProperties(Object.assign(exports, {
     cache: {},      // slow-dynamic runtime context - e.g. SSL certificate(s)
     config: {},     // static global settings that are common between multiple instances on the same host
     control: {},    // dynamic runtime settings that broadly vary behaviour e.g. on/off site
