@@ -54,9 +54,14 @@
 
     <extension name="scheme">
         <condition field="destination_number" expression="^4\d{8}$"/>
+        <condition field="${user_exists(id ${destination_number:0:7} $${domain})}" expression="^true$" break="never">
+            <anti-action  application="set" data="bridge=${sofia_contact(user/${destination_number:0:7}" inline="true"/>
+        </condition>
         <condition field="${user_exists(id ${destination_number:0:6} $${domain})}" expression="^true$" break="never">
             <action application="set" data="bridge=${sofia_contact(user/${destination_number:0:6}" inline="true"/>
-            <anti-action  application="set" data="bridge=${sofia_contact(user/${destination_number:0:7}" inline="true"/>
+        </condition>
+        <condition field="${bridge}" expression="^$" break="never">
+            <action application="set" data="bridge=sofia/external/${destination_number}@cone1.appello.care:5061;transport=tls" inline="true"/>
         </condition>
         <condition>
             <action application="set" data="hangup_after_bridge=true"/>
@@ -98,17 +103,22 @@
         </condition>
     </extension>
 
-    <%-
+    <!-- file: <%= __filename %>, basedir: <%= path.resolve(path.dirname(__filename), 'default') %>, sub: <%= query['Caller-Destination-Number'] %> -->
+<%-
     (function (base, dir, sub) {
-        var basedir = `${base}/${dir}`, fpath = `${basedir}/${sub}.xml`;
-        if (!sub) {
-            return fs.statSync(basedir).isDirectory() ? fs.readdirSync(basedir).filter(sub=>fs.statSync(`${basedir}/${sub}`).isFile()).map(sub=>include(`${dir}/${sub}`)).join('') : undefined
-        } else if (fs.existsSync(fpath) && fs.statSync(fpath).isFile()) {
+        var basedir = `${base}/${dir}`, fpath = `${basedir}/${sub}.xml`, stat = fs.existsSync(fpath) && fs.statSync(fpath);
+        if (!sub) { // include all .xml from folder
+            return fs.statSync(basedir).isDirectory()
+                ? fs.readdirSync(basedir)
+                    .filter(sub=>sub.endsWith('.xml') && fs.statSync(`${basedir}/${sub}`).isFile())
+                    .map(sub=>include(`${dir}/${sub}`))
+                    .join('')
+                : undefined
+        } else if (stat && stat.isFile() && stat.size) { // substantive file
             return include(`${dir}/${sub}.xml`)
         }
     })(path.dirname(__filename), 'default', query['Caller-Destination-Number']) // __dirname, 'default', '1000'
  %>
-
     <extension name="catchall">
         <condition>
             <action application="bridge" data="group/default"/>

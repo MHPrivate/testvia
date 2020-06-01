@@ -26,12 +26,18 @@
         </condition>
     </extension>
 
+    <!-- file: <%= __filename %>, basedir: <%= path.resolve(path.dirname(__filename), 'public') %>, sub: <%= query['Caller-Destination-Number'] %> -->
 <%-
     (function (base, dir, sub) {
-        var basedir = `${base}/${dir}`, fpath = `${basedir}/${sub}.xml`;
-        if (!sub) {
-            return fs.statSync(basedir).isDirectory() ? fs.readdirSync(basedir).filter(sub=>fs.statSync(`${basedir}/${sub}`).isFile()).map(sub=>include(`${dir}/${sub}`)).join('') : undefined
-        } else if (fs.existsSync(fpath) && fs.statSync(fpath).isFile()) {
+        var basedir = `${base}/${dir}`, fpath = `${basedir}/${sub}.xml`, stat = fs.existsSync(fpath) && fs.statSync(fpath).isFile();
+        if (!sub) { // include all .xml from folder
+            return fs.statSync(basedir).isDirectory()
+                ? fs.readdirSync(basedir)
+                    .filter(sub=>fs.statSync(`${basedir}/${sub}`).isFile())
+                    .map(sub=>include(`${dir}/${sub}`))
+                    .join('')
+                : undefined
+        } else if (stat && stat.isFile() && stat.size) { // substantive file
             return include(`${dir}/${sub}.xml`)
         }
     })(path.dirname(__filename), 'public', query['Caller-Destination-Number']) // __dirname, 'public', '1000'

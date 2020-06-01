@@ -37,6 +37,7 @@
         <list name="public.trusted" default="deny">
             <node type="allow" cidr="213.219.9.138/32"/><!-- volt-acton.appello.care -->
             <node type="allow" cidr="195.110.86.158/32"/><!-- volt-slough.appello.care -->
+            <node type="allow" cidr="217.182.98.64/27"/><!-- appello.care -->
         </list>
 
     </network-lists>
