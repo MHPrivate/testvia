@@ -55,7 +55,7 @@
     <extension name="scheme">
         <condition field="destination_number" expression="^4\d{8}$"/>
         <condition field="${user_exists(id ${destination_number:0:7} $${domain})}" expression="^true$" break="never">
-            <anti-action  application="set" data="bridge=${sofia_contact(user/${destination_number:0:7}" inline="true"/>
+            <action  application="set" data="bridge=${sofia_contact(user/${destination_number:0:7}" inline="true"/>
         </condition>
         <condition field="${user_exists(id ${destination_number:0:6} $${domain})}" expression="^true$" break="never">
             <action application="set" data="bridge=${sofia_contact(user/${destination_number:0:6}" inline="true"/>
