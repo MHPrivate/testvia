@@ -53,21 +53,15 @@
     </extension>
 
     <extension name="scheme">
-        <condition field="destination_number" expression="^4\d{8}$"/>
-        <condition field="${user_exists(id ${destination_number:0:7} $${domain})}" expression="^true$" break="never">
-            <action  application="set" data="bridge=${sofia_contact(user/${destination_number:0:7}" inline="true"/>
-        </condition>
-        <condition field="${user_exists(id ${destination_number:0:6} $${domain})}" expression="^true$" break="never">
-            <action application="set" data="bridge=${sofia_contact(user/${destination_number:0:6}" inline="true"/>
-        </condition>
-        <condition field="${bridge}" expression="^$" break="never">
-            <action application="set" data="bridge=sofia/external/${destination_number}@cone1.appello.care:5061;transport=tls" inline="true"/>
-        </condition>
-        <condition>
+        <condition field="destination_number" expression="^4\d{8}$">
             <action application="set" data="hangup_after_bridge=true"/>
             <action application="set" data="continue_on_fail=true"/>
+            <action application="set" data="bridge=${sofia_contact(user/<%= dialPrefix %>)}" inline="true"/>
             <!-- Offer SRTP on outbound legs if the contact contains 'transport=tls'. -->
             <action application="bridge" data="{rtp_secure_media=${regex(${bridge}|transport=tls)}}${lua(~stream:write(tostring(string.gsub('${bridge}','gw%+[^@]+','${destination_number}'))))}"/>
+        </condition>
+        <condition field="${hostname}" expression="^<%= cone %>$" break="never">
+            <anti-action application="bridge" data="{rtp_secure_media=true}sofia/external/${destination_number}@<%= cone %>:5061;transport=tls"/>
         </condition>
     </extension>
 
