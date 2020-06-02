@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<%  // NOTES:
+    // variable sip-force-contact=NDLB-connectile-dysfunction-2.0 (previous) - added fs_path to Contact headers - misses transport=tls on outbound INVITEs
+    // variable sip-force-contact=NDLB-connectile-dysfunction (current) - corrects Contact header ip/port in line with received origin and retains transport=tls
+ %>
 <document type="freeswitch/xml">
 <section  name="directory" description="User Directory">
     <domain name="$${domain}">

@@ -14,6 +14,9 @@ while read cmd set ip; do
         del)
             $nft delete element inet $table $set { $ip }
             ;;
+        flush)
+            $nft flush set inet $table $set
+            ;;
         save)
             ;;
     esac

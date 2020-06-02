@@ -57,7 +57,7 @@
         <!--<param name="liberal-dtmf" value="true"/>-->
 
 
-<!--
+        <!--
             Sometimes, in extremely rare edge cases, the Sofia SIP stack may stop
             responding. These options allow you to enable and control a watchdog
             on the Sofia SIP stack so that if it stops responding for the
@@ -98,7 +98,7 @@
         <param name="apply-nat-acl" value="nat.auto"/>
 
 
-<!-- (default true) set to false if you do not wish to have called party info in 1XX responses -->
+        <!-- (default true) set to false if you do not wish to have called party info in 1XX responses -->
         <!-- <param name="cid-in-1xx" value="false"/> -->
 
         <!-- extended info parsing -->
@@ -139,7 +139,7 @@
         <!--<param name="send-presence-on-register" value="first-only"/> -->
 
 
-<!-- Caller-ID type (choose one, can be overridden by inbound call type and/or sip_cid_type channel variable -->
+        <!-- Caller-ID type (choose one, can be overridden by inbound call type and/or sip_cid_type channel variable -->
         <!-- Remote-Party-ID header -->
         <!--<param name="caller-id-type" value="rpid"/>-->
 
@@ -162,7 +162,7 @@
         <param name="presence-hosts" value="$${domain},$${local_ip_v4}"/>
         <param name="presence-privacy" value="$${presence_privacy}"/>
 
-<!-- ************************************************* -->
+        <!-- ************************************************* -->
 
         <!-- This setting is for AAL2 bitpacking on G726 -->
         <!-- <param name="bitpacking" value="aal2"/> -->
@@ -192,7 +192,7 @@
         <!-- Port to listen on for TLS requests. (5061 will be used if unspecified) -->
         <param name="tls-sip-port" value="$${internal_tls_port}"/>
 
-<!-- turn on auto-flush during bridge (skip timer sleep when the socket already has data)
+        <!-- turn on auto-flush during bridge (skip timer sleep when the socket already has data)
                 (reduces delay on latent connections default true, must be disabled explicitly)-->
         <!--<param name="rtp-autoflush-during-bridge" value="false"/>-->
 
