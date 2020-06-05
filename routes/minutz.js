@@ -1,4 +1,5 @@
 var chain = require('scope-chain');
+var debug = require('debug')('minutz');
 var express = require('express');
 var jwt = require('jsonwebtoken');
 var main = require.main.exports;
@@ -247,10 +248,11 @@ exports.all('/webhook/:type', function (req, res, next) { // GET /minutz/webhook
         if (!device || req.body.event.type !== 'pir_motion')
             return res.sendStatus(200);
 
-        console.log('minutz-webhook:', JSON.stringify({ type: req.params.type, query: req.query, headers: req.headers, body: req.body }));
+        debug.enabled && debug('minutz-webhook:', JSON.stringify({ type: req.params.type, query: req.query, headers: req.headers, body: req.body }));
         if (req.body.event.type !== 'pir_motion')
             return res.sendStatus(200);
 
+        req.headers.authorization = Buffer.from(req.body.event.device_id + ':').toString('base64');
         process.emit('rpscb', 'scheme:' + device.schemeId, 'pirMotion', { unit: device.schemeUnit, origin: 'minut' });
         res.end();
 
