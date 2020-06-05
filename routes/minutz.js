@@ -252,7 +252,7 @@ exports.all('/webhook/:type', function (req, res, next) { // GET /minutz/webhook
         if (req.body.event.type !== 'pir_motion')
             return res.sendStatus(200);
 
-        req.headers.authorization = Buffer.from(req.body.event.device_id + ':').toString('base64');
+        req.headers.authorization = 'Basic ' + Buffer.from(req.body.event.device_id + ':').toString('base64');
         process.emit('rpscb', 'scheme:' + device.schemeId, 'pirMotion', { unit: device.schemeUnit, origin: 'minut' });
         res.end();
 
