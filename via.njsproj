@@ -136,7 +136,6 @@
     <Content Include="README.md" />
     <Content Include="secrets.json" />
     <Content Include="views\error.html" />
-    <Content Include="views\webauthn.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bash\" />

@@ -59,6 +59,7 @@
             <action application="set" data="bridge=${sofia_contact(user/<%= dialPrefix %>)}" inline="true"/>
             <!-- Offer SRTP on outbound legs if the contact contains 'transport=tls'. -->
             <action application="bridge" data="{rtp_secure_media=${regex(${bridge}|transport=tls)}}${lua(~stream:write(tostring(string.gsub('${bridge}','gw%+[^@]+','${destination_number}'))))}"/>
+            <!-- lua-regex:'gw%+[^@]+' same-as posix-regex:/gw\+[^@]+/ -->
         </condition>
         <condition field="${hostname}" expression="^<%= cone %>$" break="never">
             <anti-action application="bridge" data="{rtp_secure_media=true}sofia/external/${destination_number}@<%= cone %>:5061;transport=tls"/>
