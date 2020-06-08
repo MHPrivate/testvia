@@ -27,8 +27,22 @@
     </extension>
 
     <!-- file: {%= __filename %}, basedir: {%= path.resolve(path.dirname(__filename), 'public') %}, sub: {%= query['Caller-Destination-Number'] %} -->
-{%-
-    (function (base, dir, sub) {
+{% if (expedite) { -%}
+    <extension name="expedite">
+        <condition field="${eval({%= !!expedite %})}" expression="^true$">
+            <action application="set" data="bypass_media={%= expedite.byps || false %}"/>
+            <action application="set" data="effective_caller_id_number={%= expedite.numb %}"/>
+            <action application="set" data="effective_caller_id_name='{%= expedite.name %}'"/>
+            <action application="set" data="hangup_after_bridge=true"/>
+            <action application="set" data="continue_on_fail=true"/>
+            <action application="set" data="bridge=${sofia_contact(user/{%= expedite.prfx %})}" inline="true"/>
+            <!-- Offer SRTP on outbound legs if the contact contains 'transport=tls'. -->
+            <action application="bridge" data="{rtp_secure_media=${regex(${bridge}|transport=tls)}}${lua(~stream:write(tostring(string.gsub('${bridge}','gw%+[^@]+','{%= expedite.dest %}'))))}"/>
+            <!-- lua-regex:'gw%+[^@]+' same-as posix-regex:/gw\+[^@]+/ -->
+        </condition>
+    </extension>
+{%  } else { -%}
+{%- (function (base, dir, sub) {
         var basedir = `${base}/${dir}`, fpath = `${basedir}/${sub}.xml`, stat = fs.existsSync(fpath) && fs.statSync(fpath).isFile();
         if (!sub) { // include all .xml from folder
             return fs.statSync(basedir).isDirectory()
@@ -42,12 +56,13 @@
         }
     })(path.dirname(__filename), 'public', query['Caller-Destination-Number']) // __dirname, 'public', '1000'
 -%}
+{%  } -%}
 
     <extension name="public-trusted">
-      <condition field="${acl(${network_addr} public.trusted)}" expression="^true$">
-      <action application="set" data="domain_name=$${domain}"/>
-      <action application="transfer" data="${destination_number} XML default"/>
-      </condition>
+        <condition field="${acl(${network_addr} public.trusted)}" expression="^true$">
+            <action application="set" data="domain_name=$${domain}"/>
+            <action application="transfer" data="${destination_number} XML default"/>
+        </condition>
     </extension>
 
     <extension name="catchall">

@@ -53,7 +53,8 @@
     </extension>
 
     <extension name="scheme">
-        <condition field="destination_number" expression="^4\d{8}$">
+        <!-- database lookup indicates next-hop is registered on this this cone-server -->
+        <condition field="${sofia_contact(user/{%= dialPrefix %})}" expression="sofia" break="never">
             <action application="set" data="hangup_after_bridge=true"/>
             <action application="set" data="continue_on_fail=true"/>
             <action application="set" data="bridge=${sofia_contact(user/{%= dialPrefix %})}" inline="true"/>
@@ -61,7 +62,10 @@
             <action application="bridge" data="{rtp_secure_media=${regex(${bridge}|transport=tls)}}${lua(~stream:write(tostring(string.gsub('${bridge}','gw%+[^@]+','${destination_number}'))))}"/>
             <!-- lua-regex:'gw%+[^@]+' same-as posix-regex:/gw\+[^@]+/ -->
         </condition>
+        <!-- database lookup indicates next-hop is registered on another cone-server -->
         <condition field="${hostname}" expression="^{%= cone %}$" break="never">
+            <!-- skip these if _cone_ is this host -->
+            <anti-action application="set" data="sip_h_X-AppelloExpedite={%= appelloExpedite %}"/>
             <anti-action application="bridge" data="{rtp_secure_media=true}sofia/external/${destination_number}@{%= cone %}:5061;transport=tls"/>
         </condition>
     </extension>
