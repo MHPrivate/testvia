@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<%  // NOTES:
+{%  // NOTES:
     // variable sip-force-contact=NDLB-connectile-dysfunction-2.0 (previous) - added fs_path to Contact headers - misses transport=tls on outbound INVITEs
     // variable sip-force-contact=NDLB-connectile-dysfunction (current) - corrects Contact header ip/port in line with received origin and retains transport=tls
- %>
+ %}
 <document type="freeswitch/xml">
 <section  name="directory" description="User Directory">
     <domain name="$${domain}">
@@ -27,68 +27,68 @@
                     [variable_scope=leg2b]<target_endpoint>][|      pipe-sequential
                     <target_endpoint>]
         -->
-<%  if (req.locals.domain.param) { %>
+{%  if (req.locals.domain.param) { %}
         <params>
-<%    for (var name in req.locals.domain.param) { %>
-            <param name="<%= name %>" value="<%= req.locals.domain.param[name] %>"/>
-<%    } %>
+{%    for (var name in req.locals.domain.param) { %}
+            <param name="{%= name %}" value="{%= req.locals.domain.param[name] %}"/>
+{%    } %}
         </params>
-<%  } %>
-<%  if (req.locals.domain.variable) { %>
+{%  } %}
+{%  if (req.locals.domain.variable) { %}
         <variables>
-<%    for (var name in req.locals.domain.variable) { %>
-            <variable name="<%= name %>" value="<%= req.locals.domain.variable[name] %>"/>
-<%    } %>
+{%    for (var name in req.locals.domain.variable) { %}
+            <variable name="{%= name %}" value="{%= req.locals.domain.variable[name] %}"/>
+{%    } %}
         </variables>
-<%  } %>
-<%  if (req.locals.groups) { var users = {}; %>
+{%  } %}
+{%  if (req.locals.groups) { var users = {}; %}
         <groups>
-<%    for (group in req.locals.groups) { %>
-            <group name="<%= group %>">
-<%      if (req.locals.groups[group].param) { %>
+{%    for (group in req.locals.groups) { %}
+            <group name="{%= group %}">
+{%      if (req.locals.groups[group].param) { %}
                 <params>
-<%        for (var name in req.locals.groups[group].param) { %>
-                    <param name="<%= name %>" value="<%= req.locals.groups[group].param[name] %>"/>
-<%        } %>
+{%        for (var name in req.locals.groups[group].param) { %}
+                    <param name="{%= name %}" value="{%= req.locals.groups[group].param[name] %}"/>
+{%        } %}
                 </params>
-<%      } %>
-<%      if (req.locals.groups[group].variable) { %>
+{%      } %}
+{%      if (req.locals.groups[group].variable) { %}
                 <variables>
-<%        for (var name in req.locals.groups[group].variable) { %>
-                    <variable name="<%= name %>" value="<%= req.locals.groups[group].variable[name] %>"/>
-<%        } %>
+{%        for (var name in req.locals.groups[group].variable) { %}
+                    <variable name="{%= name %}" value="{%= req.locals.groups[group].variable[name] %}"/>
+{%        } %}
                 </variables>
-<%      } %>
-<%      if (req.locals.groups[group].users) { %>
+{%      } %}
+{%      if (req.locals.groups[group].users) { %}
                 <users>
-<%        for (var user in req.locals.groups[group].users) { %>
-<%          if (users[user]) { %>
-                    <user id="<%= user %>" type="pointer"/>
-<%          } else { users[user] = true; %>
-                    <user id="<%= user %>">
-<%            if (req.locals.users[user].param) { %>
+{%        for (var user in req.locals.groups[group].users) { %}
+{%          if (users[user]) { %}
+                    <user id="{%= user %}" type="pointer"/>
+{%          } else { users[user] = true; %}
+                    <user id="{%= user %}">
+{%            if (req.locals.users[user].param) { %}
                         <params>
-<%              for (var name in req.locals.users[user].param) { %>
-                            <param name="<%= name %>" value="<%= req.locals.users[user].param[name] %>"/>
-<%              } %>
+{%              for (var name in req.locals.users[user].param) { %}
+                            <param name="{%= name %}" value="{%= req.locals.users[user].param[name] %}"/>
+{%              } %}
                         </params>
-<%            } %>
-<%            if (req.locals.users[user].variable) { %>
+{%            } %}
+{%            if (req.locals.users[user].variable) { %}
                         <variables>
-<%              for (var name in req.locals.users[user].variable) { %>
-                            <variable name="<%= name %>" value="<%= req.locals.users[user].variable[name] %>"/>
-<%              } %>
+{%              for (var name in req.locals.users[user].variable) { %}
+                            <variable name="{%= name %}" value="{%= req.locals.users[user].variable[name] %}"/>
+{%              } %}
                         </variables>
-<%            } %>
+{%            } %}
                     </user>
-<%          } %>
-<%        } %>
+{%          } %}
+{%        } %}
                 </users>
-<%      } %>
+{%      } %}
             </group>
-<%    } %>
+{%    } %}
         </groups>
-<%  } %>
+{%  } %}
     </domain>
 </section>
 </document>

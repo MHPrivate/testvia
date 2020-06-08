@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <document type="freeswitch/xml">
-<%
+{%
     var attr = 'name="configuration"  description="Various Configuration"';
     var body = (function (base, dir, sub) {
         var basedir = `${base}/${dir}`, fpath = `${basedir}/${sub}.xml`, stat = fs.existsSync(fpath) && fs.statSync(fpath);
@@ -12,8 +12,8 @@
             return include(`${dir}/${sub}.xml`);
         }
     })(path.dirname(__filename), query.section, query.key_value) // __dirname, 'configuration', 'sofia.conf'
- %>
-<section <%- attr %>>
-<%- body %>
+ %}
+<section {%- attr %}>
+{%- body %}
 </section>
 </document>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-    <!-- file: <%= __filename %>, basedir: <%= path.resolve(path.dirname(__filename), query.section) %>, sub: <%= query['Caller-Context'] %> -->
-<document type="freeswitch/xml"><%
+    <!-- file: {%= __filename %}, basedir: {%= path.resolve(path.dirname(__filename), query.section) %}, sub: {%= query['Caller-Context'] %} -->
+<document type="freeswitch/xml">{%
     var attr = 'name="dialplan" description="Regex/XML Dialplan"';
     var body = (function (base, dir, sub) {
         var basedir = `${base}/${dir}`, fpath = `${basedir}/${sub}.xml`, stat = fs.existsSync(fpath) && fs.statSync(fpath);
@@ -17,8 +17,8 @@
             return (attr = 'name="result"') && '    <result status="not found"/>';
         }
     })(path.dirname(__filename), query.section, query['Caller-Context']) // __dirname, 'dialplan', 'default'
- %>
-<section <%- attr %>>
-<%- body %>
+ %}
+<section {%- attr %}>
+{%- body %}
 </section>
 </document>

@@ -1,6 +1,6 @@
 <context name="features">
 
-<%-
+{%-
     (function (base, dir, sub) {
         var basedir = `${base}/${dir}`, fpath = `${basedir}/${sub}.xml`;
         if (!sub) {
@@ -9,6 +9,6 @@
             return include(`${dir}/${sub}.xml`)
         }
     })(path.dirname(__filename), 'features', query['Caller-Destination-Number']) // __dirname, 'features', '1000'
- %>
+ %}
 
 </context>

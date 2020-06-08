@@ -26,8 +26,8 @@
         </condition>
     </extension>
 
-    <!-- file: <%= __filename %>, basedir: <%= path.resolve(path.dirname(__filename), 'public') %>, sub: <%= query['Caller-Destination-Number'] %> -->
-<%-
+    <!-- file: {%= __filename %}, basedir: {%= path.resolve(path.dirname(__filename), 'public') %}, sub: {%= query['Caller-Destination-Number'] %} -->
+{%-
     (function (base, dir, sub) {
         var basedir = `${base}/${dir}`, fpath = `${basedir}/${sub}.xml`, stat = fs.existsSync(fpath) && fs.statSync(fpath).isFile();
         if (!sub) { // include all .xml from folder
@@ -41,7 +41,7 @@
             return include(`${dir}/${sub}.xml`)
         }
     })(path.dirname(__filename), 'public', query['Caller-Destination-Number']) // __dirname, 'public', '1000'
- %>
+-%}
 
     <extension name="public-trusted">
       <condition field="${acl(${network_addr} public.trusted)}" expression="^true$">

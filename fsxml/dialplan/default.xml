@@ -56,13 +56,13 @@
         <condition field="destination_number" expression="^4\d{8}$">
             <action application="set" data="hangup_after_bridge=true"/>
             <action application="set" data="continue_on_fail=true"/>
-            <action application="set" data="bridge=${sofia_contact(user/<%= dialPrefix %>)}" inline="true"/>
+            <action application="set" data="bridge=${sofia_contact(user/{%= dialPrefix %})}" inline="true"/>
             <!-- Offer SRTP on outbound legs if the contact contains 'transport=tls'. -->
             <action application="bridge" data="{rtp_secure_media=${regex(${bridge}|transport=tls)}}${lua(~stream:write(tostring(string.gsub('${bridge}','gw%+[^@]+','${destination_number}'))))}"/>
             <!-- lua-regex:'gw%+[^@]+' same-as posix-regex:/gw\+[^@]+/ -->
         </condition>
-        <condition field="${hostname}" expression="^<%= cone %>$" break="never">
-            <anti-action application="bridge" data="{rtp_secure_media=true}sofia/external/${destination_number}@<%= cone %>:5061;transport=tls"/>
+        <condition field="${hostname}" expression="^{%= cone %}$" break="never">
+            <anti-action application="bridge" data="{rtp_secure_media=true}sofia/external/${destination_number}@{%= cone %}:5061;transport=tls"/>
         </condition>
     </extension>
 
@@ -98,8 +98,8 @@
         </condition>
     </extension>
 
-    <!-- file: <%= __filename %>, basedir: <%= path.resolve(path.dirname(__filename), 'default') %>, sub: <%= query['Caller-Destination-Number'] %> -->
-<%-
+    <!-- file: {%= __filename %}, basedir: {%= path.resolve(path.dirname(__filename), 'default') %}, sub: {%= query['Caller-Destination-Number'] %} -->
+{%-
     (function (base, dir, sub) {
         var basedir = `${base}/${dir}`, fpath = `${basedir}/${sub}.xml`, stat = fs.existsSync(fpath) && fs.statSync(fpath);
         if (!sub) { // include all .xml from folder
@@ -113,7 +113,8 @@
             return include(`${dir}/${sub}.xml`)
         }
     })(path.dirname(__filename), 'default', query['Caller-Destination-Number']) // __dirname, 'default', '1000'
- %>
+-%}
+
     <extension name="catchall">
         <condition>
             <action application="bridge" data="group/default"/>

@@ -1,6 +1,6 @@
 <configuration name="sofia.conf" description="sofia Endpoint">
 
-<%  if (!query.profile) { %>
+{%  if (!query.profile) { %}
     <global_settings>
         <param name="log-level" value="0"/>
         <!-- <param name="auto-restart" value="false"/> -->
@@ -29,10 +29,10 @@
         <!-- TLS version ("sslv23" (default), "tlsv1"). NOTE: Phones may not work with TLSv1 -->
         <param name="tls-version" value="$${sip_tls_version}"/>
     </global_settings>
-<%  } %>
+{%  } %}
 
     <profiles>
-<%-
+{%-
     (function (base, dir, sub) {
         var basedir = `${base}/${dir}`, fpath = `${basedir}/${sub}.xml`;
         if (!sub) {
@@ -41,7 +41,7 @@
             return include(`${dir}/${sub}.xml`)
         }
     })(path.dirname(__filename), 'sofia.conf', query.profile) // __dirname, 'sofia.conf', 'external'
- %>
+ %}
     </profiles>
 
 </configuration>
