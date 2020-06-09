@@ -44,7 +44,7 @@ var main = Object.defineProperties(Object.assign(exports, {
 
 process.once('terminate', function _main() {
     var unref = {
-        'bound ': true, // _sender.close (/opt/appello-via/node_modules/ws/lib/websocket.js:231:28)
+        'bound destroy': true, // WebSocket.close (/opt/appello-via/node_modules/ws/lib/websocket.js:243:24)
     }, setTimeout = global.setTimeout;
     global.setTimeout = function (cb, ms) { // intercept & unref particular timeout(s) set during shutdown
         if (ms && !unref[cb.name])
@@ -54,17 +54,16 @@ process.once('terminate', function _main() {
     };
     setInterval(function activeHandles() {
         var activeHandles = process._getActiveHandles();
-        console.log(activeHandles);
-        activeHandles.forEach(function (handle, idx, arr) {
-            if (handle.__proto__.constructor.name === 'Timer') {
-                (function recurse(timeout) {
-                    recurse.cache = recurse.cache || [];
-                    if (~recurse.cache.indexOf(timeout))
-                        return;
-                    recurse.cache.push(timeout);
-                    console.log(timeout._onTimeout && timeout._onTimeout.toString(), timeout._idleTimeout);
-                    recurse(timeout._idleNext);
-                })(handle._list._idleNext);
+        activeHandles.forEach(function (h, idx, arr) {
+            switch (h.constructor.name) {
+                case 'Socket':
+                    console.log('handle: Socket', h.fd || (h.server || {})._connectionKey || (h.server || {})._pipename, h._peername);
+                    break;
+                case 'Timer':
+                    console.log('handle: Timer', h._list._idleNext._onTimeout.toString());
+                    break;
+                default:
+                    console.log('handle:', h.constructor.name);
             }
         });
     }, 10000).unref();
