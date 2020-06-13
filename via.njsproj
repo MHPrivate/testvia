@@ -32,6 +32,7 @@
   <ItemGroup>
     <Compile Include="appello.js" />
     <Compile Include="lib\args-map.js" />
+    <Compile Include="lib\harvest.js" />
     <Compile Include="lib\jsonerr.js" />
     <Compile Include="lib\limit.js" />
     <Compile Include="lib\minut.js" />

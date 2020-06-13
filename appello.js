@@ -19,6 +19,7 @@ var main = Object.defineProperties(Object.assign(exports, {
     modules: { // only for diagnostic accessibility - not to be used by code - use require(s) only
         esl: require('./lib/esl'),
         fsxml: require('./lib/fsxml'),
+        harvest: require('./lib/harvest'),
         ipsets: require('./lib/ipsets'),
         larcs: require('./lib/mesh/larcs'),
         mesh: require('./lib/mesh'),
