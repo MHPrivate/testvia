@@ -47,6 +47,7 @@
     <Compile Include="lib\redis\mosh.js" />
     <Compile Include="lib\redis\mosh2.js" />
     <Compile Include="lib\redis\proxy2.js" />
+    <Compile Include="lib\registrations.js" />
     <Compile Include="lib\rpscb.js" />
     <Compile Include="lib\scaber\communicator-assist.js" />
     <Compile Include="lib\scaber\communicator-scaip.js" />

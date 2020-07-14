@@ -8,7 +8,7 @@ require('./lib/repletion')({ processGlobal: true, always: !process.stdin.isTTY }
 var callsites = require('callsites');
 var fs = require('fs');
 
-var main = Object.defineProperties(Object.assign(exports, {
+var main = Object.defineProperties(Object.assign(exports,{
     cache: {},      // slow-dynamic runtime context - e.g. SSL certificate(s)
     config: {},     // static global settings that are common between multiple instances on the same host
     control: {},    // dynamic runtime settings that broadly vary behaviour e.g. on/off site
@@ -25,6 +25,7 @@ var main = Object.defineProperties(Object.assign(exports, {
         mesh: require('./lib/mesh'),
         minut: require('./lib/minut'),
         mysql: require('./lib/mysql'),
+        registrations: require('./lib/registrations'),
         rpscb: require('./lib/redis'), // redis -> rpscb (redis-pub-sub-callback)
         scabs: require('./lib/mesh/scabs'),
         web: require('./lib/web'),
