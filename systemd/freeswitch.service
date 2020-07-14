@@ -1,12 +1,12 @@
 [Unit]
 Description=The FREESwitch Server
-After=network.target remote-fs.target nss-lookup.target mariadb.service memcached.service haproxy.service
+After=network.target remote-fs.target nss-lookup.target mariadb.service memcached.service haproxy.service appello.service
 
 [Service]
 Type=forking
 PIDFile=/run/freeswitch/freeswitch.pid
 EnvironmentFile=/opt/appello-via/systemd/freeswitch.environment
-#ExecStartPre=/usr/bin/sleep 30
+ExecStartPre=/usr/bin/sleep 5
 ExecStart=/usr/bin/freeswitch -nc -u freeswitch -g daemon $FREESWITCH_PARAMS
 ExecStop=/usr/bin/freeswitch -stop
 LimitMEMLOCK=infinity
