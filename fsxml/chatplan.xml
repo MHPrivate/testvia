@@ -1,7 +1,24 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<document type="freeswitch/xml">
-    <!-- __filename -->
-    <section name="result">
-        <result status="not found"/>
-    </section>
+    <!-- file: {%= __filename %}, basedir: {%= path.resolve(path.dirname(__filename), query.section) %}, sub: {%= query['context'] %} -->
+<document type="freeswitch/xml">{%
+    var attr = 'name="chatplan" description="Regex/XML Dialplan"';
+    var body = (function (base, dir, sub) {
+        var basedir = `${base}/${dir}`, fpath = `${basedir}/${sub}.xml`, stat = fs.existsSync(fpath) && fs.statSync(fpath);
+        if (!sub) { // include all .xml from folder
+            return fs.statSync(basedir).isDirectory()
+                ? fs.readdirSync(basedir)
+                    .filter(sub => sub.endsWith('.xml') && fs.statSync(`${basedir}/${sub}`).isFile())
+                    .map(sub=>include(`${dir}/${sub}`))
+                    .join('')
+                : undefined;
+        } else if (stat && stat.isFile() && stat.size) { // substantive file
+            return include(`${dir}/${sub}.xml`);
+        } else { // non-existent OR non-file OR empty file
+            return (attr = 'name="result"') && '    <result status="not found"/>';
+        }
+    })(path.dirname(__filename), query.section, query['context']) // __dirname, 'chatplan', 'public'
+ %}
+<section {%- attr %}>
+{%- body -%}
+</section>
 </document>

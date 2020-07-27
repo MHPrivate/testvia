@@ -1,0 +1,10 @@
+# /etc/sysconfig/scaber
+## Type:                string
+## Default:             ""
+## Config:              ""
+## ServiceRestart:      scaber
+#
+DEBUG_HIDE_DATE=yes
+PORT=443
+#DEBUG=mysql,worker,session,communicator:*,consumer:*
+DEBUG=mysql

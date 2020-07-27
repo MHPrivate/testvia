@@ -1,0 +1,9 @@
+﻿<context name="public">
+  <extension name="halt">
+    <condition>
+        <!-- prevent sofia_presence_chat_send() from trying to forward this SIP-MESSAGE -->
+        <action application="set" data="appello_to=${to}"/>
+        <action application="set" data="to=sip:"/>
+    </condition>
+  </extension>
+</context>

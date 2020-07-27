@@ -1,0 +1,16 @@
+# /etc/systemd/system/scaber.service
+[Unit]
+Description=Appello Scaber service
+After=network.service
+#Requires=network.service
+
+[Service]
+EnvironmentFile=/opt/appello-via/systemd/scaber.environment
+ExecStart=/opt/appello-via/scaber.js
+ExecReload=/usr/bin/kill -HUP $MAINPID
+TimeoutStopSec=15
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+

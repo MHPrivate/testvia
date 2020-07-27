@@ -36,6 +36,7 @@
     <Compile Include="lib\jsonerr.js" />
     <Compile Include="lib\limit.js" />
     <Compile Include="lib\minut.js" />
+    <Compile Include="lib\nowip.js" />
     <Compile Include="lib\redis\proxyConfig.js" />
     <Compile Include="lib\redis\scheme.js" />
     <Compile Include="lib\redis\server2.js" />
@@ -93,6 +94,7 @@
     <Content Include="bash\ipset-restore.sh" />
     <Content Include="bash\nsupdate.sh" />
     <Content Include="fsxml\chatplan.xml" />
+    <Content Include="fsxml\chatplan\public.xml" />
     <Content Include="fsxml\configuration.xml" />
     <Content Include="fsxml\configuration\acl.conf.xml" />
     <Content Include="fsxml\configuration\amr.conf.xml" />
@@ -148,6 +150,7 @@
     <Folder Include="fsxml\dialplan\default\" />
     <Folder Include="fsxml\dialplan\features\" />
     <Folder Include="fsxml\dialplan\public\" />
+    <Folder Include="fsxml\chatplan\" />
     <Folder Include="lib\" />
     <Folder Include="lib\mesh\" />
     <Folder Include="lib\redis\" />
