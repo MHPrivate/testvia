@@ -74,6 +74,9 @@ process.once('terminate', function _main() {
 process.nextTick(function (nics) {
     for (var nic in nics) // lo, ens160, ens192
         for (var idx in nics[nic]) // 0, 1, 2, ...
-            if (!nics[nic][idx].internal) // external
-                return main.uuidv1 = require('uuid/v1').bind(null, { node: Buffer.from(nics[nic][idx].mac.replace(/:/g, ''), 'hex') });
+            if (!nics[nic][idx].internal) { // external
+                main.config.mac = nics[nic][idx].mac;
+                main.uuidv1 = require('uuid/v1').bind(null, { node: Buffer.from(main.config.mac.replace(/:/g, ''), 'hex') })
+                return;
+            }
 }, require('os').networkInterfaces());

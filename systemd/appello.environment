@@ -6,4 +6,5 @@
 #
 DEBUG_HIDE_DATE=yes
 PORT=443
+#DEBUG=mysql,mesh,mesh:larcs,mesh:scabs,apns-sub,apn
 DEBUG=mysql,mesh,mesh:larcs,mesh:scabs
