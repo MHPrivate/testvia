@@ -94,6 +94,7 @@
         <param name="inbound-codec-negotiation" value="generous"/>
         <param name="nonce-ttl" value="60"/>
         <param name="auth-calls" value="$${external_auth_calls}"/>
+        <param name="auth-messages" value="$${external_auth_calls}"/>
         <param name="inbound-late-negotiation" value="true"/>
         <param name="inbound-zrtp-passthru" value="true"/>
         <!-- (also enables late negotiation) -->

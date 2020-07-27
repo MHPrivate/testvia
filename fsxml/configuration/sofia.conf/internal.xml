@@ -188,6 +188,7 @@
         <!-- TLS: disabled by default, set to "true" to enable -->
         <param name="tls" value="$${internal_ssl_enable}"/>
         <!-- Set to true to not bind on the normal sip-port but only on the TLS port -->
+        <!-- a TLS profile should be tls-only to enforce transport for sip MESSAGE methods -->
         <param name="tls-only" value="true"/>
         <!-- Port to listen on for TLS requests. (5061 will be used if unspecified) -->
         <param name="tls-sip-port" value="$${internal_tls_port}"/>
@@ -243,6 +244,7 @@
         <!-- add a ;received="<ip>:<port>" to the contact when replying to register for nat handling -->
         <!--<param name="NDLB-received-in-nat-reg-contact" value="true"/>-->
         <param name="auth-calls" value="$${internal_auth_calls}"/>
+        <param name="auth-messages" value="$${internal_auth_calls}"/>
         <!-- Force the user and auth-user to match. -->
         <param name="inbound-reg-force-matching-username" value="true"/>
         <!-- on authed calls, authenticate *all* the packets not just invite -->

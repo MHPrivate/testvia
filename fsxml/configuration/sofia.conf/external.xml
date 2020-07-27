@@ -15,10 +15,18 @@
             <param name="ping" value="25"/>
         </gateway>
         <gateway name="simwood">
-            <param name="username" value="930409-ApelloLtd"/>
-            <param name="password" value="c19df6fe65e4b3fd4d20c4ff"/>
-            <param name="realm" value="out.simwood.com"/>
             <param name="register" value="false"/>
+            <param name="realm" value="out.simwood.com"/>
+            <!--<param name="realm" value="slo.out.simwood.com"/>-->
+            <!--<param name="realm" value="lon.out.simwood.com"/>-->
+            <!--<param name="realm" value="man.out.simwood.com"/>-->
+
+            <!--<param name="register" value="true"/>-->
+            <!--<param name="realm" value="reg.simwood.com"/>-->
+            <!--<param name="extension" value="443338805247"/>-->
+            <!--<param name="register-transport" value="tls"/>-->
+            <!--<param name="username" value="930992-443338805247"/>-->
+            <!--<param name="password" value="01cf8a56255a04475e196e63"/>-->
             <param name="ping" value="25"/>
         </gateway>
     </gateways>
@@ -75,6 +83,7 @@
         <param name="inbound-codec-negotiation" value="generous"/>
         <param name="nonce-ttl" value="60"/>
         <param name="auth-calls" value="$${external_auth_calls}"/>
+        <param name="auth-messages" value="$${external_auth_calls}"/>
         <param name="inbound-late-negotiation" value="true"/>
         <param name="inbound-zrtp-passthru" value="true"/>
         <!-- (also enables late negotiation) -->
