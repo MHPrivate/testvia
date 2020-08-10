@@ -1,6 +1,11 @@
 <extension name="scaip" >
-    <condition field="destination_number" expression="^scaip$">
-        <action application="answer"/>
-        <action application="sleep" data="32000"/>
+    <condition field="destination_number" expression="^scaip$"/>
+    <condition field="caller_id_number" expression="anonymous" break="on-true">
+        <action application="hangup" data="REQUESTED_CHAN_UNAVAIL"/>
+    </condition>
+    <condition>
+        <!--<action application="set" data="drop_dtmf=true"/>-->
+        <!--<action application="set" data="park_after_bridge=true"/>-->
+        <action application="park"/>
     </condition>
 </extension>

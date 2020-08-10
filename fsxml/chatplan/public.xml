@@ -1,9 +1,15 @@
 ﻿<context name="public">
-  <extension name="halt">
+  <extension name="halt" continue="true">
     <condition>
-        <!-- prevent sofia_presence_chat_send() from trying to forward this SIP-MESSAGE -->
-        <action application="set" data="appello_to=${to}"/>
-        <action application="set" data="to=sip:"/>
+      <!-- prevent sofia_presence_chat_send() from trying to forward this SIP-MESSAGE -->
+      <action application="set" data="appello_to=${to}"/>
+      <action application="set" data="to=sip:"/>
+    </condition>
+  </extension>
+
+  <extension name="debug" continue="true">
+    <condition field="${message_debug}" expression="^true$">
+      <action application="info"/>
     </condition>
   </extension>
 </context>

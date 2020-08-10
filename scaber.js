@@ -54,9 +54,10 @@ if (cluster.isMaster) {
     };
     Object.assign(main.modules, { // load worker functionality
         ConsumerNowipVolt: require('./lib/scaber/consumer-nowip-volt'),
-        ConsumerNowipJontek: require('./lib/scaber/consumer-nowip-jontek'),
+        //ConsumerNowipJontek: require('./lib/scaber/consumer-nowip-jontek'),
         esl: require('./lib/esl'),
         mysql: require('./lib/mysql'),
+        nowip: require('./lib/nowip'),
         Session: require('./lib/scaber/session'),
         Task: require('./lib/scaber/task'),
         worker: require('./lib/scaber/worker'),

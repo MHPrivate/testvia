@@ -52,6 +52,31 @@
         </condition>
     </extension>
 
+    <extension name="scaber" >
+        <condition field="${sip_req_params}" expression="\bappello=scaber\b"/>
+        <condition field="caller_id_number" expression="anonymous" break="on-true">
+            <!--<action application="respond" data="503"/>-->
+            <action application="hangup" data="REQUESTED_CHAN_UNAVAIL"/>
+        </condition>
+        <condition>
+            <!--<action application="set" data="drop_dtmf=true"/>-->
+            <!--<action application="set" data="park_after_bridge=true"/>-->
+            <action application="park"/>
+            <!--<action application="answer"/>-->
+            <!--<action application="set" data="RECORD_TITLE=Recording ${destination_number} ${caller_id_number} ${strftime(%Y-%m-%d %H:%M)}"/>-->
+            <!--<action application="set" data="RECORD_STEREO=true"/>-->
+            <!--<action application="record_session" data="/tmp/essence-${strftime(%Y-%m-%d-%H-%M-%S)}.wav"/>-->
+            <!--<action application="sleep" data="1000"/>-->
+            <!--<action application="send_dtmf" data="db@80"/>-->
+            <!--<action application="play_and_get_digits" data="24 24 2 5000 A '' ''"/>-->
+            <!--<action application="sleep" data="150"/>-->
+            <!--<action application="send_dtmf" data="db@80"/>-->
+            <!--<action application="sleep" data="150"/>-->
+            <!--<action application="send_dtmf" data="4w1@80"/>-->
+            <!--<action application="playback" data="local_stream://moh"/>-->
+        </condition>
+    </extension>
+
     <!-- file: {%= __filename %}, basedir: {%= path.resolve(path.dirname(__filename), 'public') %}, sub: {%= query['Caller-Destination-Number'] %} -->
 {% if (expedite) { -%}
     <extension name="expedite">
