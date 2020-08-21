@@ -7,7 +7,7 @@
         if (!sub) { // include all .xml from folder
             return fs.statSync(basedir).isDirectory()
                 ? fs.readdirSync(basedir)
-                    .filter(sub => sub.endsWith('.xml') && fs.statSync(`${basedir}/${sub}`).isFile())
+                    .filter(sub=>sub.endsWith('.xml') && fs.statSync(`${basedir}/${sub}`).isFile())
                     .map(sub=>include(`${dir}/${sub}`))
                     .join('')
                 : undefined;

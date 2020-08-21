@@ -4,8 +4,12 @@
     var attr = 'name="configuration"  description="Various Configuration"';
     var body = (function (base, dir, sub) {
         var basedir = `${base}/${dir}`, fpath = `${basedir}/${sub}.xml`, stat = fs.existsSync(fpath) && fs.statSync(fpath);
-        if (!sub) {
-            return fs.statSync(basedir).isDirectory() ? fs.readdirSync(basedir).filter(sub=>fs.statSync(`${basedir}/${sub}`).isFile()).map(sub=>include(`${dir}/${sub}`)).join('') : undefined;
+        if (!sub) { // include all .xml from folder
+            return fs.statSync(basedir).isDirectory()
+                ? fs.readdirSync(basedir)
+                    .filter(sub=>sub.endsWith('.xml') && fs.statSync(`${basedir}/${sub}`).isFile())
+                    .map(sub=>include(`${dir}/${sub}`))
+                    .join('') : undefined;
         } else if (stat && stat.isFile() && !stat.size) {
             return (attr = 'name="result"') && `<!-- ${__filename} --><result status="not found"/>`;
         } else {

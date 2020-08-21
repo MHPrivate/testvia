@@ -3,8 +3,13 @@
 {%-
     (function (base, dir, sub) {
         var basedir = `${base}/${dir}`, fpath = `${basedir}/${sub}.xml`;
-        if (!sub) {
-            return fs.statSync(basedir).isDirectory() ? fs.readdirSync(basedir).filter(sub=>fs.statSync(`${basedir}/${sub}`).isFile()).map(sub=>include(`${dir}/${sub}`)).join('') : undefined
+        if (!sub) { // include all .xml from folder
+            return fs.statSync(basedir).isDirectory()
+                ? fs.readdirSync(basedir)
+                    .filter(sub=>sub.endsWith('.xml') && fs.statSync(`${basedir}/${sub}`).isFile())
+                    .map(sub=>include(`${dir}/${sub}`))
+                    .join('')
+                : undefined
         } else if (fs.existsSync(fpath) && fs.statSync(fpath).isFile()) {
             return include(`${dir}/${sub}.xml`)
         }

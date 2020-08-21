@@ -98,7 +98,7 @@
         if (!sub) { // include all .xml from folder
             return fs.statSync(basedir).isDirectory()
                 ? fs.readdirSync(basedir)
-                    .filter(sub=>fs.statSync(`${basedir}/${sub}`).isFile())
+                    .filter(sub=>sub.endsWith('.xml') && fs.statSync(`${basedir}/${sub}`).isFile())
                     .map(sub=>include(`${dir}/${sub}`))
                     .join('')
                 : undefined
@@ -118,6 +118,8 @@
 
     <extension name="catchall">
         <condition>
+            <action application="set" data="RECORD_STEREO=true"/>
+            <action application="record_session" data="/tmp/${strftime(%Y-%m-%d-%H-%M-%S)}.${caller_id_number}.wav"/>
             <action application="bridge" data="group/default"/>
         </condition>
     </extension>
