@@ -1,0 +1,20 @@
+    <include>
+        <param name="INCLUDING" value="{%= `${path.basename(__filename)}` %}"/>
+        <param name="apply-inbound-acl" value="domains"/>
+        <param name="auth-calls" value="$${internal_auth_calls}"/>
+        <param name="auth-messages" value="$${internal_auth_calls}"/>
+        <param name="challenge-realm" value="auto_from"/>
+        <!--Force the user and auth-user to match-->
+        <!-- <param name="inbound-reg-force-matching-username" value="false"/> -->
+        <!--Enable to use presence and mwi, this could be set to 'passive'-->
+        <param name="manage-presence" value="true"/>
+        <!--
+            Valid values for this parameter are "contact", "true", "false". 
+                Setting value="true" is the most common use.
+                Setting this value to "contact" will remove the old registration based
+                  on sip_user, sip_host and contact field as opposed to the call_id.
+        -->
+        <param name="multiple-registrations" value="contact"/>
+        <!--'true' means every time 'first-only' means on the first register-->
+        <!-- <param name="send-message-query-on-register" value="true"/> -->
+    </include>

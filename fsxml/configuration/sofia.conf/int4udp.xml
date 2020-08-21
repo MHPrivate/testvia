@@ -1,0 +1,42 @@
+<profile name="int4udp">
+    <!-- ext4udp/ext4tls/ext4tcp/ext6udp/ext6tls/ext6tcp/int4udp/int4tls/int4tcp/int6udp/int6tcp/int6tcp -->
+    <!--
+        This is a sofia sip profile/user agent.  This will service exactly one ip and port.
+        In FreeSWITCH you can run multiple sip user agents on their own ip and port.
+
+        When you hear someone say "sofia profile" this is what they are talking about.
+    -->
+    <!-- https://freeswitch.org/confluence/display/FREESWITCH/Sofia+Configuration+Files -->
+    <!--aliases are other names that will work as a valid profile name for this profile-->
+    <aliases>
+        <!-- <alias name="default"/> -->
+        <!-- <alias name="outbound"/> -->
+        <!-- <alias name="nat"/> -->
+    </aliases>
+    <gateways>
+        <!--Outbound Registrations-->
+    </gateways>
+    <domains>
+        <!--indicator to parse the directory for domains with parse="true" to get gateways-->
+        <!-- <domain name="$${domain}" parse="true"/> -->
+        <!--indicator to parse the directory for domains with parse="true" to get gateways and alias every domain to this profile-->
+        <!-- <domain name="all" alias="true" parse="true"/> -->
+        <!-- <domain name="all" alias="true" parse="false"/> -->
+    </domains>
+
+    <settings>
+{%- include(`${path.dirname(__filename)}/includes/common.xml`) %}
+{%- include(`${path.dirname(__filename)}/includes/v4.xml`) %}
+{%- include(`${path.dirname(__filename)}/includes/udp.xml`) %}
+{%- include(`${path.dirname(__filename)}/includes/internal.xml`) %}
+        <param name="INCLUDING" value="{%= `${path.basename(__filename)}` %}"/>
+        <param name="sip-port" value="$${internal_sip_port}"/>
+        <!--Port to listen on for TLS requests. (5061 will be used if unspecified)-->
+        <!-- <param name="tls-sip-port" value="$${internal_tls_port}"/> -->
+
+        <!--For sip over websocket support-->
+        <!-- <param name="ws-binding"  value="$${internal_ws_port}"/> -->
+        <!--For sip over secure websocket support - auto-creates wss.pem in $${certs_dir} if absent-->
+        <!-- <param name="wss-binding" value="$${internal_wss_port}"/> -->
+    </settings>
+</profile>

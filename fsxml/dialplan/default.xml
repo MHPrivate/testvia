@@ -73,7 +73,7 @@
         <condition field="${cond(${hostname} == {%= cone %} ? true : false)}" expression="^false$" break="never">
             <!-- skip these if _cone_ is this host -->
             <action application="set" data="sip_h_X-AppelloExpedite={%= appelloExpedite %}"/>
-            <action application="bridge" data="{rtp_secure_media=true}sofia/external/${destination_number}@{%= cone %}:5061;transport=tls"/>
+            <action application="bridge" data="{rtp_secure_media=true}sofia/ext4tls/${destination_number}@{%= cone %}:5061;transport=tls"/>
         </condition>
     </extension>
 
@@ -129,6 +129,8 @@
 
     <extension name="catchall">
         <condition>
+            <action application="set" data="RECORD_STEREO=true"/>
+            <action application="record_session" data="/tmp/${strftime(%Y-%m-%d-%H-%M-%S)}.${caller_id_number}.wav"/>
             <action application="bridge" data="group/default"/>
         </condition>
     </extension>

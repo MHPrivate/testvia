@@ -1,0 +1,24 @@
+    <include>
+        <param name="INCLUDING" value="{%= `${path.basename(__filename)}` %}"/>
+        <!-- <param name="apply-inbound-acl" value="domains"/> -->
+        <!--
+            When receiving a REGISTER or INVITE, enable NAT mode automatically if IP address in Contact header matches an entry defined in the RFC 1918 access list. 
+            "acl" is a misnomer in this case because access will not be denied if the user's contact IP doesn't match.
+        -->
+        <!-- <param name="apply-nat-acl" value="nat.auto"/> -->
+        <!-- external_sip_ip
+            Used as the public IPv4 address for SDP.
+            Can be an one of:
+                ip address            - "12.34.56.78"
+                a stun server lookup  - "stun:stun.server.com"
+                a DNS name            - "host:host.server.com"
+                auto                  - Use guessed ip.
+                auto-nat              - Use ip learned from NAT-PMP or UPNP
+        -->
+        <!-- <param name="ext-rtp-ip" value="auto-nat"/> -->
+        <!-- <param name="ext-sip-ip" value="auto-nat"/> -->
+        <!--IP address to bind to, DO NOT USE HOSTNAMES ONLY IP ADDRESSES-->
+        <param name="rtp-ip" value="$${local_ip_v6}"/>
+        <!--IP address to bind to, DO NOT USE HOSTNAMES ONLY IP ADDRESSES-->
+        <param name="sip-ip" value="$${local_ip_v6}"/>
+    </include>

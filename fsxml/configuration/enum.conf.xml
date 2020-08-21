@@ -14,8 +14,8 @@
     </settings>
 
     <routes>
-        <route service="E2U+SIP" regex="sip:(.*)" replace="sofia/${use_profile}-ipv6/$1;transport=udp|sofia/${use_profile}/$1;transport=udp"/>
-        <route service="E2T+SIP" regex="sip:(.*)" replace="sofia/${use_profile}-ipv6/$1;transport=tcp|sofia/${use_profile}/$1;transport=tcp"/>
-        <route service="E2T+SIPS" regex="sip:(.*)" replace="sofia/${use_profile}-ipv6/$1;transport=tls|sofia/${use_profile}/$1;transport=tls"/>
+        <route service="E2U+SIP" regex="sip:(.*)" replace="sofia/ext6udp/$1;transport=udp|sofia/ext4udp/$1;transport=udp"/>
+        <route service="E2T+SIP" regex="sip:(.*)" replace="sofia/ext6tcp/$1;transport=tcp|sofia/ext4tcp/$1;transport=tcp"/>
+        <route service="E2T+SIPS" regex="sip:(.*)" replace="sofia/ext6tls/$1;transport=tls|sofia/ext4tls/$1;transport=tls"/>
     </routes>
 </configuration>

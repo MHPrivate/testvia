@@ -1,0 +1,10 @@
+    <include>
+        <param name="INCLUDING" value="{%= `${path.basename(__filename)}` %}"/>
+        <!--If you want to send any special bind params of your own-->
+        <param name="bind-params" value="transport=tcp"/>
+        <!--TLS: disabled by default, set to 'true' to enable-->
+        <!-- <param name="tls" value="true"/> -->
+        <!--Set to true to not bind on the normal sip-port but only on the TLS port-->
+        <!--a TLS profile should be tls-only to enforce transport for sip MESSAGE methods-->
+        <!-- <param name="tls-only" value="true"/> -->
+    </include>

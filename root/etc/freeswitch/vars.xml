@@ -62,7 +62,6 @@
   <X-PRE-PROCESS cmd="set" data="domain=appello.care"/><!-- MHM -->
   <X-PRE-PROCESS cmd="set" data="domain_name=$${domain}"/>
   <X-PRE-PROCESS cmd="set" data="hold_music=local_stream://moh"/>
-  <X-PRE-PROCESS cmd="set" data="use_profile=external"/>
   <X-PRE-PROCESS cmd="set" data="rtp_sdes_suites=AEAD_AES_256_GCM_8|AEAD_AES_128_GCM_8|AES_CM_256_HMAC_SHA1_80|AES_CM_192_HMAC_SHA1_80|AES_CM_128_HMAC_SHA1_80|AES_CM_256_HMAC_SHA1_32|AES_CM_192_HMAC_SHA1_32|AES_CM_128_HMAC_SHA1_32|AES_CM_128_NULL_AUTH"/>
   <!--
       Enable ZRTP globally you can override this on a per channel basis
@@ -425,13 +424,16 @@
   <X-PRE-PROCESS cmd="set" data="internal_sip_port=5070"/><!-- MHM -->
   <X-PRE-PROCESS cmd="set" data="internal_tls_port=5071"/><!-- MHM -->
   <X-PRE-PROCESS cmd="set" data="internal_ssl_enable=true"/><!-- MHM -->
-  <X-PRE-PROCESS cmd="set" data="internal_wss_port=:7443"/><!-- MHM -->
+  <X-PRE-PROCESS cmd="set" data="internal_ws_port=:5072"/><!-- MHM -->
+  <X-PRE-PROCESS cmd="set" data="internal_wss_port=:5073"/><!-- MHM -->
 
   <!-- External SIP Profile -->
   <X-PRE-PROCESS cmd="set" data="external_auth_calls=false"/>
   <X-PRE-PROCESS cmd="set" data="external_sip_port=5060"/><!-- MHM -->
   <X-PRE-PROCESS cmd="set" data="external_tls_port=5061"/><!-- MHM -->
   <X-PRE-PROCESS cmd="set" data="external_ssl_enable=true"/><!-- MHM -->
+  <X-PRE-PROCESS cmd="set" data="external_ws_port=:5062"/><!-- MHM -->
+  <X-PRE-PROCESS cmd="set" data="external_wss_port=:5063"/><!-- MHM -->
 
   <!-- Video Settings -->
   <!-- Setting the max bandwdith -->

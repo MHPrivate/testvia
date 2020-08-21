@@ -1,0 +1,6 @@
+<extension name="moh">
+    <condition field="destination_number" expression="^9664$">
+        <action application="answer"/>
+        <action application="playback" data="$${hold_music}"/>
+    </condition>
+</extension>
