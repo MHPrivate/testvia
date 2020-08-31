@@ -16,5 +16,5 @@
         -->
         <param name="multiple-registrations" value="contact"/>
         <!--'true' means every time 'first-only' means on the first register-->
-        <!-- <param name="send-message-query-on-register" value="true"/> -->
+        <param name="send-message-query-on-register" value="false"/>
     </include>

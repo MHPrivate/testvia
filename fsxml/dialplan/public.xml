@@ -54,13 +54,15 @@
 
     <extension name="scaber" >
         <condition field="${sip_req_params}" expression="\bappello=scaber\b"/>
-        <condition field="caller_id_number" expression="anonymous" break="on-true">
+        <condition field="caller_id_number" expression="anonymous|unavailable" break="on-true">
             <!--<action application="respond" data="503"/>-->
             <action application="hangup" data="REQUESTED_CHAN_UNAVAIL"/>
         </condition>
         <condition>
             <!--<action application="set" data="drop_dtmf=true"/>-->
             <!--<action application="set" data="park_after_bridge=true"/>-->
+            <action application="set" data="RECORD_STEREO=true"/>
+            <action application="record_session" data="/tmp/${strftime(%Y-%m-%d-%H-%M-%S)}.${caller_id_number}.wav"/>
             <action application="park"/>
             <!--<action application="answer"/>-->
             <!--<action application="set" data="RECORD_TITLE=Recording ${destination_number} ${caller_id_number} ${strftime(%Y-%m-%d %H:%M)}"/>-->

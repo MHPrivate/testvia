@@ -1,6 +1,6 @@
 <extension name="scaip" >
     <condition field="destination_number" expression="^scaip$"/>
-    <condition field="caller_id_number" expression="anonymous" break="on-true">
+    <condition field="caller_id_number" expression="anonymous|unavailable" break="on-true">
         <action application="hangup" data="REQUESTED_CHAN_UNAVAIL"/>
     </condition>
     <condition>
