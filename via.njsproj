@@ -51,6 +51,7 @@
     <Compile Include="lib\registrations.js" />
     <Compile Include="lib\rpscb.js" />
     <Compile Include="lib\scaber\communicator-assist.js" />
+    <Compile Include="lib\scaber\communicator-bs8521.js" />
     <Compile Include="lib\scaber\communicator-scaip.js" />
     <Compile Include="lib\scaber\communicator-nowip.js" />
     <Compile Include="lib\scaber\consumer-nowip-jontek.js" />

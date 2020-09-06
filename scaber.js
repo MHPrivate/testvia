@@ -49,6 +49,7 @@ if (cluster.isMaster) {
     process.once('terminate', cluster.worker.disconnect.bind(cluster.worker)); // cleanup IPC to master
     main.config.Communicators = {
         assist: require('./lib/scaber/communicator-assist'),
+        bs8521: require('./lib/scaber/communicator-bs8521'),
         nowip: require('./lib/scaber/communicator-nowip'),
         scaip: require('./lib/scaber/communicator-scaip'),
     };
