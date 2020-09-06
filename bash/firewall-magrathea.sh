@@ -1,7 +1,6 @@
 while read cidr other; do
 echo $cidr:
-firewall-cmd --perm --add-rich-rule="rule family=ipv4 source address=$cidr port port=5060 protocol=udp accept"
-firewall-cmd --perm --add-rich-rule="rule family=ipv4 source address=$cidr port port=5061 protocol=tcp accept"
+firewall-cmd --perm --ipset=chums4 --add-entry=$cidr
 done <<EOT
 87.238.72.129/32
 87.238.72.130/32

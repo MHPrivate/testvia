@@ -17,6 +17,9 @@ while read cmd set ip; do
         flush)
             $nft flush set inet $table $set
             ;;
+        list)
+            $nft list set inet $table $set
+            ;;
         save)
             ;;
     esac
