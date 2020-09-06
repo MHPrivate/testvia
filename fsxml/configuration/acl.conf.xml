@@ -3,23 +3,36 @@
         <!--
             These ACL's are automatically created on startup.
 
-            rfc6598.auto  - RFC6598 Space 100.64.0.0/10
-            rfc1918.auto  - RFC1918 Space - 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, fe80::/16
+            rfc6598.auto  - RFC6598 Space - 100.64.0.0/10
+            rfc1918.auto  - RFC1918 Space - 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, fe80::/10
             nat.auto      - RFC1918 Excluding LAN - 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 100.64.0.0/10
             localnet.auto - ACL for LAN.
             loopback.auto - ACL for your loopback - 127.0.0.0/8, ::1/128
-            rfc6598.auto  - RFC6598 Space - 100.64.0.0/10
-            wan.auto      - not RFC1918 - 0.0.0.0/8, 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.0.0/16, fe80::/16
-            wan_v6.auto   - not RFC1918 - 0.0.0.0/0 fe80::/16
+            wan.auto      - not RFC1918 - 0.0.0.0/8, 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.0.0/16, fe80::/10
+            wan_v6.auto   - not RFC1918 - 0.0.0.0/0 fe80::/10
             wan_v4.auto   - not RFC1918 - 0.0.0.0/8, 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.0.0/16, ::/0
             any_v6.auto   - not v4 - 0.0.0.0/0
             any_v4.auto   - not v6 - ::/0
         -->
 
+        <!-- nat.auto + 169.254.0.0/16 -->
+        <list name="nat.extra" default="deny">
+            <!-- RFC1918 -->
+            <node type="allow" cidr="10.0.0.0/8"/>
+            <node type="allow" cidr="172.16.0.0/12"/>
+            <node type="allow" cidr="192.168.0.0/16"/>
+            <!-- RFC6598 -->
+            <node type="allow" cidr="100.64.0.0/10"/>
+            <!-- RFC3927 -->
+            <node type="allow" cidr="169.254.0.0/16"/>
+        </list>
+
+        <!-- example
         <list name="lan" default="allow">
             <node type="deny" cidr="192.168.42.0/24"/>
             <node type="allow" cidr="192.168.42.42/32"/>
         </list>
+        -->
 
         <!--
             This will traverse the directory adding all users
@@ -32,12 +45,6 @@
             <node type="allow" domain="$${domain}"/>
             <!-- use cidr= if you wish to allow ip ranges to this domains acl. -->
             <!-- <node type="allow" cidr="192.168.0.0/24"/> -->
-        </list>
-
-        <list name="public.trusted" default="deny">
-            <node type="allow" cidr="213.219.9.138/32"/><!-- volt-acton.appello.care -->
-            <node type="allow" cidr="195.110.86.158/32"/><!-- volt-slough.appello.care -->
-            <node type="allow" cidr="217.182.98.64/27"/><!-- appello.care -->
         </list>
 
     </network-lists>
