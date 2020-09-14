@@ -54,6 +54,7 @@
     <Compile Include="lib\scaber\communicator-bs8521.js" />
     <Compile Include="lib\scaber\communicator-scaip.js" />
     <Compile Include="lib\scaber\communicator-nowip.js" />
+    <Compile Include="lib\scaber\communicator-tu8521.js" />
     <Compile Include="lib\scaber\consumer-nowip-jontek.js" />
     <Compile Include="lib\scaber\consumer-nowip-volt.js" />
     <Compile Include="lib\scaber\master.js" />

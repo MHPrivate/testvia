@@ -47,12 +47,16 @@ if (cluster.isMaster) {
 } else {
     cluster.worker.on('disconnect', process.emit.bind(process, 'terminate')); // terminate on IPC disconnect
     process.once('terminate', cluster.worker.disconnect.bind(cluster.worker)); // cleanup IPC to master
-    main.config.Communicators = {
-        assist: require('./lib/scaber/communicator-assist'),
-        bs8521: require('./lib/scaber/communicator-bs8521'),
-        nowip: require('./lib/scaber/communicator-nowip'),
-        scaip: require('./lib/scaber/communicator-scaip'),
-    };
+    Object.assign(main.config, {
+        Communicators: {
+            assist: require('./lib/scaber/communicator-assist'),
+            bs8521: require('./lib/scaber/communicator-bs8521'),
+            nowip: require('./lib/scaber/communicator-nowip'),
+            scaip: require('./lib/scaber/communicator-scaip'),
+            tu8521: require('./lib/scaber/communicator-tu8521'),
+            default: process.env.DEFAULT_COMMUNICATOR || 'bs8521',
+        },
+    });
     Object.assign(main.modules, { // load worker functionality
         ConsumerNowipVolt: require('./lib/scaber/consumer-nowip-volt'),
         //ConsumerNowipJontek: require('./lib/scaber/consumer-nowip-jontek'),
