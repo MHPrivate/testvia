@@ -5,4 +5,4 @@
 #
 # if not empty: parameters for freeswitch
 #
-FREESWITCH_PARAMS="-nonat"
+FREESWITCH_PARAMS="-conf /opt/appello-via/root/etc/freeswitch -log /var/log/freeswitch -db /var/lib/freeswitch/db -run /var/run/freeswitch -nonat"
