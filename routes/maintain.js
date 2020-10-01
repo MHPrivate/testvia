@@ -8,7 +8,7 @@ var router = module.exports = express.Router();
 router.get('/cert/appello.care', locals.trusted, function (req, res, next) {
     next.index = req.index;
     var locals = Object.assign(req.locals, { chunks: [], map: { key: 'privkey', cert: 'cert', chain: 'chain' } });
-    if (!Object.keys(req.query).length) // empty shopping list means everything
+    if (!['key', 'cert', 'chain'].some(function (e, i, a) { return e in this }, req.query)) // empty shopping list means everything
         req.query = { key: '', cert: '', chain: '' };
     chain(next, function () {
         mysql('select *,l.chain from fqdns f left join leChains l on f.chainId=l.id where fqdn=?', ['appello.care'], this);
