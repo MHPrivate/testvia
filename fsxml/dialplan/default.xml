@@ -59,6 +59,14 @@
         </condition>
     </extension>
 
+    <extension name="scaber-eavesdrop">
+        <condition field="destination_number" expression="^722237$">
+            <action application="set" data="eavesdrop_require_group=scaber"/>
+            <action application="answer"/>
+            <action application="eavesdrop" data="all"/>
+        </condition>
+    </extension>
+
     <extension name="scheme" continue="true">
         <!-- database lookup indicates next-hop is registered on this this cone-server -->
         <condition field="${sofia_contact(user/{%= dialPrefix %})}" expression="sofia" break="never">
