@@ -62,7 +62,7 @@
             <!--<action application="set" data="drop_dtmf=true"/>-->
             <!--<action application="set" data="park_after_bridge=true"/>-->
             <action application="set" data="RECORD_STEREO=true"/>
-            <action application="record_session" data="/tmp/${strftime(%Y-%m-%d-%H-%M-%S)}.${caller_id_number}.wav"/>
+            <action application="record_session" data="$${recordings_dir}/${strftime(%Y-%m-%d-%H-%M-%S)}.${caller_id_number}.wav"/>
             <action application="park"/>
             <!--<action application="answer"/>-->
             <!--<action application="set" data="RECORD_TITLE=Recording ${destination_number} ${caller_id_number} ${strftime(%Y-%m-%d %H:%M)}"/>-->
