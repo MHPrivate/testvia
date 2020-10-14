@@ -33,7 +33,7 @@
         <param name="presence-hosts" value="$${domain}"/>
         <param name="presence-privacy" value="$${presence_privacy}"/>
         <param name="record-path" value="$${recordings_dir}"/>
-        <param name="record-template" value="${caller_id_number}.${strftime(%Y-%m-%d-%H-%M-%S)}.wav"/>
+        <param name="record-template" value="${strftime(%Y-%m-%dT%H-%M-%SZ)}.${caller_id_number}.wav"/>
         <param name="rfc2833-pt" value="101"/>
         <param name="rtp-digit-delay" value="8"/><!-- 80ms -->
         <param name="rtp-timer-name" value="soft"/>

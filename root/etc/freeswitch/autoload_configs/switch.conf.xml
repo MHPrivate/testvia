@@ -141,7 +141,7 @@
     <!-- <param name="enable-softtimer-timerfd" value="true"/> -->
     <!-- <param name="enable-cond-yield" value="true"/> -->
     <!-- <param name="enable-timer-matrix" value="true"/> -->
-    <!-- <param name="threaded-system-exec" value="true"/> -->
+    <param name="threaded-system-exec" value="true"/>
     <!-- <param name="tipping-point" value="0"/> -->
     <!-- <param name="timer-affinity" value="disabled"/> -->
     <!-- NEEDS DOCUMENTATION -->
