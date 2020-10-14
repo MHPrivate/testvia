@@ -11,7 +11,8 @@ done <<EOT
 81.171.12.244/32    gw3.telealarm.com
 85.133.122.73/32    essence + chiptech
 85.214.144.155/32   gw1.telealarm.com
- 87.86.190.25	    careip via CSL
+ 87.86.190.23/32    careip via CSL (doro on analogue APN - arrange with CSL to switch to digital APN)
+ 87.86.190.25/32    careip via CSL (doro on analogue APN - arrange with CSL to switch to digital APN)
 94.23.55.219/32     gw2.telealarm.com
 EOT
 
