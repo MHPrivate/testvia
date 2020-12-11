@@ -42,6 +42,11 @@
             <!--<param name="password" value="01cf8a56255a04475e196e63"/>-->
             <!-- <param name="ping" value="25"/> -->
         <!-- </gateway> -->
+        <gateway name="magrathea">
+            <param name="username" value="111850"/>
+            <param name="realm" value="sipipgw.magrathea.net:5060"/>
+            <param name="register" value="false"/>
+        </gateway>
     </gateways>
     <domains>
         <!--indicator to parse the directory for domains with parse="true" to get gateways-->
