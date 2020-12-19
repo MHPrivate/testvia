@@ -1,18 +1,17 @@
 <configuration name="spandsp.conf" description="SpanDSP config">
     <modem-settings>
         <!--
-    total-modems set to N will create that many soft-modems.
-    If you use them with Hylafax you need the following for each one numbered 0..N:
+            total-modems set to N will create that many soft-modems.
+            If you use them with Hylafax you need the following for each one numbered 0..N:
 
-    1) A line like this in /etc/inittab:
+            1) A line like this in /etc/inittab:
 
-      f0:2345:respawn:/usr/lib/fax/faxgetty /dev/FS0
+              f0:2345:respawn:/usr/lib/fax/faxgetty /dev/FS0
 
-    2) copy conf/config.FS0 to /var/spool/hylafax/etc (or wherver the appropriate dir is on your system)
+            2) copy conf/config.FS0 to /var/spool/hylafax/etc (or wherver the appropriate dir is on your system)
 
-    Subsequent modem configs would incrment the 0 to 1 and so on.
-
--->
+            Subsequent modem configs would incrment the 0 to 1 and so on.
+        -->
         <param name="total-modems" value="0"/>
         <!-- Change the directory of the devices created from /dev. Needed if FS runs as non-root -->
         <!-- <param name="directory" value="/dev/FS"/> -->
@@ -39,7 +38,7 @@
         <!-- <param name="t38-tx-reinvite-packet-count" value="100"/> -->
     </fax-settings>
 
-    <descriptors>
+    <descriptors debug-level="0">
 
         <!-- These tones are defined in Annex to ITU Operational Bulletin No. 781 - 1.II.2003 -->
         <!-- Various Tones Used in National Networks (According to ITU-T Recommendation E.180)(03/1998) -->
@@ -112,6 +111,87 @@
                 <element freq1="0" freq2="0" min="464" max="516"/>
             </tone>
         </descriptor>
+
+        <!-- telecare junk tones -->
+        <descriptor name="telecare-junk">
+            <tone name="telecare-junk:1850">
+                <!-- specification -->
+                <element freq1="1850" freq2="0" min="130" max="250"/>
+            </tone>
+            <tone name="telecare-junk:1645">
+                <!-- tynetec-reach -->
+                <element freq1="1645" freq2="0" min="130" max="250"/>
+            </tone>
+        </descriptor>
+
+        <!-- telecare stmf tone pairs -->
+        <descriptor name="telecare-stmf">
+            <tone name="telecare-stmf:0">
+                <element freq1="941" freq2="0" min="80" max="96"/>
+                <element freq1="1336" freq2="0" min="80" max="96"/>
+            </tone>
+            <tone name="telecare-stmf:1">
+                <element freq1="697" freq2="0" min="80" max="96"/>
+                <element freq1="1209" freq2="0" min="80" max="96"/>
+            </tone>
+            <tone name="telecare-stmf:2">
+                <element freq1="697" freq2="0" min="80" max="96"/>
+                <element freq1="1336" freq2="0" min="80" max="96"/>
+            </tone>
+            <tone name="telecare-stmf:3">
+                <element freq1="697" freq2="0" min="80" max="96"/>
+                <element freq1="1477" freq2="0" min="80" max="96"/>
+            </tone>
+            <tone name="telecare-stmf:4">
+                <element freq1="770" freq2="0" min="80" max="96"/>
+                <element freq1="1209" freq2="0" min="80" max="96"/>
+            </tone>
+            <tone name="telecare-stmf:5">
+                <element freq1="770" freq2="0" min="80" max="96"/>
+                <element freq1="1336" freq2="0" min="80" max="96"/>
+            </tone>
+            <tone name="telecare-stmf:6">
+                <element freq1="770" freq2="0" min="80" max="96"/>
+                <element freq1="1477" freq2="0" min="80" max="96"/>
+            </tone>
+            <tone name="telecare-stmf:7">
+                <element freq1="852" freq2="0" min="80" max="96"/>
+                <element freq1="1209" freq2="0" min="80" max="96"/>
+            </tone>
+            <tone name="telecare-stmf:8">
+                <element freq1="852" freq2="0" min="80" max="96"/>
+                <element freq1="1336" freq2="0" min="80" max="96"/>
+            </tone>
+            <tone name="telecare-stmf:9">
+                <element freq1="852" freq2="0" min="80" max="96"/>
+                <element freq1="1477" freq2="0" min="80" max="96"/>
+            </tone>
+            <tone name="telecare-stmf:A">
+                <element freq1="697" freq2="0" min="80" max="96"/>
+                <element freq1="1633" freq2="0" min="80" max="96"/>
+            </tone>
+            <tone name="telecare-stmf:B">
+                <element freq1="770" freq2="0" min="80" max="96"/>
+                <element freq1="1633" freq2="0" min="80" max="96"/>
+            </tone>
+            <tone name="telecare-stmf:C">
+                <element freq1="852" freq2="0" min="80" max="96"/>
+                <element freq1="1633" freq2="0" min="80" max="96"/>
+            </tone>
+            <tone name="telecare-stmf:D">
+                <element freq1="941" freq2="0" min="80" max="96"/>
+                <element freq1="1633" freq2="0" min="80" max="96"/>
+            </tone>
+            <tone name="telecare-stmf:*">
+                <element freq1="941" freq2="0" min="80" max="96"/>
+                <element freq1="1209" freq2="0" min="80" max="96"/>
+            </tone>
+            <tone name="telecare-stmf:#">
+                <element freq1="941" freq2="0" min="80" max="96"/>
+                <element freq1="1477" freq2="0" min="80" max="96"/>
+            </tone>
+        </descriptor>
+
     </descriptors>
 
 </configuration>
