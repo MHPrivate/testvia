@@ -54,7 +54,7 @@
 
     <extension name="scaber" >
         <condition field="${sip_req_params}" expression="\bappello=scaber\b"/>
-        <condition field="caller_id_number" expression="anonymous|unavailable" break="on-true">
+        <condition field="caller_id_number" expression="anonymous|unavailable|unknown" break="on-true">
             <!--<action application="respond" data="503"/>-->
             <action application="hangup" data="REQUESTED_CHAN_UNAVAIL"/>
         </condition>
