@@ -54,7 +54,7 @@ if (cluster.isMaster) {
             detect: require('./lib/scaber/communicator-detect'), // bridge, guard, bs8521, tt92, ttnew
             nowip: require('./lib/scaber/communicator-nowip'),
             scaip: require('./lib/scaber/communicator-scaip'),
-            default: process.env.DEFAULT_COMMUNICATOR || 'bs8521',
+            default: process.env.DEFAULT_COMMUNICATOR || 'detect',
         },
         Consumers: {
             bridge: require('./lib/scaber/consumer-bridge'),
