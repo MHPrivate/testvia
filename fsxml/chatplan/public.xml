@@ -1,11 +1,10 @@
 ﻿<context name="public">
+  <!-- supported actions: fire. info, reply, send, set, stop, system, unset -->
   <extension name="halt" continue="true">
     <condition>
-      <!-- prevent sofia_presence_chat_send() from trying to forward this SIP-MESSAGE -->
-      <!-- <action application="set" data="appello_to=${to}"/> -->
-      <!-- <action application="set" data="to=sip:"/> -->
       <!-- see: https://freeswitch.org/confluence/display/FREESWITCH/mod_sms#mod_sms-Programming -->
       <action application="set" data="final_delivery=true"/>
+      <!--<action application="info"/>-->
     </condition>
   </extension>
 

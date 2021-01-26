@@ -51,15 +51,18 @@ if (cluster.isMaster) {
         Communicators: {
             assist: require('./lib/scaber/communicator-assist'),
             bs8521: require('./lib/scaber/communicator-bs8521'),
+            detect: require('./lib/scaber/communicator-detect'), // bridge, guard, bs8521, tt92, ttnew
             nowip: require('./lib/scaber/communicator-nowip'),
             scaip: require('./lib/scaber/communicator-scaip'),
-            tu8521: require('./lib/scaber/communicator-tu8521'),
-            default: process.env.DEFAULT_COMMUNICATOR || 'bs8521',
+            default: process.env.DEFAULT_COMMUNICATOR || 'detect',
+        },
+        Consumers: {
+            bridge: require('./lib/scaber/consumer-bridge'),
+            nowipVolt: require('./lib/scaber/consumer-nowip-volt'),
+            //nowipJontek: require('./lib/scaber/consumer-nowip-jontek'),
         },
     });
     Object.assign(main.modules, { // load worker functionality
-        ConsumerNowipVolt: require('./lib/scaber/consumer-nowip-volt'),
-        //ConsumerNowipJontek: require('./lib/scaber/consumer-nowip-jontek'),
         esl: require('./lib/esl'),
         mysql: require('./lib/mysql'),
         nowip: require('./lib/nowip'),
