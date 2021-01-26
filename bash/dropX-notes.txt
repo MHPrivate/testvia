@@ -1,0 +1,44 @@
+#1 permenantly create & activate drop4
+firewall-cmd --quiet --perm --new-ipset=drop4 --type=hash:ip --family=inet && # permenantly create drop4
+    firewall-cmd --quiet --perm --zone=drop --add-source=ipset:drop4 # permenantly assign drop4 to drop zone
+
+#2 permenantly create & activate drop6
+firewall-cmd --quiet --perm --new-ipset=drop6 --type=hash:ip --family=inet6 && # permenantly create drop6
+    firewall-cmd --quiet --perm --zone=drop --add-source=ipset:drop6 # permenantly assign drop6 to drop zone
+
+#3 reload
+firewall-cmd --quiet --reload # reload
+
+#4 dynamically pause drop4, recreate as expiring and resume
+firewall-cmd --quiet --zone=drop --remove-source=ipset:drop4
+nft delete set inet firewalld drop4
+nft add set inet firewalld drop4 { type ipv4_addr\; flags timeout\; timeout 1h\; }
+firewall-cmd --quiet --zone=drop --add-source=ipset:drop4
+
+#5 dynamically pause drop6, recreate as expiring and resume
+firewall-cmd --quiet --zone=drop --remove-source=ipset:drop6
+nft delete set inet firewalld drop6
+nft add set inet firewalld drop6 { type ipv6_addr\; flags timeout\; timeout 1h\; }
+firewall-cmd --quiet --zone=drop --add-source=ipset:drop6
+
+
+#1 persistently delete drop4
+firewall-cmd --quiet --perm --zone=drop --remove-source=ipset:drop4 && # permenantly cease usage of drop4
+    firewall-cmd --quiet --perm --delete-ipset=drop4 # permenantly delete drop4
+
+#2 persistently delete drop6
+firewall-cmd --quiet --perm --zone=drop --remove-source=ipset:drop6 && # permenantly cease usage of drop6
+    firewall-cmd --quiet --perm --delete-ipset=drop6 # permenantly delete drop6
+
+#3 reload
+firewall-cmd --quiet --reload # reload
+
+
+nft add element inet firewalld drop4 {81.143.253.146 timeout 60s} # 4019916	UAT Rig 2 (172) Oregon
+nft add element inet firewalld drop4 {81.143.253.147 timeout 60s} # 4019902	UAT Rig 1 (192) Oregon
+
+
+firewall-cmd --get-ipsets
+nft list ruleset | less
+nft list set inet firewalld drop4
+nft --json list set inet firewalld drop4 | jq .

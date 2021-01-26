@@ -160,8 +160,6 @@
     <Content Include="fsxml\dialplan\default\9196.xml" />
     <Content Include="fsxml\dialplan\features.xml" />
     <Content Include="fsxml\dialplan\public.xml" />
-    <Content Include="fsxml\dialplan\public\nowip.xml" />
-    <Content Include="fsxml\dialplan\public\scaip.xml" />
     <Content Include="fsxml\directory.xml" />
     <Content Include="fsxml\languages.xml" />
     <Content Include="package-lock.json" />
