@@ -6,5 +6,5 @@
 #
 DEBUG_HIDE_DATE=yes
 PORT=443
-#DEBUG=mysql,worker,session,communicator:*,consumer:*
-DEBUG=mysql
+DEBUG=mysql,worker,session,communicator:*,consumer:*
+#DEBUG=mysql
