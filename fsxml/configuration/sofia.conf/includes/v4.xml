@@ -1,7 +1,7 @@
     <include>
         <param name="INCLUDING" value="{%= `${path.basename(__filename)}` %}"/>
         <!--
-            When receiving a REGISTER or INVITE, enable NAT mode automatically if IP address in Contact header matches an entry defined in the RFC 1918 access list. 
+            When receiving a REGISTER or INVITE, enable NAT mode automatically if IP address in Contact header matches an entry defined in the RFC 1918 access list.
             "acl" is a misnomer in this case because access will not be denied if the user's contact IP doesn't match.
         -->
         <param name="apply-nat-acl" value="nat.extra"/>
