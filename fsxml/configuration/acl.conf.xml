@@ -47,5 +47,45 @@
             <!-- <node type="allow" cidr="192.168.0.0/24"/> -->
         </list>
 
+        <!--
+            This list is used from fs_cli to protect certain addresses from firewall blocked
+            -->
+        <list name="whitelist" default="deny">
+            <node cidr="46.23.249.41/32"    type="deny"  comment="possum development"/>
+            <node cidr="5.56.114.121/32"    type="deny"  comment="oysta eugin home"/>
+            <node cidr="51.195.193.224/27"  type="allow" comment="appello london"/>
+            <node cidr="52.232.85.155/32"   type="allow" comment="oysta production2"/>
+            <node cidr="81.171.12.244/32"   type="allow" comment="gw3.telealarm.com"/>
+            <node cidr="81.94.198.93/32"    type="deny"  comment="acuris keith harris"/>
+            <node cidr="85.133.122.73/32"   type="allow" comment="essence + chiptech"/>
+            <node cidr="85.214.144.155/32"  type="allow" comment="gw1.telealarm.com"/>
+            <node cidr="87.238.72.128/26"   type="allow" comment="magrathea reading"/>
+            <node cidr="87.238.73.128/26"   type="allow" comment="magrathea london"/>
+            <node cidr="87.238.74.128/26"   type="allow" comment="magrathea maidenhead"/>
+            <node cidr="87.238.77.128/26"   type="allow" comment="magrathea ireland"/>
+            <node cidr="87.86.190.23/32"    type="allow" comment="careip via CSL (doro on analogue APN - arrange with CSL to switch to digital APN)"/>
+            <node cidr="87.86.190.25/32"    type="allow" comment="careip via CSL (doro on analogue APN - arrange with CSL to switch to digital APN)"/>
+            <node cidr="94.23.55.219/32"    type="allow" comment="gw2.telealarm.com"/>
+            <node cidr="104.40.178.187/32"  type="allow" comment="oysta production1"/>
+            <node cidr="122.61.175.170/32"  type="deny"  comment="chiptech sean hadley dev"/>
+            <node cidr="125.236.214.19/32"  type="deny"  comment="chiptech sean hadley dev"/>
+            <node cidr="155.4.133.112/32"   type="deny"  comment="possum development"/>
+            <node cidr="178.22.139.77/32"   type="allow" comment="lon.out.simwood.com"/>
+            <node cidr="185.63.140.77/32"   type="allow" comment="slo.out.simwood.com"/>
+            <node cidr="185.63.142.77/32"   type="allow" comment="man.out.simwood.com"/>
+            <node cidr="195.10.99.99/32"    type="allow" comment="chiptech"/>
+            <node cidr="195.110.86.158/32"  type="allow" comment="volt volt-slough"/>
+            <node cidr="213.166.2.128/26"   type="allow" comment="magrathea reading"/>
+            <node cidr="213.166.3.128/26"   type="allow" comment="magrathea maidenhead"/>
+            <node cidr="213.166.4.128/26"   type="allow" comment="magrathea london"/>
+            <node cidr="213.199.130.48/32"  type="deny"  comment="oysta testing"/>
+            <node cidr="213.219.9.138/32"   type="allow" comment="volt volt-acton"/>
+            <node cidr="217.156.234.130/32" type="allow" comment="neatnovo (mobius-additional)"/>
+            <node cidr="217.156.234.160/29" type="allow" comment="neatnovo (mobius-primary)"/>
+            <node cidr="217.156.234.176/29" type="allow" comment="neatnovo (mobius-secondary)"/>
+            <node cidr="217.182.98.64/27"   type="allow" comment="appello roubaix"/>
+            <node cidr="2001:41d0:68:3000::/56"  type="allow" comment="appello roubaix"/>
+            <node cidr="2001:41d0:818:5000::/56" type="allow" comment="appello london"/>
+        </list>
     </network-lists>
 </configuration>

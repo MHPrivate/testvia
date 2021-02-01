@@ -42,3 +42,38 @@ firewall-cmd --get-ipsets
 nft list ruleset | less
 nft list set inet firewalld drop4
 nft --json list set inet firewalld drop4 | jq .
+
+#fs_cli -r -d 0 -l 4
+2021-01-31 08:53:31.612688 [WARNING] sofia_reg.c:2905 Can't find user [40199018X@192.168.9.250] from 192.168.9.11
+You must define a domain called '192.168.9.250' in your directory and add a user with the id="40199018X" attribute
+and you must configure your device to use the proper domain in it's authentication credentials.
+
+2021-01-31 09:00:54.694373 [WARNING] sofia_reg.c:2930 Can't find user [martinX@appello.care] from 51.195.193.225
+You must define a domain called 'appello.care' in your directory and add a user with the id="martinX" attribute
+and you must configure your device to use the proper domain in its authentication credentials.
+
+2021-01-31 10:30:37.614371 [WARNING] sofia_reg.c:2930 Can't find user [martinX@appello.care] from 2001:41d0:818:5000:250:56ff:febd:9b0f
+You must define a domain called 'appello.care' in your directory and add a user with the id="martinX" attribute
+and you must configure your device to use the proper domain in its authentication credentials.
+
+# bad username
+2021-01-31 13:10:46.134394 [WARNING] sofia_reg.c:1794 SIP auth challenge (REGISTER) on sofia profile 'int4tls' for [martinX@appello.care] from ip 51.195.193.225
+2021-01-31 13:10:46.214373 [WARNING] sofia_reg.c:2930 Can't find user [martinX@appello.care] from 51.195.193.225
+You must define a domain called 'appello.care' in your directory and add a user with the id="martinX" attribute
+and you must configure your device to use the proper domain in its authentication credentials.
+2021-01-31 13:10:46.214373 [WARNING] sofia_reg.c:1739 SIP auth failure (REGISTER) on sofia profile 'int4tls' for [martinX@appello.care] from ip 51.195.193.225
+
+# good username - bad password
+2021-01-31 13:12:41.454381 [WARNING] sofia_reg.c:1794 SIP auth challenge (REGISTER) on sofia profile 'int4tls' for [martin@appello.care] from ip 51.195.193.225
+2021-01-31 13:12:41.514374 [WARNING] sofia_reg.c:1739 SIP auth failure (REGISTER) on sofia profile 'int4tls' for [martin@appello.care] from ip 51.195.193.225
+
+### incorrect username or password
+#dmesg -w | grep -v . | fs_cli -irRd 0 l 4 | sed -un "/SIP auth failure/{s/^.*for \[//;s/@.*from ip//;p}" | while read user ip; do
+
+### incorrect username only
+dmesg -w | grep -v . | fs_cli -irRd 0 l 4 | sed -un "/Can't find user/{s/^.*user \[//;s/@.*from//;p}" | while read user ip; do
+    [ $(fs_cli -x "acl $ip whitelist") == true ] && continue
+    drop=$([[ "$ip" == *:* ]] && echo drop6 || echo drop4)
+    echo nft add element inet firewalld $drop {$ip timeout 3600s} \# $user
+    # nft add element inet firewalld $drop {$ip timeout 3600s} \# $user
+done
