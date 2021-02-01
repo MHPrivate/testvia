@@ -9,7 +9,7 @@
         <!--Enable to use presence and mwi, this could be set to 'passive'-->
         <!-- <param name="manage-presence" value="true"/> -->
         <!--
-            Valid values for this parameter are "contact", "true", "false". 
+            Valid values for this parameter are "contact", "true", "false".
                 Setting value="true" is the most common use.
                 Setting this value to "contact" will remove the old registration based
                   on sip_user, sip_host and contact field as opposed to the call_id.
