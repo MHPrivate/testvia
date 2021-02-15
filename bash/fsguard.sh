@@ -1,10 +1,12 @@
 #! /bin/bash
 # Script to add source IPs of failed freeswitch authentications to a systemwide droplist
+date=/usr/bin/date
 dmesg=/usr/bin/dmesg
 echo=/usr/bin/echo
 firewall=/usr/bin/firewall
 fs_cli=/usr/bin/fs_cli
 grep=/usr/bin/grep
+jq=/usr/bin/jq
 nft=/usr/sbin/nft
 null=/dev/null
 sed=/usr/bin/sed
@@ -17,13 +19,16 @@ for ver in 4 6; do
 done
 [ $exit -gt 0 ] && exit $exit
 
+recreate () {
+    $nft list set inet firewalld drop${1} | $grep -q timeout && return
+    $echo recreating drop${1} with timeout feature
+    $nft delete set inet firewalld drop${1}
+    $nft add set inet firewalld drop${1} { type ipv${1}_addr\; flags timeout\; timeout 1h\; }
+    $nft insert rule inet firewalld filter_INPUT ip${1%4} saddr @drop${1} drop
+}
+
 for ver in 4 6; do
-    $nft list set inet firewalld drop${ver} | $grep -q timeout && continue
-    $echo recreating drop${ver} with timeout feature
-    $firewall-cmd --quiet --zone=drop --remove-source=ipset:drop${ver}
-    $nft delete set inet firewalld drop${ver}
-    $nft add set inet firewalld drop${ver} { type ipv${ver}_addr\; flags timeout\; timeout 1h\; }
-    $firewall-cmd --quiet --zone=drop --add-source=ipset:drop${ver}
+    recreate $ver
 done
 
 #script="/SIP auth failure/{s/^.*for \[//;s/@.*from ip//;p}" # incorrect username or password
@@ -33,13 +38,21 @@ script="/Can't find user/{s/^.*user \[//;s/@.*from//;p}" #incorrect username onl
 # dmesg | grep      - create a silent stdin for fs_cli to only deliver logging
 # fs_cli | sed      - generates lines of "<user> <ip>" that failed authentication
 $dmesg -w | $grep -v . | $fs_cli -irRd 0 -l 4 | $sed -un "$script" | while read user ip; do
-    # check for whitelisted IPs
-    [ $($fs_cli -x "acl $ip whitelist") == true ] && continue
     # identify ipv4 or ipv6
     ver=$([[ "$ip" == *:* ]] && $echo 6 || $echo 4)
+    # check if the IP is already blacklisted
+    ($nft -j list set inet firewalld drop${ver} | $jq .nftables[1].set.elem | $grep -q $ip) && continue
+    # check for whitelisted IPs
+    [ $($fs_cli -x "acl $ip whitelist") == true ] && continue
     # log the nft command
-    $echo nft add element inet firewalld drop${ver} {$ip timeout 1h} \# $user
-    # execute the nft commant
+    $echo nft add element inet firewalld drop${ver} {$ip timeout 1h} \# $user $($date +%T.%N)
+    # execute the nft command
+    $nft add element inet firewalld drop${ver} {$ip timeout 1h} \# $user && continue
+    # recreate the nft set
+    recreate ${ver}
+    # log the nft command
+    $echo nft add element inet firewalld drop${ver} {$ip timeout 1h} \# $user $($date +%T.%N) retry
+    # retry nft command
     $nft add element inet firewalld drop${ver} {$ip timeout 1h} \# $user
 done
 
