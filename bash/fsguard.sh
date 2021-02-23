@@ -23,7 +23,7 @@ recreate () {
     $nft list set inet firewalld drop${1} | $grep -q timeout && return
     $echo recreating drop${1} with timeout feature
     $nft delete set inet firewalld drop${1}
-    $nft add set inet firewalld drop${1} { type ipv${1}_addr\; flags timeout\; timeout 1h\; }
+    $nft add set inet firewalld drop${1} { type ipv${1}_addr\; flags interval,timeout\; timeout 1h\; }
     $nft insert rule inet firewalld filter_INPUT ip${1%4} saddr @drop${1} drop
 }
 
