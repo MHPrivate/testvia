@@ -6,6 +6,18 @@
         </condition>
     </extension>
 
+    <extension name="internationalize">
+        <condition field="destination_number" expression="^00(\d*)$" break="never">
+            <action application="transfer" data="+$1"/>
+        </condition>
+        <condition field="destination_number" expression="^0(\d*)$" break="never">
+            <action application="transfer" data="+44$1"/>
+        </condition>
+        <condition field="destination_number" expression="^(44\d{8,}\d*)$" break="never"><!-- depreciated-->
+            <action application="transfer" data="+$1"/>
+        </condition>
+    </extension>
+
     <extension name="global" continue="true">
         <condition field="${call_debug}" expression="^true$" break="never">
             <action application="info"/>
@@ -59,6 +71,17 @@
         </condition>
     </extension>
 
+    <extension name="enovation">
+        <condition field="username" expression="^enovation$">
+            <action application="multiset" data="hangup_after_bridge=true continue_on_fail=false"/>
+            <!--<action application="info"/>-->
+        </condition>
+        <condition field="caller_id_number" expression="^44170650921\d$">
+            <action application="bridge" data="sofia/gateway/magrathea/${destination_number}"/>
+            <anti-action application="bridge" data="{origination_caller_id_number=441706509210,origination_privacy=screen:hide_number}sofia/gateway/magrathea/${destination_number}"/>
+        </condition>
+    </extension>
+
     <extension name="scaber-eavesdrop">
         <condition field="destination_number" expression="^722237$">
             <action application="set" data="eavesdrop_require_group=scaber"/>
@@ -84,6 +107,13 @@
             <action application="set" data="continue_on_fail=true"/>
             <action application="set" data="sip_h_X-AppelloExpedite={%= appelloExpedite %}"/>
             <action application="bridge" data="{rtp_secure_media=true}sofia/ext4tls/${destination_number}@{%= cone %}:5061;transport=tls"/>
+        </condition>
+    </extension>
+
+    <extension name="martin">
+        <condition field="username" expression="^martin">
+            <action application="multiset" data="hangup_after_bridge=true continue_on_fail=false"/>
+            <action application="bridge" data="{origination_caller_id_number=447802827727}sofia/gateway/magrathea/${destination_number}"/>
         </condition>
     </extension>
 
