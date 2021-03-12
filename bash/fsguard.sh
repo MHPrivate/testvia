@@ -45,13 +45,13 @@ $dmesg -w | $grep -v . | $fs_cli -irRd 0 -l 4 | $sed -un "$script" | while read 
     # check for whitelisted IPs
     [ $($fs_cli -x "acl $ip whitelist") == true ] && continue
     # log the nft command
-    $echo nft add element inet firewalld drop${ver} {$ip timeout 1h} \# $user $($date +%T.%N)
+    $echo nft add element inet firewalld drop${ver} {$ip timeout 1h} \# $user
     # execute the nft command
     $nft add element inet firewalld drop${ver} {$ip timeout 1h} \# $user && continue
     # recreate the nft set
     recreate ${ver}
     # log the nft command
-    $echo nft add element inet firewalld drop${ver} {$ip timeout 1h} \# $user $($date +%T.%N) retry
+    $echo nft add element inet firewalld drop${ver} {$ip timeout 1h} \# $user retry
     # retry nft command
     $nft add element inet firewalld drop${ver} {$ip timeout 1h} \# $user
 done
