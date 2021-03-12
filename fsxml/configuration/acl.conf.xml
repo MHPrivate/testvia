@@ -51,8 +51,8 @@
             This list is used from fs_cli to protect certain addresses from firewall blocked
             -->
         <list name="whitelist" default="deny">
-            <node cidr="46.23.249.41/32"    type="deny"  comment="possum development"/>
             <node cidr="5.56.114.121/32"    type="deny"  comment="oysta eugin home"/>
+            <node cidr="46.23.249.41/32"    type="deny"  comment="possum development"/>
             <node cidr="51.195.193.224/27"  type="allow" comment="appello london"/>
             <node cidr="52.232.85.155/32"   type="allow" comment="oysta production2"/>
             <node cidr="81.171.12.244/32"   type="allow" comment="gw3.telealarm.com"/>
