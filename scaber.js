@@ -57,6 +57,7 @@ if (cluster.isMaster) {
             default: process.env.DEFAULT_COMMUNICATOR || 'detect',
         },
         Consumers: {
+            bs8521pnc: require('./lib/scaber/consumer-bs8521-pnc'),
             bridge: require('./lib/scaber/consumer-bridge'),
             nowipVolt: require('./lib/scaber/consumer-nowip-volt'),
             //nowipJontek: require('./lib/scaber/consumer-nowip-jontek'),

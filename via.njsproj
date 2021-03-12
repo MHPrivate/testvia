@@ -62,6 +62,7 @@
     <Compile Include="lib\scaber\communicator-detect\TtNew.js" />
     <Compile Include="lib\scaber\communicator-detect\TtOld.js" />
     <Compile Include="lib\scaber\consumer-nowip-jontek.js" />
+    <Compile Include="lib\scaber\consumer-bs8521-pnc.js" />
     <Compile Include="lib\scaber\consumer-nowip-volt.js" />
     <Compile Include="lib\scaber\consumer-bridge.js" />
     <Compile Include="lib\scaber\master.js" />
