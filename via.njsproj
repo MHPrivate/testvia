@@ -51,6 +51,7 @@
     <Compile Include="lib\registrations.js" />
     <Compile Include="lib\rpscb.js" />
     <Compile Include="lib\scaber\communicator-assist.js" />
+    <Compile Include="lib\scaber\communicator-bs8521-pnc.js" />
     <Compile Include="lib\scaber\communicator-bs8521.js" />
     <Compile Include="lib\scaber\communicator-detect.js" />
     <Compile Include="lib\scaber\communicator-detect\Bridge.js" />
@@ -61,7 +62,9 @@
     <Compile Include="lib\scaber\communicator-detect\Tt92.js" />
     <Compile Include="lib\scaber\communicator-detect\TtNew.js" />
     <Compile Include="lib\scaber\communicator-detect\TtOld.js" />
+    <Compile Include="lib\scaber\consumer-slsuser.js" />
     <Compile Include="lib\scaber\consumer-nowip-jontek.js" />
+    <Compile Include="lib\scaber\consumer-bs8521-pnc.js" />
     <Compile Include="lib\scaber\consumer-nowip-volt.js" />
     <Compile Include="lib\scaber\consumer-bridge.js" />
     <Compile Include="lib\scaber\master.js" />
