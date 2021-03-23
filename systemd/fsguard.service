@@ -1,0 +1,9 @@
+[Unit]
+Description=The FREESwitch failed authentication blacklister
+After=freeswitch.service
+
+[Service]
+ExecStart=/opt/appello-via/bash/fsguard.sh
+
+[Install]
+WantedBy=multi-user.target

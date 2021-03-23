@@ -1,0 +1,79 @@
+#1 permenantly create & activate drop4
+firewall-cmd --quiet --perm --new-ipset=drop4 --type=hash:ip --family=inet && # permenantly create drop4
+    firewall-cmd --quiet --perm --zone=drop --add-source=ipset:drop4 # permenantly assign drop4 to drop zone
+
+#2 permenantly create & activate drop6
+firewall-cmd --quiet --perm --new-ipset=drop6 --type=hash:ip --family=inet6 && # permenantly create drop6
+    firewall-cmd --quiet --perm --zone=drop --add-source=ipset:drop6 # permenantly assign drop6 to drop zone
+
+#3 reload
+firewall-cmd --quiet --reload # reload
+
+#4 dynamically pause drop4, recreate as expiring and resume
+firewall-cmd --quiet --zone=drop --remove-source=ipset:drop4
+nft delete set inet firewalld drop4
+nft add set inet firewalld drop4 { type ipv4_addr\; flags timeout\; timeout 1h\; }
+firewall-cmd --quiet --zone=drop --add-source=ipset:drop4
+
+#5 dynamically pause drop6, recreate as expiring and resume
+firewall-cmd --quiet --zone=drop --remove-source=ipset:drop6
+nft delete set inet firewalld drop6
+nft add set inet firewalld drop6 { type ipv6_addr\; flags timeout\; timeout 1h\; }
+firewall-cmd --quiet --zone=drop --add-source=ipset:drop6
+
+
+#1 persistently delete drop4
+firewall-cmd --quiet --perm --zone=drop --remove-source=ipset:drop4 && # permenantly cease usage of drop4
+    firewall-cmd --quiet --perm --delete-ipset=drop4 # permenantly delete drop4
+
+#2 persistently delete drop6
+firewall-cmd --quiet --perm --zone=drop --remove-source=ipset:drop6 && # permenantly cease usage of drop6
+    firewall-cmd --quiet --perm --delete-ipset=drop6 # permenantly delete drop6
+
+#3 reload
+firewall-cmd --quiet --reload # reload
+
+
+nft add element inet firewalld drop4 {81.143.253.146 timeout 60s} # 4019916	UAT Rig 2 (172) Oregon
+nft add element inet firewalld drop4 {81.143.253.147 timeout 60s} # 4019902	UAT Rig 1 (192) Oregon
+
+
+firewall-cmd --get-ipsets
+nft list ruleset | less
+nft list set inet firewalld drop4
+nft --json list set inet firewalld drop4 | jq .
+
+#fs_cli -r -d 0 -l 4
+2021-01-31 08:53:31.612688 [WARNING] sofia_reg.c:2905 Can't find user [40199018X@192.168.9.250] from 192.168.9.11
+You must define a domain called '192.168.9.250' in your directory and add a user with the id="40199018X" attribute
+and you must configure your device to use the proper domain in it's authentication credentials.
+
+2021-01-31 09:00:54.694373 [WARNING] sofia_reg.c:2930 Can't find user [martinX@appello.care] from 51.195.193.225
+You must define a domain called 'appello.care' in your directory and add a user with the id="martinX" attribute
+and you must configure your device to use the proper domain in its authentication credentials.
+
+2021-01-31 10:30:37.614371 [WARNING] sofia_reg.c:2930 Can't find user [martinX@appello.care] from 2001:41d0:818:5000:250:56ff:febd:9b0f
+You must define a domain called 'appello.care' in your directory and add a user with the id="martinX" attribute
+and you must configure your device to use the proper domain in its authentication credentials.
+
+# bad username
+2021-01-31 13:10:46.134394 [WARNING] sofia_reg.c:1794 SIP auth challenge (REGISTER) on sofia profile 'int4tls' for [martinX@appello.care] from ip 51.195.193.225
+2021-01-31 13:10:46.214373 [WARNING] sofia_reg.c:2930 Can't find user [martinX@appello.care] from 51.195.193.225
+You must define a domain called 'appello.care' in your directory and add a user with the id="martinX" attribute
+and you must configure your device to use the proper domain in its authentication credentials.
+2021-01-31 13:10:46.214373 [WARNING] sofia_reg.c:1739 SIP auth failure (REGISTER) on sofia profile 'int4tls' for [martinX@appello.care] from ip 51.195.193.225
+
+# good username - bad password
+2021-01-31 13:12:41.454381 [WARNING] sofia_reg.c:1794 SIP auth challenge (REGISTER) on sofia profile 'int4tls' for [martin@appello.care] from ip 51.195.193.225
+2021-01-31 13:12:41.514374 [WARNING] sofia_reg.c:1739 SIP auth failure (REGISTER) on sofia profile 'int4tls' for [martin@appello.care] from ip 51.195.193.225
+
+### incorrect username or password
+#dmesg -w | grep -v . | fs_cli -irRd 0 l 4 | sed -un "/SIP auth failure/{s/^.*for \[//;s/@.*from ip//;p}" | while read user ip; do
+
+### incorrect username only
+dmesg -w | grep -v . | fs_cli -irRd 0 l 4 | sed -un "/Can't find user/{s/^.*user \[//;s/@.*from//;p}" | while read user ip; do
+    [ $(fs_cli -x "acl $ip whitelist") == true ] && continue
+    drop=$([[ "$ip" == *:* ]] && echo drop6 || echo drop4)
+    echo nft add element inet firewalld $drop {$ip timeout 3600s} \# $user
+    # nft add element inet firewalld $drop {$ip timeout 3600s} \# $user
+done
