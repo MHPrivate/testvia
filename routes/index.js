@@ -1,4 +1,4 @@
-﻿var chain = require('scope-chain');
+var chain = require('scope-chain');
 var express = require('express');
 var jwt = require('jsonwebtoken');
 var main = require.main.exports;
