@@ -1,4 +1,4 @@
-﻿var chain = require('scope-chain');
+var chain = require('scope-chain');
 var express = require('express');
 var locals = require('../lib/locals');
 var main = require.main.exports;

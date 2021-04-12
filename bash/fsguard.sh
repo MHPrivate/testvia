@@ -58,25 +58,38 @@ done
 
 exit
 
-#1 permenantly create & activate drop4
-firewall-cmd --quiet --perm --new-ipset=drop4 --type=hash:ip --family=inet && # permenantly create drop4
-    firewall-cmd --quiet --perm --zone=drop --add-source=ipset:drop4 # permenantly assign drop4 to drop zone
+#1 permenantly create drop4
+firewall-cmd --quiet --perm --new-ipset=drop4 --type=hash:ip --family=inet # permenantly create drop4
 
-#2 permenantly create & activate drop6
-firewall-cmd --quiet --perm --new-ipset=drop6 --type=hash:ip --family=inet6 && # permenantly create drop6
-    firewall-cmd --quiet --perm --zone=drop --add-source=ipset:drop6 # permenantly assign drop6 to drop zone
+#2 permenantly create drop6
+firewall-cmd --quiet --perm --new-ipset=drop6 --type=hash:ip --family=inet6 # permenantly create drop6
 
 #3 reload
 firewall-cmd --quiet --reload # reload
 
 
 #1 persistently delete drop4
-firewall-cmd --quiet --perm --zone=drop --remove-source=ipset:drop4 && # permenantly cease usage of drop4
-    firewall-cmd --quiet --perm --delete-ipset=drop4 # permenantly delete drop4
+firewall-cmd --quiet --perm --delete-ipset=drop4 # permenantly delete drop4
 
 #2 persistently delete drop6
-firewall-cmd --quiet --perm --zone=drop --remove-source=ipset:drop6 && # permenantly cease usage of drop6
-    firewall-cmd --quiet --perm --delete-ipset=drop6 # permenantly delete drop6
+firewall-cmd --quiet --perm --delete-ipset=drop6 # permenantly delete drop6
 
 #3 reload
 firewall-cmd --quiet --reload # reload
+
+
+# recreate drop4 with timeout feature
+nft list set inet firewalld drop4 | grep -q timeout && return
+echo recreating drop4 with timeout feature
+nft delete set inet firewalld drop4
+nft add set inet firewalld drop4 { type ipv4_addr\; flags interval,timeout\; timeout 7d\; }
+nft insert rule inet firewalld filter_INPUT ip saddr @drop4 drop
+
+# recreate drop6 with timeout feature
+nft list set inet firewalld drop6 | grep -q timeout && return
+echo recreating drop6 with timeout feature
+nft delete set inet firewalld drop6
+nft add set inet firewalld drop6 { type ipv6_addr\; flags interval,timeout\; timeout 7d\; }
+nft insert rule inet firewalld filter_INPUT ip6 saddr @drop6 drop
+
+
