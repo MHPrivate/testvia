@@ -78,6 +78,7 @@
             <action application="hangup" data="REQUESTED_CHAN_UNAVAIL"/>
         </condition>
         <condition>
+            <action application="set" data="rtp_digit_delay=90"/><!-- 90ms on inbound legs BUT seriously longer on outbound legs -->
             <action application="set" data="send_silence_when_idle=1000"/>
             <action application="set" data="eavesdrop_group=scaber"/>
             <action application="set" data="RECORD_STEREO=true"/>
@@ -158,6 +159,7 @@
 
     <extension name="magrathea-test">
         <condition field="destination_number" expression="^443300888674$">
+            <action application="set" data="rtp_digit_delay=90"/><!-- 90ms on inbound legs BUT seriously longer on outbound legs -->
             <action application="answer"/>
             <action application="park"/>
         </condition>

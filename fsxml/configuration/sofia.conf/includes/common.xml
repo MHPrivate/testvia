@@ -35,7 +35,7 @@
         <param name="record-path" value="$${recordings_dir}"/>
         <param name="record-template" value="${strftime(%Y-%m-%dT%H-%M-%SZ)}.${caller_id_number}.wav"/>
         <param name="rfc2833-pt" value="101"/>
-        <param name="rtp-digit-delay" value="8"/><!-- 80ms -->
+        <param name="rtp-digit-delay" value="9"/><!-- 90ms on outbound legs BUT seriously shorter on inbound legs -->
         <param name="rtp-timer-name" value="soft"/>
         <!--<param name="shutdown-on-fail" value="true"/>-->
         <param name="sip-capture" value="no"/>
@@ -62,4 +62,5 @@
         <param name="use-rtp-timer" value="true"/>
         <param name="enable-timer" value="true"/>
         <param name="session-timeout" value="900"/>
+        <param name="rtp-rewrite-timestamps" value="true"/>
     </include>
