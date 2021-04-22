@@ -142,6 +142,7 @@
     <Content Include="lib\scaber\communicator-bs8521-pnc.js" />
     <Content Include="lib\scaber\communicator-bs8521.js" />
     <Content Include="lib\scaber\communicator-detect.js" />
+    <Content Include="lib\scaber\communicator-detect\Unknown.js" />
     <Content Include="lib\scaber\communicator-detect\Bridge.js" />
     <Content Include="lib\scaber\communicator-detect\Bs8521.js" />
     <Content Include="lib\scaber\communicator-detect\Guard.js" />
