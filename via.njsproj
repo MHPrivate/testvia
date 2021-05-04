@@ -1,7 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">14.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
     <Name>via</Name>
     <RootNamespace>via</RootNamespace>
@@ -20,7 +19,6 @@
     <OutputPath>.</OutputPath>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
-    <ProjectView>ShowAllFiles</ProjectView>
     <StartWebBrowser>false</StartWebBrowser>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -30,80 +28,17 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="appello.js" />
-    <Compile Include="lib\args-map.js" />
-    <Compile Include="lib\harvest.js" />
-    <Compile Include="lib\jsonerr.js" />
-    <Compile Include="lib\limit.js" />
-    <Compile Include="lib\minut.js" />
-    <Compile Include="lib\nowip.js" />
-    <Compile Include="lib\redis\proxyConfig.js" />
-    <Compile Include="lib\redis\scheme.js" />
-    <Compile Include="lib\redis\server2.js" />
-    <Compile Include="lib\redis\certificate.js" />
-    <Compile Include="lib\redis\drop2.js" />
-    <Compile Include="lib\redis\find2.js" />
-    <Compile Include="lib\redis\index.js" />
-    <Compile Include="lib\redis\larc2.js" />
-    <Compile Include="lib\redis\mosh.js" />
-    <Compile Include="lib\redis\mosh2.js" />
-    <Compile Include="lib\redis\proxy2.js" />
-    <Compile Include="lib\registrations.js" />
-    <Compile Include="lib\rpscb.js" />
-    <Compile Include="lib\scaber\communicator-assist.js" />
-    <Compile Include="lib\scaber\communicator-bs8521-pnc.js" />
-    <Compile Include="lib\scaber\communicator-bs8521.js" />
-    <Compile Include="lib\scaber\communicator-detect.js" />
-    <Compile Include="lib\scaber\communicator-detect\Bridge.js" />
-    <Compile Include="lib\scaber\communicator-detect\Guard.js" />
-    <Compile Include="lib\scaber\communicator-scaip.js" />
-    <Compile Include="lib\scaber\communicator-nowip.js" />
-    <Compile Include="lib\scaber\communicator-detect\Bs8521.js" />
-    <Compile Include="lib\scaber\communicator-detect\Tt92.js" />
-    <Compile Include="lib\scaber\communicator-detect\TtNew.js" />
-    <Compile Include="lib\scaber\communicator-detect\TtOld.js" />
-    <Compile Include="lib\scaber\consumer-slsuser.js" />
-    <Compile Include="lib\scaber\consumer-nowip-jontek.js" />
-    <Compile Include="lib\scaber\consumer-bs8521-pnc.js" />
-    <Compile Include="lib\scaber\consumer-nowip-volt.js" />
-    <Compile Include="lib\scaber\consumer-bridge.js" />
-    <Compile Include="lib\scaber\master.js" />
-    <Compile Include="lib\scaber\session.js" />
-    <Compile Include="lib\scaber\task.js" />
-    <Compile Include="lib\scaber\transform.js" />
-    <Compile Include="lib\scaber\webio.js" />
-    <Compile Include="lib\scaber\worker.js" />
-    <Compile Include="lib\socket.io-track.js" />
-    <Compile Include="routes\maintain.js" />
-    <Compile Include="routes\minuty.js" />
-    <Compile Include="routes\minutz.js" />
-    <Compile Include="scaber.js" />
-    <Compile Include="lib\apns-sub.js" />
-    <Compile Include="lib\apns.js" />
-    <Compile Include="lib\crc32.js" />
-    <Compile Include="lib\esl.js" />
-    <Compile Include="lib\firebase.js" />
-    <Compile Include="lib\fsxml.js" />
-    <Compile Include="lib\ipsets.js" />
-    <Compile Include="lib\ipv4fqdn.js" />
-    <Compile Include="lib\locals.js" />
-    <Compile Include="lib\mesh.io.js" />
-    <Compile Include="lib\mesh\larcs.js" />
-    <Compile Include="lib\mesh\index.js" />
-    <Compile Include="lib\mesh\scabs.js" />
-    <Compile Include="lib\mosh.js" />
-    <Compile Include="lib\mysql.js" />
-    <Compile Include="lib\name-function.js" />
-    <Compile Include="lib\nsupdate.js" />
-    <Compile Include="lib\repletion.js" />
-    <Compile Include="lib\running.js" />
-    <Compile Include="lib\state-machine.js" />
-    <Compile Include="lib\web.js" />
-    <Compile Include="routes\index.js" />
-    <Compile Include="routes\v1\index.js" />
-    <Compile Include="routes\v1\larc.js" />
-    <Compile Include="routes\v1\mosh.js" />
-    <Compile Include="routes\v1\sshkeys.js" />
+    <Content Include="appello.js" />
+    <Content Include="bash\dropX-notes.txt" />
+    <Content Include="bash\firewall-acuris.sh" />
+    <Content Include="bash\firewall-chiptech.sh" />
+    <Content Include="bash\firewall-chums.sh" />
+    <Content Include="bash\firewall-larcs.sh" />
+    <Content Include="bash\firewall-magrathea.sh" />
+    <Content Include="bash\firewall-oysta.sh" />
+    <Content Include="bash\firewall-scaip.sh" />
+    <Content Include="bash\firewall-volt.sh" />
+    <Content Include="bash\fsguard.sh" />
     <Content Include="bash\ipset-restore.sh" />
     <Content Include="bash\nsupdate.sh" />
     <Content Include="fsxml\chatplan.xml" />
@@ -159,29 +94,101 @@
     <Content Include="fsxml\dialplan\default\9171.xml" />
     <Content Include="fsxml\dialplan\default\9172.xml" />
     <Content Include="fsxml\dialplan\default\9195.xml" />
-    <Content Include="fsxml\dialplan\default\9664.xml" />
     <Content Include="fsxml\dialplan\default\9196.xml" />
+    <Content Include="fsxml\dialplan\default\9664.xml" />
     <Content Include="fsxml\dialplan\features.xml" />
     <Content Include="fsxml\dialplan\public.xml" />
     <Content Include="fsxml\directory.xml" />
     <Content Include="fsxml\languages.xml" />
+    <Content Include="lib\apns-sub.js" />
+    <Content Include="lib\apns.js" />
+    <Content Include="lib\args-map.js" />
+    <Content Include="lib\crc32.js" />
+    <Content Include="lib\esl.js" />
+    <Content Include="lib\firebase.js" />
+    <Content Include="lib\fsxml.js" />
+    <Content Include="lib\harvest.js" />
+    <Content Include="lib\ipsets.js" />
+    <Content Include="lib\ipv4fqdn.js" />
+    <Content Include="lib\jsonerr.js" />
+    <Content Include="lib\limit.js" />
+    <Content Include="lib\locals.js" />
+    <Content Include="lib\mesh.io.js" />
+    <Content Include="lib\mesh\index.js" />
+    <Content Include="lib\mesh\larcs.js" />
+    <Content Include="lib\mesh\scabs.js" />
+    <Content Include="lib\minut.js" />
+    <Content Include="lib\mosh.js" />
+    <Content Include="lib\mysql.js" />
+    <Content Include="lib\name-function.js" />
+    <Content Include="lib\nowip.js" />
+    <Content Include="lib\nsupdate.js" />
+    <Content Include="lib\redis\certificate.js" />
+    <Content Include="lib\redis\drop2.js" />
+    <Content Include="lib\redis\find2.js" />
+    <Content Include="lib\redis\index.js" />
+    <Content Include="lib\redis\larc2.js" />
+    <Content Include="lib\redis\mosh.js" />
+    <Content Include="lib\redis\mosh2.js" />
+    <Content Include="lib\redis\proxy2.js" />
+    <Content Include="lib\redis\proxyConfig.js" />
+    <Content Include="lib\redis\scheme.js" />
+    <Content Include="lib\redis\server2.js" />
+    <Content Include="lib\registrations.js" />
+    <Content Include="lib\repletion.js" />
+    <Content Include="lib\rpscb.js" />
+    <Content Include="lib\running.js" />
+    <Content Include="lib\scaber\communicator-assist.js" />
+    <Content Include="lib\scaber\communicator-bs8521-pnc.js" />
+    <Content Include="lib\scaber\communicator-bs8521.js" />
+    <Content Include="lib\scaber\communicator-detect.js" />
+    <Content Include="lib\scaber\communicator-detect\Unknown.js" />
+    <Content Include="lib\scaber\communicator-detect\Bridge.js" />
+    <Content Include="lib\scaber\communicator-detect\Bs8521.js" />
+    <Content Include="lib\scaber\communicator-detect\Guard.js" />
+    <Content Include="lib\scaber\communicator-detect\Tt92.js" />
+    <Content Include="lib\scaber\communicator-detect\TtNew.js" />
+    <Content Include="lib\scaber\communicator-detect\TtOld.js" />
+    <Content Include="lib\scaber\communicator-nowip.js" />
+    <Content Include="lib\scaber\communicator-scaip.js" />
+    <Content Include="lib\scaber\consumer-bridge.js" />
+    <Content Include="lib\scaber\consumer-bs8521-pnc.js" />
+    <Content Include="lib\scaber\consumer-nowip-jontek.js" />
+    <Content Include="lib\scaber\consumer-nowip-volt.js" />
+    <Content Include="lib\scaber\consumer-slsuser.js" />
+    <Content Include="lib\scaber\master.js" />
+    <Content Include="lib\scaber\session.js" />
+    <Content Include="lib\scaber\task.js" />
+    <Content Include="lib\scaber\transform.js" />
+    <Content Include="lib\scaber\webio.js" />
+    <Content Include="lib\scaber\worker.js" />
+    <Content Include="lib\socket.io-track.js" />
+    <Content Include="lib\state-machine.js" />
+    <Content Include="lib\web.js" />
     <Content Include="package-lock.json" />
     <Content Include="package.json" />
     <Content Include="README.md" />
+    <Content Include="routes\index.js" />
+    <Content Include="routes\maintain.js" />
+    <Content Include="routes\minuty.js" />
+    <Content Include="routes\minutz.js" />
+    <Content Include="routes\v1\index.js" />
+    <Content Include="routes\v1\larc.js" />
+    <Content Include="routes\v1\mosh.js" />
+    <Content Include="routes\v1\sshkeys.js" />
+    <Content Include="scaber.js" />
     <Content Include="secrets.json" />
     <Content Include="views\error.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bash\" />
     <Folder Include="fsxml\" />
+    <Folder Include="fsxml\chatplan\" />
     <Folder Include="fsxml\configuration\" />
     <Folder Include="fsxml\configuration\sofia.conf\" />
     <Folder Include="fsxml\configuration\sofia.conf\includes\" />
     <Folder Include="fsxml\dialplan\" />
     <Folder Include="fsxml\dialplan\default\" />
-    <Folder Include="fsxml\dialplan\features\" />
-    <Folder Include="fsxml\dialplan\public\" />
-    <Folder Include="fsxml\chatplan\" />
     <Folder Include="lib\" />
     <Folder Include="lib\mesh\" />
     <Folder Include="lib\redis\" />
@@ -189,12 +196,7 @@
     <Folder Include="lib\scaber\communicator-detect\" />
     <Folder Include="routes\" />
     <Folder Include="routes\v1\" />
-    <Folder Include="static\" />
-    <Folder Include="static\public\" />
-    <Folder Include="static\secure\" />
     <Folder Include="views\" />
   </ItemGroup>
-  <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />
-  <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsTools.targets" />
+  <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
 </Project>
