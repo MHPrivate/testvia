@@ -83,7 +83,7 @@
             <action application="set" data="eavesdrop_group=scaber"/>
             <action application="set" data="RECORD_STEREO=true"/>
             <action application="set" data="record_file_path=$${recordings_dir}/${strftime(%Y-%m-%dT%H-%M-%SZ)}.${caller_id_number}.wav"/>
-            <!-- <action application="record_session" data="${record_file_path}"/> -->
+            <!-- <action application="record_session" data="${record_file_path}"/> disabled here to facilitate bypass_media on forwarded/bridged calls -->
             <action application="park"/>
         </condition>
     </extension>
