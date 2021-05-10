@@ -50,7 +50,6 @@ if (cluster.isMaster) {
     Object.assign(main.config, {
         Communicators: {
             assist: require('./lib/scaber/communicator-assist'),
-            //bs8521: require('./lib/scaber/communicator-bs8521'),
             bs8521pnc: require('./lib/scaber/communicator-bs8521-pnc'),
             detect: require('./lib/scaber/communicator-detect'), // bridge, guard, bs8521, tt92, ttnew
             nowip: require('./lib/scaber/communicator-nowip'),
