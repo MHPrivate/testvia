@@ -132,7 +132,7 @@
             <action application="set" data="eavesdrop_group=scaber"/>
             <action application="set" data="RECORD_STEREO=true"/>
             <action application="set" data="record_file_path=$${recordings_dir}/${strftime(%Y-%m-%dT%H-%M-%SZ)}.${caller_id_number}.wav"/>
-            <action application="record_session" data="${record_file_path}"/>
+            <!-- <action application="record_session" data="${record_file_path}"/> -->
             <action application="park"/>
             <!--<action application="answer"/>-->
             <!--<action application="sleep" data="32000"/>-->
@@ -145,7 +145,7 @@
             <action application="set" data="eavesdrop_group=scaber"/>
             <action application="set" data="RECORD_STEREO=true"/>
             <action application="set" data="record_file_path=$${recordings_dir}/${strftime(%Y-%m-%dT%H-%M-%SZ)}.${caller_id_number}.wav"/>
-            <action application="record_session" data="${record_file_path}"/>
+            <!-- <action application="record_session" data="${record_file_path}"/> -->
             <action application="park"/>
             <!--<action application="answer"/>-->
             <!--<action application="sleep" data="32000"/>-->
@@ -158,7 +158,7 @@
             <action application="set" data="eavesdrop_group=scaber"/>
             <action application="set" data="RECORD_STEREO=true"/>
             <action application="set" data="record_file_path=$${recordings_dir}/${strftime(%Y-%m-%dT%H-%M-%SZ)}.${caller_id_number}.wav"/>
-            <action application="record_session" data="${record_file_path}"/>
+            <!-- <action application="record_session" data="${record_file_path}"/> -->
             <action application="park"/>
             <!--<action application="answer"/>-->
             <!--<action application="sleep" data="32000"/>-->
