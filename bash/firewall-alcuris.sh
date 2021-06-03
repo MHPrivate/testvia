@@ -3,5 +3,5 @@ while read; do
 	[ -z "$cidr" ] && continue
 	echo firewall-cmd $@ --ipset=chums4 --add-entry=$cidr
 done <<EOT
-81.94.198.93/32		keith harris
+80.65.250.126/32		keith harris
 EOT
