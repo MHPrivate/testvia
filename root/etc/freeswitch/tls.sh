@@ -7,7 +7,7 @@ fs_cli=/usr/bin/fs_cli
 ln=/usr/bin/ln
 openssl=/usr/bin/openssl
 rm=/usr/bin/rm
-sleep=usr/bin/sleep
+sleep=/usr/bin/sleep
 
 check=dtls-srtp.pem
 token=8a947e04-c590-4f6c-b40c-455e385e2ef2
