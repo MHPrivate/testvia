@@ -7,7 +7,7 @@ fs_cli=/usr/bin/fs_cli
 ln=/usr/bin/ln
 openssl=/usr/bin/openssl
 rm=/usr/bin/rm
-sleep=usr/bin/sleep
+sleep=/usr/bin/sleep
 
 check=dtls-srtp.pem
 token=8a947e04-c590-4f6c-b40c-455e385e2ef2
@@ -35,6 +35,6 @@ $chgrp daemon agent.pem cafile.pem dtls-srtp.pem tls.pem wss.pem
 [ "$old" == "$(openssl x509 -noout -serial -in $check)" ]  && exit
 
 while sleep 1; do
-    [ $(fs_cli -x status | grep -- '- peak' | cut -d ' ' -f 1) -gt 0 ] && break
+    [ $(fs_cli -x status | grep -- '- peak' | cut -d ' ' -f 1) -eq 0 ] && break
 done
 $fs_cli -x 'unload mod_sofia'; $sleep 5; $fs_cli -x 'load mod_sofia'

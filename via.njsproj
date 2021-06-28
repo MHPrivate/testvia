@@ -140,7 +140,6 @@
     <Content Include="lib\running.js" />
     <Content Include="lib\scaber\communicator-assist.js" />
     <Content Include="lib\scaber\communicator-bs8521-pnc.js" />
-    <Content Include="lib\scaber\communicator-bs8521.js" />
     <Content Include="lib\scaber\communicator-detect.js" />
     <Content Include="lib\scaber\communicator-detect\Unknown.js" />
     <Content Include="lib\scaber\communicator-detect\Bridge.js" />
