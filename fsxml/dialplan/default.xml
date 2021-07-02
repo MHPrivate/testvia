@@ -110,19 +110,19 @@
         </condition>
     </extension>
 
-    <extension name="martin">
-        <condition field="username" expression="^martin">
-            <action application="multiset" data="hangup_after_bridge=true continue_on_fail=false"/>
-            <action application="bridge" data="{origination_caller_id_number=447802827727}sofia/gateway/magrathea/${destination_number}"/>
-        </condition>
-    </extension>
-
     <extension name="park">
         <condition field="destination_number" expression="^(park|7275)$">
             <!--<action application="set" data="fs_send_unsupported_message=true"/>-->
             <action application="info"/>
             <action application="answer"/>
             <action application="park"/>
+        </condition>
+    </extension>
+
+    <extension name="martin">
+        <condition field="username" expression="^martin">
+            <action application="multiset" data="hangup_after_bridge=true continue_on_fail=false"/>
+            <action application="bridge" data="{origination_caller_id_number=447802827727}sofia/gateway/magrathea/${destination_number}"/>
         </condition>
     </extension>
 

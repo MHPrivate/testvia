@@ -165,6 +165,33 @@
         </condition>
     </extension>
 
+    <extension name="reject">
+        <!-- database sipFilters driven extension to reject the call -->
+        <condition field="${eval({%= !!hangup %})}" expression="^true$">
+            <action application="hangup" data="{%= hangup %}"/>
+        </condition>
+    </extension>
+
+    <extension name="scheme" continue="true">
+        <!-- database lookup indicates next-hop is registered on this this cone-server -->
+        <condition field="${sofia_contact(user/{%= dialPrefix %})}" expression="sofia" break="never">
+            <action application="set" data="hangup_after_bridge=true"/>
+            <action application="set" data="continue_on_fail=true"/>
+            <action application="set" data="bridge=${sofia_contact(user/{%= dialPrefix %})}" inline="true"/>
+            <!-- Offer SRTP on outbound legs if the contact contains 'transport=tls'. -->
+            <!-- lua-regex:'gw%+[^@]+' equivalent to posix-regex:/gw\+[^@]+/ -->
+            <action application="bridge" data="{rtp_secure_media=${regex(${bridge}|(?i)transport=tls)}}${lua(~stream:write(tostring(string.gsub('${bridge}','gw%+[^@]+','${destination_number}'))))}"/>
+        </condition>
+        <!-- database lookup indicates next-hop is registered on another cone-server -->
+        <condition field="${cond(${hostname} == {%= cone %} ? true : false)}" expression="^false$" break="never">
+            <!-- skip these if _cone_ is this host -->
+            <action application="set" data="hangup_after_bridge=true"/>
+            <action application="set" data="continue_on_fail=true"/>
+            <action application="set" data="sip_h_X-AppelloExpedite={%= appelloExpedite %}"/>
+            <action application="bridge" data="{rtp_secure_media=true}sofia/ext4tls/${destination_number}@{%= cone %}:5061;transport=tls"/>
+        </condition>
+    </extension>
+
     <extension name="catchall">
         <condition>
             <action application="set" data="RECORD_STEREO=true"/>
