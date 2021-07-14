@@ -157,7 +157,7 @@
     <Content Include="lib\scaber\consumer-slsuser.js" />
     <Content Include="lib\scaber\master.js" />
     <Content Include="lib\scaber\session.js" />
-    <Content Include="lib\scaber\task.js" />
+    <Content Include="lib\scaber\tasks.js" />
     <Content Include="lib\scaber\transform.js" />
     <Content Include="lib\scaber\webio.js" />
     <Content Include="lib\scaber\worker.js" />

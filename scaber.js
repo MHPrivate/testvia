@@ -70,7 +70,7 @@ if (cluster.isMaster) {
         nowip: require('./lib/nowip'),
         rpscb: require('./lib/rpscb'),
         Session: require('./lib/scaber/session'),
-        Task: require('./lib/scaber/task'),
+        Tasks: require('./lib/scaber/tasks'),
         worker: require('./lib/scaber/worker'),
     });
 }
