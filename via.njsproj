@@ -141,6 +141,10 @@
     <Content Include="lib\scaber\communicator-assist.js" />
     <Content Include="lib\scaber\communicator-bs8521-pnc.js" />
     <Content Include="lib\scaber\communicator-detect.js" />
+    <Content Include="lib\scaber\communicator-detect\Bs8521\Close.js" />
+    <Content Include="lib\scaber\communicator-detect\Bs8521\Establish.js" />
+    <Content Include="lib\scaber\communicator-detect\Bs8521\Null.js" />
+    <Content Include="lib\scaber\communicator-detect\Bs8521\Speech.js" />
     <Content Include="lib\scaber\communicator-detect\Unknown.js" />
     <Content Include="lib\scaber\communicator-detect\Bridge.js" />
     <Content Include="lib\scaber\communicator-detect\Bs8521.js" />
@@ -193,6 +197,7 @@
     <Folder Include="lib\redis\" />
     <Folder Include="lib\scaber\" />
     <Folder Include="lib\scaber\communicator-detect\" />
+    <Folder Include="lib\scaber\communicator-detect\Bs8521\" />
     <Folder Include="routes\" />
     <Folder Include="routes\v1\" />
     <Folder Include="views\" />
