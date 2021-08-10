@@ -144,8 +144,6 @@
     <Content Include="lib\scaber\communicator-detect\Bs8521\Close.js" />
     <Content Include="lib\scaber\communicator-detect\Bs8521\Establish.js" />
     <Content Include="lib\scaber\communicator-detect\Bs8521\Generic.js" />
-    <Content Include="lib\scaber\communicator-detect\Bs8521\Null.js" />
-    <Content Include="lib\scaber\communicator-detect\Bs8521\Speech.js" />
     <Content Include="lib\scaber\communicator-detect\Unknown.js" />
     <Content Include="lib\scaber\communicator-detect\Bridge.js" />
     <Content Include="lib\scaber\communicator-detect\Bs8521.js" />
