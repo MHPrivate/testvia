@@ -143,12 +143,15 @@
     <Content Include="lib\scaber\communicator-detect.js" />
     <Content Include="lib\scaber\communicator-detect\Bs8521\Establish.js" />
     <Content Include="lib\scaber\communicator-detect\Bs8521\Generic.js" />
+    <Content Include="lib\scaber\communicator-detect\Tt92\Catalogue.js" />
+    <Content Include="lib\scaber\communicator-detect\Tt92\Clear.js" />
+    <Content Include="lib\scaber\communicator-detect\Tt92\Establish.js" />
+    <Content Include="lib\scaber\communicator-detect\Tt92\Generic.js" />
+    <Content Include="lib\scaber\communicator-detect\Tt92\Select.js" />
+    <Content Include="lib\scaber\communicator-detect\TtNew\Establish.js" />
     <Content Include="lib\scaber\communicator-detect\TtNew\Generic.js" />
     <Content Include="lib\scaber\communicator-detect\TtNew\Clear.js" />
     <Content Include="lib\scaber\communicator-detect\TtNew\Select.js" />
-    <Content Include="lib\scaber\communicator-detect\TtNew\Establish.js">
-      <SubType>Code</SubType>
-    </Content>
     <Content Include="lib\scaber\communicator-detect\TtNew\Catalogue.js" />
     <Content Include="lib\scaber\communicator-detect\Unknown.js" />
     <Content Include="lib\scaber\communicator-detect\Bridge.js" />
@@ -203,6 +206,7 @@
     <Folder Include="lib\scaber\" />
     <Folder Include="lib\scaber\communicator-detect\" />
     <Folder Include="lib\scaber\communicator-detect\Bs8521\" />
+    <Folder Include="lib\scaber\communicator-detect\Tt92\" />
     <Folder Include="lib\scaber\communicator-detect\TtNew\" />
     <Folder Include="routes\" />
     <Folder Include="routes\v1\" />
