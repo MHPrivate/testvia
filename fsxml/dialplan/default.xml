@@ -111,10 +111,15 @@
     </extension>
 
     <extension name="park">
+        <condition field="${appello_dev}" expression="^true$"/>
         <condition field="destination_number" expression="^(park|7275)$">
-            <!--<action application="set" data="fs_send_unsupported_message=true"/>-->
+            <!-- fs_send_unsupported_info enables sending INFOs where 'send_info' is not listed in the X-FS-Support header -->
+            <action application="set" data="fs_send_unsupported_info=true"/>
+            <!-- fs_send_unsupported_message enables sending MESSAGEs where 'send_message' is not listed in the X-FS-Support header -->
+            <action application="set" data="fs_send_unsupported_message=true"/>
             <action application="info"/>
             <action application="answer"/>
+            <!--<action application="sched_hangup" data="+5"/>-->
             <action application="park"/>
         </condition>
     </extension>
@@ -128,6 +133,10 @@
 
     <extension name="assist" >
         <condition field="destination_number" expression="^assist$|^assist-[\w-]+$">
+            <!-- fs_send_unsupported_info enables sending INFOs where 'send_info' is not listed in the X-FS-Support header -->
+            <action application="set" data="fs_send_unsupported_info=true"/>
+            <!-- fs_send_unsupported_message enables sending MESSAGEs where 'send_message' is not listed in the X-FS-Support header -->
+            <action application="set" data="fs_send_unsupported_message=true"/>
             <action application="set" data="send_silence_when_idle=1000"/>
             <action application="set" data="eavesdrop_group=scaber"/>
             <action application="set" data="RECORD_STEREO=true"/>
@@ -141,6 +150,10 @@
 
     <extension name="nowip" >
         <condition field="destination_number" expression="^nowip$|^nowip-[\w-]+$">
+            <!-- fs_send_unsupported_info enables sending INFOs where 'send_info' is not listed in the X-FS-Support header -->
+            <action application="set" data="fs_send_unsupported_info=true"/>
+            <!-- fs_send_unsupported_message enables sending MESSAGEs where 'send_message' is not listed in the X-FS-Support header -->
+            <action application="set" data="fs_send_unsupported_message=true"/>
             <action application="set" data="send_silence_when_idle=1000"/>
             <action application="set" data="eavesdrop_group=scaber"/>
             <action application="set" data="RECORD_STEREO=true"/>
@@ -154,6 +167,10 @@
 
     <extension name="scaip" >
         <condition field="destination_number" expression="^scaip$|^scaip-[\w-]+$">
+            <!-- fs_send_unsupported_info enables sending INFOs where 'send_info' is not listed in the X-FS-Support header -->
+            <action application="set" data="fs_send_unsupported_info=true"/>
+            <!-- fs_send_unsupported_message enables sending MESSAGEs where 'send_message' is not listed in the X-FS-Support header -->
+            <action application="set" data="fs_send_unsupported_message=true"/>
             <action application="set" data="send_silence_when_idle=1000"/>
             <action application="set" data="eavesdrop_group=scaber"/>
             <action application="set" data="RECORD_STEREO=true"/>
