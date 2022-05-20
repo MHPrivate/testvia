@@ -138,11 +138,15 @@
     <Content Include="lib\repletion.js" />
     <Content Include="lib\rpscb.js" />
     <Content Include="lib\running.js" />
+    <Content Include="lib\azure.js" />
+    <Content Include="lib\scaber\communicator-null.js" />
     <Content Include="lib\scaber\communicator-assist.js" />
     <Content Include="lib\scaber\communicator-bs8521-pnc.js" />
     <Content Include="lib\scaber\communicator-detect.js" />
     <Content Include="lib\scaber\communicator-detect\Bs8521\Establish.js" />
     <Content Include="lib\scaber\communicator-detect\Bs8521\Generic.js" />
+    <Content Include="lib\scaber\communicator-detect\Bsia.js" />
+    <Content Include="lib\scaber\communicator-detect\Bsia\Establish.js" />
     <Content Include="lib\scaber\communicator-detect\Tt92\Catalogue.js" />
     <Content Include="lib\scaber\communicator-detect\Tt92\Clear.js" />
     <Content Include="lib\scaber\communicator-detect\Tt92\Establish.js" />
@@ -167,6 +171,7 @@
     <Content Include="lib\scaber\communicator-detect\TtOld.js" />
     <Content Include="lib\scaber\communicator-nowip.js" />
     <Content Include="lib\scaber\communicator-scaip.js" />
+    <Content Include="lib\scaber\consumer-simple.js" />
     <Content Include="lib\scaber\consumer-bridge.js" />
     <Content Include="lib\scaber\consumer-bs8521-pnc.js" />
     <Content Include="lib\scaber\consumer-nowip-jontek.js" />
@@ -174,7 +179,6 @@
     <Content Include="lib\scaber\consumer-slsuser.js" />
     <Content Include="lib\scaber\master.js" />
     <Content Include="lib\scaber\session.js" />
-    <Content Include="lib\scaber\tasks.js" />
     <Content Include="lib\scaber\transform.js" />
     <Content Include="lib\scaber\webio.js" />
     <Content Include="lib\scaber\worker.js" />
@@ -211,6 +215,7 @@
     <Folder Include="lib\scaber\" />
     <Folder Include="lib\scaber\communicator-detect\" />
     <Folder Include="lib\scaber\communicator-detect\Bs8521\" />
+    <Folder Include="lib\scaber\communicator-detect\Bsia\" />
     <Folder Include="lib\scaber\communicator-detect\Tt92\" />
     <Folder Include="lib\scaber\communicator-detect\TtNew\" />
     <Folder Include="lib\scaber\communicator-detect\TtOld\" />
