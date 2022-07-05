@@ -1,6 +1,7 @@
     <include>
         <param name="INCLUDING" value="{%= `${path.basename(__filename)}` %}"/>
         <!-- Dialplan context in which to dump calls that come in to this profile's ip:port -->
+        <param name="challenge-realm" value="$${domain}"/>
         <param name="context" value="public"/>
         <param name="debug" value="0"/>
         <param name="dialplan" value="XML"/>

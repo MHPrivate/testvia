@@ -52,22 +52,12 @@
         </condition>
     </extension>
 
-    <extension name="enovation">
-        <condition field="${sip_req_params}" expression="\bappello=enovation\b"/>
-        <condition field="caller_id_number" expression="anonymous|unavailable|unknown" break="on-true">
-            <!--<action application="respond" data="503"/>-->
+    <extension name="grouped-callback">
+        <condition field="${sip_h_x-inin-cnv}" expression="^$" break="never">
             <action application="hangup" data="REQUESTED_CHAN_UNAVAIL"/>
         </condition>
-        <condition>
-            <action application="set" data="send_silence_when_idle=1000"/>
-            <action application="set" data="eavesdrop_group=enovation"/>
-            <action application="set" data="RECORD_STEREO=true"/>
-            <action application="set" data="record_file_path=$${recordings_dir}/${strftime(%Y-%m-%dT%H-%M-%SZ)}.${caller_id_number}.wav"/>
-            <action application="record_session" data="${record_file_path}"/>
-            <action application="set" data="sip_cid_type=rpid"/>
-            <action application="set" data="bridge=${sofia_contact(*/enovation)}" inline="true"/>
-            <!-- Offer SRTP on outbound legs if the contact contains 'transport=tls'. -->
-            <action application="bridge" data="{rtp_secure_media=${regex(${bridge}|transport=Tls)}}${lua(~stream:write(tostring(string.gsub('${bridge}','enovation','${destination_number}'))))}"/>
+        <condition field="destination_number" expression="^00(\d+)#(\d{4})$">
+            <action application="park"/>
         </condition>
     </extension>
 
@@ -168,7 +158,13 @@
     <extension name="magrathea-test">
         <condition field="destination_number" expression="^443300888674$">
             <action application="set" data="rtp_digit_delay=90"/><!-- 90ms on inbound legs BUT seriously longer on outbound legs -->
+            <!-- <action application="set" data="RECORD_STEREO=true"/> -->
+            <action application="set" data="record_file_path=$${recordings_dir}/${strftime(%Y-%m-%dT%H-%M-%SZ)}.${caller_id_number}.wav"/>
+            <action application="record_session" data="${record_file_path}"/>
             <action application="answer"/>
+            <action application="spandsp_start_dtmf"/>
+            <action application="sleep" data="1000"/>
+            <action application="gentones" data="%(100,100,1400);%(100,4750,2300);%(750,0,1400)"/>
             <action application="park"/>
         </condition>
     </extension>

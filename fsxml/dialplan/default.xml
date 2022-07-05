@@ -71,17 +71,6 @@
         </condition>
     </extension>
 
-    <extension name="enovation">
-        <condition field="username" expression="^enovation$">
-            <action application="multiset" data="hangup_after_bridge=true continue_on_fail=false"/>
-            <!--<action application="info"/>-->
-        </condition>
-        <condition field="caller_id_number" expression="^44170650921\d$">
-            <action application="bridge" data="sofia/gateway/magrathea/${destination_number}"/>
-            <anti-action application="bridge" data="{origination_caller_id_number=441706509210,origination_privacy=screen:hide_number}sofia/gateway/magrathea/${destination_number}"/>
-        </condition>
-    </extension>
-
     <extension name="scaber-eavesdrop">
         <condition field="destination_number" expression="^722237$">
             <action application="set" data="eavesdrop_require_group=scaber"/>
@@ -124,10 +113,21 @@
         </condition>
     </extension>
 
+    <extension name="grouped-callback">
+        <!--
+        <condition field="${sip_h_x-inin-cnv}" expression="^$" break="never">
+            <action application="hangup" data="REQUESTED_CHAN_UNAVAIL"/>
+        </condition>
+        -->
+        <condition field="destination_number" expression="^00(\d+)#(\d{4})$">
+            <action application="park"/>
+        </condition>
+    </extension>
+
     <extension name="martin">
         <condition field="username" expression="^martin">
             <action application="multiset" data="hangup_after_bridge=true continue_on_fail=false"/>
-            <action application="bridge" data="{origination_caller_id_number=447802827727}sofia/gateway/magrathea/${destination_number}"/>
+            <action application="bridge" data="{origination_caller_id_number=+447802827727}sofia/gateway/magrathea/${destination_number}"/>
         </condition>
     </extension>
 

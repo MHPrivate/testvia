@@ -5,6 +5,5 @@
 ## ServiceRestart:      scaber
 #
 DEBUG_HIDE_DATE=yes
-PORT=443
-DEBUG=mysql,worker,session,communicator:*,consumer:*
+DEBUG=mysql,azure,worker,session,communicator:*,consumer:*,protocol:*
 #DEBUG=mysql
