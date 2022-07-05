@@ -114,14 +114,14 @@
     </extension>
 
     <extension name="grouped-callback">
+        <condition field="destination_number" expression="^00(\d+)#(\d{4})$">
+            <action application="park"/>
+        </condition>
         <!--
         <condition field="${sip_h_x-inin-cnv}" expression="^$" break="never">
             <action application="hangup" data="REQUESTED_CHAN_UNAVAIL"/>
         </condition>
         -->
-        <condition field="destination_number" expression="^00(\d+)#(\d{4})$">
-            <action application="park"/>
-        </condition>
     </extension>
 
     <extension name="martin">
