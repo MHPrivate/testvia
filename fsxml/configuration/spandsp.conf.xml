@@ -236,6 +236,18 @@
             </tone>
         </descriptor>
 
-    </descriptors>
+		<!-- telecare grouped tones -->
+		<descriptor name="telecare-grouped">
+			<tone name="telecare-grouped:1850">
+				<!-- specification -->
+				<element freq1="1850" freq2="0" min="750" max="2200"/>
+			</tone>
+			<tone name="telecare-grouped:1400">
+				<!-- tunstall-communicall -->
+				<element freq1="1400" freq2="0" min="750" max="2200"/>
+			</tone>
+		</descriptor>
+
+	</descriptors>
 
 </configuration>
