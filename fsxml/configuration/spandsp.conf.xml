@@ -122,49 +122,53 @@
                 <!-- tynetec-reach -->
                 <element freq1="1645" freq2="0" min="130" max="250"/>
             </tone>
+            <tone name="telecare-junk:1000">
+                <!-- tunstall piper-group+uac -->
+                <element freq1="1000" freq2="0" min="400" max="600 "/>
+            </tone>
         </descriptor>
 
         <!-- telecare burst digits -->
         <descriptor name="telecare-burst">
             <tone name="telecare-burst:1">
-                <element freq1="1850" freq2="0" min="20" max="49"/>
-                <element freq1="0" freq2="0" min="16" max="16"/>
+                <element freq1="1850" freq2="0" min="15" max="55"/>
+                <element freq1="0" freq2="0" min="50" max="100"/>
             </tone>
             <tone name="telecare-burst:2">
-                <element freq1="1850" freq2="0" min="71" max="100"/>
-                <element freq1="0" freq2="0" min="16" max="16"/>
+                <element freq1="1850" freq2="0" min="66" max="106"/>
+                <element freq1="0" freq2="0" min="50" max="100"/>
             </tone>
             <tone name="telecare-burst:3">
-                <element freq1="1850" freq2="0" min="122" max="151"/>
-                <element freq1="0" freq2="0" min="16" max="16"/>
+                <element freq1="1850" freq2="0" min="117" max="157"/>
+                <element freq1="0" freq2="0" min="50" max="100"/>
             </tone>
             <tone name="telecare-burst:4">
-                <element freq1="1850" freq2="0" min="174" max="202"/>
-                <element freq1="0" freq2="0" min="16" max="16"/>
+                <element freq1="1850" freq2="0" min="168" max="208"/>
+                <element freq1="0" freq2="0" min="50" max="100"/>
             </tone>
             <tone name="telecare-burst:5">
-                <element freq1="1850" freq2="0" min="225" max="254"/>
-                <element freq1="0" freq2="0" min="16" max="16"/>
+                <element freq1="1850" freq2="0" min="219" max="259"/>
+                <element freq1="0" freq2="0" min="50" max="100"/>
             </tone>
             <tone name="telecare-burst:6">
-                <element freq1="1850" freq2="0" min="276" max="305"/>
-                <element freq1="0" freq2="0" min="16" max="16"/>
+                <element freq1="1850" freq2="0" min="270" max="310"/>
+                <element freq1="0" freq2="0" min="50" max="100"/>
             </tone>
             <tone name="telecare-burst:7">
-                <element freq1="1850" freq2="0" min="327" max="356"/>
-                <element freq1="0" freq2="0" min="16" max="16"/>
+                <element freq1="1850" freq2="0" min="321" max="361"/>
+                <element freq1="0" freq2="0" min="50" max="100"/>
             </tone>
             <tone name="telecare-burst:8">
-                <element freq1="1850" freq2="0" min="379" max="407"/>
-                <element freq1="0" freq2="0" min="16" max="16"/>
+                <element freq1="1850" freq2="0" min="372" max="412"/>
+                <element freq1="0" freq2="0" min="50" max="100"/>
             </tone>
             <tone name="telecare-burst:9">
-                <element freq1="1850" freq2="0" min="430" max="459"/>
-                <element freq1="0" freq2="0" min="16" max="16"/>
+                <element freq1="1850" freq2="0" min="423" max="463"/>
+                <element freq1="0" freq2="0" min="50" max="100"/>
             </tone>
             <tone name="telecare-burst:0">
-                <element freq1="1850" freq2="0" min="481" max="510"/>
-                <element freq1="0" freq2="0" min="16" max="16"/>
+                <element freq1="1850" freq2="0" min="474" max="514"/>
+                <element freq1="0" freq2="0" min="50" max="100"/>
             </tone>
         </descriptor>
 
@@ -233,6 +237,18 @@
             <tone name="telecare-stmf:#">
                 <element freq1="941" freq2="0" min="80" max="96"/>
                 <element freq1="1477" freq2="0" min="80" max="96"/>
+            </tone>
+        </descriptor>
+
+        <!-- telecare grouped tones -->
+        <descriptor name="telecare-grouped">
+            <tone name="telecare-grouped:1850">
+                <!-- specification -->
+                <element freq1="1850" freq2="0" min="750" max="2200"/>
+            </tone>
+            <tone name="telecare-grouped:1400">
+                <!-- tunstall-communicall -->
+                <element freq1="1400" freq2="0" min="750" max="2200"/>
             </tone>
         </descriptor>
 

@@ -1,0 +1,95 @@
+<!DOCTYPE html []>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="MarkdownViewer++" />
+    <title>rpscb.md</title>
+    <style type="text/css">
+            
+/* Avoid page breaks inside the most common attributes, especially for exports (i.e. PDF) */
+td, h1, h2, h3, h4, h5, p, ul, ol, li {
+    page-break-inside: avoid; 
+}
+
+        </style>
+  </head>
+  <body>
+    <h1 id="module-redis-publishsubscribe-callback">Module: <u>R</u>edis <u>P</u>ublish/<u>S</u>ubscribe <u>C</u>all<u>b</u>ack</h1>
+    <p>This module wraps the public NPM <code>redis</code> module as a pair of connections, one for publishing (and DB access), the other for subscribing.</p>
+    <p>The module supplies a standard EventEmitter overloaded with the following attributes:</p>
+    <ul>
+      <li>defaultMs = 5000 - the default request round-trip timeout</li>
+      <li>expires - the utcMs of the most imminent request timeout</li>
+      <li>interval - the handle of the redis-ping keepalive</li>
+      <li>pendings - a dictionary of pending requests </li>
+      <li>pub - the redis connection for publishing and database access</li>
+      <li>publish([ms], 'channel', [args, ...], cb(err, outstanding, ...)) - the publication method</li>
+      <li>ready - a Promise that is fulfilled once both redis-connections are established</li>
+      <li>sub - the redis connection for subscribing</li>
+      <li>timeout - the handle of the most imminent request timeout</li>
+      <li>uuid() - a uuid-v1 generator method</li>
+    </ul>
+    <p>The EventEmitter monitors added and removed listeners and automatically subscribes/unsubscribes the given channel-name</p>
+    <h2 id="startup">Startup</h2>
+    <p>The <code>rpcsb</code> module awaits the process.running Promise from the <code>running</code> module before initiating connections.</p>
+    <p>Connections are established using config defined on <code>main.secrets.redis</code> formatted as shown below:</p>
+    <pre>
+      <code>{
+    "url": "rediss://:&lt;password&gt;@&lt;hostname&gt;:&lt;port&gt;",
+    "retry_unfulfilled_commands": true,
+    "socket_keepalive": true
+},
+</code>
+    </pre>
+    <p>TLS encrypted connections are used where the uri defines the <code>rediss:</code> schema, while unencrypted connections are used where the uri defines the <code>redis:</code> schema.</p>
+    <p>Once both the <code>pub</code> and <code>sub</code> connections are ready, the exported <code>ready</code> Promise is fulfilled for triggering user-defined followup operations.</p>
+    <h2 id="usage">Usage</h2>
+    <h3 id="publishing">Publishing</h3>
+    <p>Calls to the supplied <code>publish</code> method wrap any arguments in a JSON object and publish it to the named-channel.</p>
+    <p>e.g.</p>
+    <pre>
+      <code>    // extend the default timeout to 10s by suppling it as the optional 1st arg
+    rpscb.publish(10000, 'party', function (err, outs, result) {
+        if (err)
+            return console.log('outstanding:', outs, err);
+
+        console.log('outstanding:', outs, result);
+    });
+</code>
+    </pre>
+    <p>Where the <code>publish</code> is called with a callback, the sent JSON object is augmented with a transient channel-name to receive recipient responses.</p>
+    <p>When supplied, the <code>publish</code> callback is called multiple times, once for each recipient that responds and/or reporting any final timed-out responses. The <code>outstanding</code> count argument supplied on each invoke indicates the number of remaining of responses, or zero where remaining responses have timed-out.</p>
+    <p>The <code>publish</code> method returns a <code>job</code> object which should not be externally modified. For interest, the <code>job</code> object has the following attributes:</p>
+    <ul>
+      <li>await - count of outstanding responses</li>
+      <li>channel - the publication channel-name</li>
+      <li>date - the Date of the initial request or most recent response</li>
+      <li>fn - the callback passed to <code>publish</code></li>
+      <li>ms - the incremental timeout from the most recent activity</li>
+    </ul>
+    <p>If there are no listeners for a published channel-name, the callback will be invoked immediately indicating none outstanding.</p>
+    <p>The per-request timeout is restarted by each received response, ultimately timing-out all remaining responses N(ms) after the last received response.</p>
+    <p>For example, were a publish-with-callback to land with four recipients, but two failed to respond, the callback would be invoked as follows:</p>
+    <ul>
+      <li>cb(null, 3, ...) // first responder within 5000ms of initial publish</li>
+      <li>cb(null, 2, ...) // second responder within 5000ms of first response</li>
+      <li>cb(Error('rpscb timeout'), 0) // third &amp; fourth responder timeout 5000ms after second response.</li>
+    </ul>
+    <h3 id="subscribing">Subscribing</h3>
+    <p>Received publications are emitted on the module's EventEmitter against the published channel-name along with any supplied args.</p>
+    <p>Publications that are expected to respond will carry a locally defined trailing callback arg.</p>
+    <p>e.g.</p>
+    <pre>
+      <code>    rpscb.on('party', function (/* [arg, ...], ?cb */) { // optional args and cb
+        if (typeof arguments[arguments.length - 1] !== 'function') // no response expected
+            null;
+        else if (true) // response expected - indicate success
+            cb(null, 'dancing');
+        else // response expected - indicate failure
+            cb(new Error('funeral'));
+    });
+</code>
+    </pre>
+    <p>The supplied callback has in-built protection against being called multiple times.</p>
+  </body>
+</html>

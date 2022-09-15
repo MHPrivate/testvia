@@ -9,7 +9,9 @@
     "url": "git+ssh://git@github.com/mhmeadows63/appello-via.git"
   },
   "dependencies": {
+    "@azure/msal-node": "^1.8.0",
     "@parse/node-apn": "^3.1.0",
+    "agentkeepalive": "^4.2.1",
     "basic-auth": "^2.0.1",
     "body-parser": "^1.18.3",
     "callsites": "^3.0.0",
