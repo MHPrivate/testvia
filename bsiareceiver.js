@@ -85,7 +85,7 @@ var bsiaREs = [
     /(?<account>\d{6})(?<channels>\d{8})(?<status>\d)$/,   // 15 - NNNNNNCCCCCCCCS
     /(?<account>\d{7})(?<channels>\d{8})(?<status>\d)$/,   // 16 - NNNNNNNCCCCCCCCS
     /(?<account>\d{8})(?<channels>\d{8})(?<status>\d)$/,   // 17 - NNNNNNNNCCCCCCCCS
-    null,   // 18
+    /(?<account>\d{9})(?<channels>\d{8})(?<status>\d)$/,   // 18 - NNNNNNNNNCCCCCCCCS
     null,   // 19
     null,   // 20
     /(?<account>\d{4})(?<channels>\d{16})(?<status>\d)$/,   // 21 - NNNNCCCCCCCCCCCCCCCCS
@@ -93,7 +93,7 @@ var bsiaREs = [
     /(?<account>\d{6})(?<channels>\d{16})(?<status>\d)$/,   // 23 - NNNNNNCCCCCCCCCCCCCCCCS
     /(?<account>\d{7})(?<channels>\d{16})(?<status>\d)$/,   // 24 - NNNNNNNCCCCCCCCCCCCCCCCS
     /(?<account>\d{8})(?<channels>\d{16})(?<status>\d)$/,   // 25 - NNNNNNNNCCCCCCCCCCCCCCCCS
-    null,   // 26
+    /(?<account>\d{9})(?<channels>\d{16})(?<status>\d)$/,   // 26 - NNNNNNNNNCCCCCCCCCCCCCCCCS
     null,   // 27
     null,   // 28
     /(?<account>\d{4})(?<channels>\d{24})(?<status>\d)$/,   // 29 - NNNNCCCCCCCCCCCCCCCCCCCCCCCCS
@@ -101,6 +101,7 @@ var bsiaREs = [
     /(?<account>\d{6})(?<channels>\d{24})(?<status>\d)$/,   // 31 - NNNNNNCCCCCCCCCCCCCCCCCCCCCCCCS
     /(?<account>\d{7})(?<channels>\d{24})(?<status>\d)$/,   // 32 - NNNNNNNCCCCCCCCCCCCCCCCCCCCCCCCS
     /(?<account>\d{8})(?<channels>\d{24})(?<status>\d)$/,   // 33 - NNNNNNNNCCCCCCCCCCCCCCCCCCCCCCCCS
+    /(?<account>\d{9})(?<channels>\d{24})(?<status>\d)$/,   // 34 - NNNNNNNNNCCCCCCCCCCCCCCCCCCCCCCCCS
 ];
 
 // only open the socket once dependencies are in place - e.g. rpscb
