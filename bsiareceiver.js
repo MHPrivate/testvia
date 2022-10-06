@@ -66,42 +66,43 @@ process.running.then(function onLoaded() {
     });
 });
 
-var bsiaREs = [
-    null,   // 00
-    null,   // 01
-    null,   // 02
-    null,   // 03
-    null,   // 04
-    null,   // 05
-    null,   // 06
-    null,   // 07
-    null,   // 08
-    null,   // 09
-    null,   // 10
-    null,   // 11
-    null,   // 12
-    /(?<account>\d{4})(?<channels>\d{8})(?<status>\d)$/,   // 13 - NNNNCCCCCCCCS
-    /(?<account>\d{5})(?<channels>\d{8})(?<status>\d)$/,   // 14 - NNNNNCCCCCCCCS
-    /(?<account>\d{6})(?<channels>\d{8})(?<status>\d)$/,   // 15 - NNNNNNCCCCCCCCS
-    /(?<account>\d{7})(?<channels>\d{8})(?<status>\d)$/,   // 16 - NNNNNNNCCCCCCCCS
-    /(?<account>\d{8})(?<channels>\d{8})(?<status>\d)$/,   // 17 - NNNNNNNNCCCCCCCCS
-    /(?<account>\d{9})(?<channels>\d{8})(?<status>\d)$/,   // 18 - NNNNNNNNNCCCCCCCCS
-    null,   // 19
-    null,   // 20
-    /(?<account>\d{4})(?<channels>\d{16})(?<status>\d)$/,   // 21 - NNNNCCCCCCCCCCCCCCCCS
-    /(?<account>\d{5})(?<channels>\d{16})(?<status>\d)$/,   // 22 - NNNNNCCCCCCCCCCCCCCCCS
-    /(?<account>\d{6})(?<channels>\d{16})(?<status>\d)$/,   // 23 - NNNNNNCCCCCCCCCCCCCCCCS
-    /(?<account>\d{7})(?<channels>\d{16})(?<status>\d)$/,   // 24 - NNNNNNNCCCCCCCCCCCCCCCCS
-    /(?<account>\d{8})(?<channels>\d{16})(?<status>\d)$/,   // 25 - NNNNNNNNCCCCCCCCCCCCCCCCS
-    /(?<account>\d{9})(?<channels>\d{16})(?<status>\d)$/,   // 26 - NNNNNNNNNCCCCCCCCCCCCCCCCS
-    null,   // 27
-    null,   // 28
-    /(?<account>\d{4})(?<channels>\d{24})(?<status>\d)$/,   // 29 - NNNNCCCCCCCCCCCCCCCCCCCCCCCCS
-    /(?<account>\d{5})(?<channels>\d{24})(?<status>\d)$/,   // 30 - NNNNNCCCCCCCCCCCCCCCCCCCCCCCCS
-    /(?<account>\d{6})(?<channels>\d{24})(?<status>\d)$/,   // 31 - NNNNNNCCCCCCCCCCCCCCCCCCCCCCCCS
-    /(?<account>\d{7})(?<channels>\d{24})(?<status>\d)$/,   // 32 - NNNNNNNCCCCCCCCCCCCCCCCCCCCCCCCS
-    /(?<account>\d{8})(?<channels>\d{24})(?<status>\d)$/,   // 33 - NNNNNNNNCCCCCCCCCCCCCCCCCCCCCCCCS
-    /(?<account>\d{9})(?<channels>\d{24})(?<status>\d)$/,   // 34 - NNNNNNNNNCCCCCCCCCCCCCCCCCCCCCCCCS
+var bsiaREs = [ // CSL send 4 leading routing digits that are not part of BSIA
+    null,   // 00 = 0xCSL + 00xBSIA
+    null,   // 01 = 1xCSL + 00xBSIA
+    null,   // 02 = 2xCSL + 00xBSIA
+    null,   // 03 = 3xCSL + 00xBSIA
+    null,   // 04 = 4xCSL + 00xBSIA
+    null,   // 05 = 4xCSL + 01xBSIA
+    null,   // 06 = 4xCSL + 02xBSIA
+    null,   // 07 = 4xCSL + 03xBSIA
+    null,   // 08 = 4xCSL + 04xBSIA
+    null,   // 09 = 4xCSL + 05xBSIA
+    null,   // 10 = 4xCSL + 06xBSIA
+    null,   // 11 = 4xCSL + 07xBSIA
+    null,   // 12 = 4xCSL + 08xBSIA
+    null,   // 13 = 4xCSL + 09xBSIA
+    null,   // 14 = 4xCSL + 10xBSIA
+    null,   // 15 = 4xCSL + 11xBSIA
+    null,   // 16 = 4xCSL + 12xBSIA
+    /\d{4}(?<account>\d{4})(?<channels>\d{8})(?<status>\d)$/,   // 17 = 4xCSL + 13xBSIA - NNNNCCCCCCCCS
+    /\d{4}(?<account>\d{5})(?<channels>\d{8})(?<status>\d)$/,   // 18 = 4xCSL + 14xBSIA - NNNNNCCCCCCCCS
+    /\d{4}(?<account>\d{6})(?<channels>\d{8})(?<status>\d)$/,   // 19 = 4xCSL + 15xBSIA - NNNNNNCCCCCCCCS
+    null,   // 20 = 4xCSL + 16xBSIA
+    null,   // 21 = 4xCSL + 17xBSIA
+    null,   // 22 = 4xCSL + 18xBSIA
+    null,   // 23 = 4xCSL + 19xBSIA
+    null,   // 24 = 4xCSL + 20xBSIA
+    /\d{4}(?<account>\d{4})(?<channels>\d{16})(?<status>\d)$/,   // 25 = 4xCSL + 21xBSIA - NNNNCCCCCCCCCCCCCCCCS
+    /\d{4}(?<account>\d{5})(?<channels>\d{16})(?<status>\d)$/,   // 26 = 4xCSL + 22xBSIA - NNNNNCCCCCCCCCCCCCCCCS
+    /\d{4}(?<account>\d{6})(?<channels>\d{16})(?<status>\d)$/,   // 27 = 4xCSL + 23xBSIA - NNNNNNCCCCCCCCCCCCCCCCS
+    null,   // 28 = 4xCSL + 24xBSIA
+    null,   // 29 = 4xCSL + 25xBSIA
+    null,   // 30 = 4xCSL + 26xBSIA
+    null,   // 31 = 4xCSL + 27xBSIA
+    null,   // 32 = 4xCSL + 28xBSIA
+    /\d{4}(?<account>\d{4})(?<channels>\d{24})(?<status>\d)$/,   // 33 = 4xCSL + 29xBSIA - NNNNCCCCCCCCCCCCCCCCCCCCCCCCS
+    /\d{4}(?<account>\d{5})(?<channels>\d{24})(?<status>\d)$/,   // 34 = 4xCSL + 30xBSIA - NNNNNCCCCCCCCCCCCCCCCCCCCCCCCS
+    /\d{4}(?<account>\d{6})(?<channels>\d{24})(?<status>\d)$/,   // 35 = 4xCSL + 31xBSIA - NNNNNNCCCCCCCCCCCCCCCCCCCCCCCCS
 ];
 
 // only open the socket once dependencies are in place - e.g. rpscb
