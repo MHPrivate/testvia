@@ -124,13 +124,6 @@
         -->
     </extension>
 
-    <extension name="martin">
-        <condition field="username" expression="^martin">
-            <action application="multiset" data="hangup_after_bridge=true continue_on_fail=false"/>
-            <action application="bridge" data="{origination_caller_id_number=+447802827727}sofia/gateway/magrathea/${destination_number}"/>
-        </condition>
-    </extension>
-
     <extension name="assist" >
         <condition field="destination_number" expression="^assist$|^assist-[\w-]+$">
             <!-- fs_send_unsupported_info enables sending INFOs where 'send_info' is not listed in the X-FS-Support header -->
@@ -194,12 +187,19 @@
                     .join('')
                 : undefined
         } else if (stat && stat.isFile() && stat.size) { // substantive file
-            return include(`${dir}/${sub}.xml`)
-        }
-    })(path.dirname(__filename), 'default', query['Caller-Destination-Number']) // __dirname, 'default', '1000'
--%}
+	return include(`${dir}/${sub}.xml`)
+	}
+	})(path.dirname(__filename), 'default', query['Caller-Destination-Number']) // __dirname, 'default', '1000'
+	-%}
 
-    <extension name="catchall">
+	<extension name="martin">
+		<condition field="username" expression="^martin">
+			<action application="multiset" data="hangup_after_bridge=true continue_on_fail=false"/>
+			<action application="bridge" data="{origination_caller_id_number=+447802827727}sofia/gateway/magrathea/${destination_number}"/>
+		</condition>
+	</extension>
+
+	<extension name="catchall">
         <condition>
             <action application="set" data="RECORD_STEREO=true"/>
             <action application="record_session" data="/tmp/${strftime(%Y-%m-%d-%H-%M-%S)}.${caller_id_number}.wav"/>

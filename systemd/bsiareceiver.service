@@ -1,0 +1,16 @@
+# /etc/systemd/system/bsiareceiver.service
+[Unit]
+Description=Appello BsiaReceiver service
+After=network.service
+#Requires=network.service
+
+[Service]
+EnvironmentFile=/opt/appello-via/systemd/bsiareceiver.environment
+ExecStart=/opt/appello-via/bsiareceiver.js
+ExecReload=/usr/bin/kill -HUP $MAINPID
+TimeoutStopSec=15
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
