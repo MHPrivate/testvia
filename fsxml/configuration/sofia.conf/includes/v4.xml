@@ -20,4 +20,8 @@
         <param name="rtp-ip" value="$${local_ip_v4}"/>
         <!--IP address to bind to, DO NOT USE HOSTNAMES ONLY IP ADDRESSES-->
         <param name="sip-ip" value="$${local_ip_v4}"/>
+
+        <param name="minimum-session-expires" value="90"/>
+        <param name="session-timeout" value="90"/>
+
     </include>
