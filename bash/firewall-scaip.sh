@@ -8,11 +8,13 @@ done <<EOT
 85.133.122.72/32    essence + chiptech (CSL)
 85.133.122.73/32    essence + chiptech (CSL)
 85.133.122.86/32    essence + chiptech (CSL)
-85.214.144.155/32   gw1.telealarm.com
+162.19.197.254/32   gw1.telealarm.com
+ 85.214.144.155/32   gw1.telealarm.com - retired 2023-01-19
  86.179.16.27/32     possum development - pete swales
  87.86.190.23/32     careip via CSL (doro on analogue APN - arrange with CSL to switch to digital APN)
  87.86.190.25/32     careip via CSL (doro on analogue APN - arrange with CSL to switch to digital APN)
-94.23.55.219/32     gw2.telealarm.com
+51.83.23.158/32     gw2.telealarm.com
+ 94.23.55.219/32     gw2.telealarm.com - retired 2023-01-19
  155.4.133.112/32    possum development - emil bengtsson
 178.22.139.77/32    lon.out.simwood.com
 185.63.140.77/32    slo.out.simwood.com
