@@ -13,6 +13,15 @@ var cluster = require('cluster');
 require('./lib/running').running = undefined; // causes main.running set _true_ once running AND _false_ when terminating
 require('./lib/repletion')({ processGlobal: true, always: !process.stdin.isTTY, pidify: !cluster.isMaster }); // starts either a console:repl OR a daemon:replify (/run/<main>.sock)
 
+global.UTIL = Object.assign(global.UTIL || {}, { // merge into any existing global UTIL object
+    stringify: (function () { // a circular-reference safe alternative to JSON.stringify() for debug & console output
+        var util = require('util');
+        return function stringify(obj) {
+            return util.inspect(obj, { breakLength: Infinity, depth: Infinity });
+        }
+    })(),
+});
+
 var fs = require('fs');
 var main = Object.defineProperties(Object.assign(exports,  {
     cache: {},      // slow-dynamic runtime context - e.g. SSL certificate(s)
