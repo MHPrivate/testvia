@@ -52,15 +52,6 @@
         </condition>
     </extension>
 
-    <extension name="grouped-callback">
-        <condition field="destination_number" expression="^\+\d+\D\d{4}$">
-            <action application="park"/>
-        </condition>
-        <condition field="${sip_h_x-inin-cnv}" expression="^$" break="never">
-            <action application="hangup" data="REQUESTED_CHAN_UNAVAIL"/>
-        </condition>
-    </extension>
-
     <extension name="scaber" >
         <condition field="${sip_req_params}" expression="\bappello=scaber\b"/>
         <condition field="caller_id_number" expression="anonymous|unavailable|unknown" break="on-true">
@@ -75,6 +66,24 @@
             <action application="set" data="record_file_path=$${recordings_dir}/${strftime(%Y-%m-%dT%H-%M-%SZ)}.${caller_id_number}.wav"/>
             <!-- <action application="record_session" data="${record_file_path}"/> disabled here to facilitate bypass_media on forwarded/bridged calls -->
             <action application="park"/>
+        </condition>
+    </extension>
+
+    <extension name="grouped-callback" continue="false">
+        <condition field="destination_number" expression="^(\+|00)\d+\D\d{4}$">
+            <action application="park"/>
+        </condition>
+        <condition field="${sip_h_x-inin-cnv}" expression="^$" break="never">
+            <action application="hangup" data="REQUESTED_CHAN_UNAVAIL"/>
+        </condition>
+    </extension>
+
+    <extension name="sip-terminal-adapter">
+        <condition field="destination_number" expression="^440000">
+            <action application="park"/>
+        </condition>
+        <condition field="caller_id_number" expression="^\+0" break="on-true">
+            <anti-action application="hangup" data="REQUESTED_CHAN_UNAVAIL"/>
         </condition>
     </extension>
 
@@ -125,7 +134,7 @@
             <action application="set" data="effective_caller_id_name='{%= expedite.name %}'"/>
             <action application="set" data="hangup_after_bridge=true"/>
             <action application="set" data="continue_on_fail=true"/>
-            <action application="set" data="bridge=${sofia_contact(user/{%= expedite.prfx %})}" inline="true"/>
+            <action application="set" data="bridge=${sofia_contact(*/{%= expedite.prfx %})}" inline="true"/>
             <!-- Offer SRTP on outbound legs if the contact contains 'transport=tls'. -->
             <action application="bridge" data="{rtp_secure_media=${regex(${bridge}|transport=tls)}}${lua(~stream:write(tostring(string.gsub('${bridge}','gw%+[^@]+','{%= expedite.dest %}'))))}"/>
             <!-- lua-regex:'gw%+[^@]+' same-as posix-regex:/gw\+[^@]+/ -->
@@ -158,16 +167,20 @@
     <extension name="reject">
         <!-- database sipFilters driven extension to reject the call -->
         <condition field="${eval({%= !!hangup %})}" expression="^true$">
+            <!-- short pause to give time for an esl-client to intervene -->
+            <action application="sleep" data="500"/>
             <action application="hangup" data="{%= hangup %}"/>
         </condition>
     </extension>
 
     <extension name="scheme" continue="true">
+        <!-- ensure the target is an SLS destination -->
+        <condition field="destination_number" expression="^4\d{8}$" break="on-false"/>
         <!-- database lookup indicates next-hop is registered on this this cone-server -->
-        <condition field="${sofia_contact(user/{%= dialPrefix %})}" expression="sofia" break="never">
+        <condition field="${sofia_contact(*/{%= dialPrefix %})}" expression="sofia" break="never">
             <action application="set" data="hangup_after_bridge=true"/>
             <action application="set" data="continue_on_fail=true"/>
-            <action application="set" data="bridge=${sofia_contact(user/{%= dialPrefix %})}" inline="true"/>
+            <action application="set" data="bridge=${sofia_contact(*/{%= dialPrefix %})}" inline="true"/>
             <!-- Offer SRTP on outbound legs if the contact contains 'transport=tls'. -->
             <!-- lua-regex:'gw%+[^@]+' equivalent to posix-regex:/gw\+[^@]+/ -->
             <action application="bridge" data="{rtp_secure_media=${regex(${bridge}|(?i)transport=tls)}}${lua(~stream:write(tostring(string.gsub('${bridge}','gw%+[^@]+','${destination_number}'))))}"/>
