@@ -247,6 +247,7 @@ exports.post('/', function (req, res, next) { // POST /larc - create/update larc
             config: locals.config || undefined, // optional assembled config fragments to master only
             fqdn: locals.fqdn, // for TLS certificate creation
             lastCdrMs: locals.lastCdrMs, // enables incremental CDR upload
+            live: Boolean((locals.scheme || {}).live), // activates correct lostnode email-address
             mainurl: main.identity, // hostname : port
             moshHost: os.hostname(), // ensure packet relay via this host
             moshPort: locals.moshPort || null, // optional nexus liason port
