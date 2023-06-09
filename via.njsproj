@@ -163,6 +163,7 @@
     <Content Include="lib\scaber\protocol\Bs8521\Stabilise.js" />
     <Content Include="lib\scaber\protocol\Bsia.js" />
     <Content Include="lib\scaber\protocol\Bsia\Establish.js" />
+    <Content Include="lib\scaber\protocol\Detect2.js" />
     <Content Include="lib\scaber\protocol\Guard.js" />
     <Content Include="lib\scaber\protocol\Tt92.js" />
     <Content Include="lib\scaber\protocol\Tt92\Catalogue.js" />
