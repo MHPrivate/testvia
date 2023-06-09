@@ -53,8 +53,14 @@
     </extension>
 
     <extension name="scaber" >
-        <condition field="${sip_req_params}" expression="\bappello=scaber\b"/>
-        <condition field="caller_id_number" expression="anonymous|unavailable|unknown" break="on-true">
+        <condition field="${sip_req_params}" expression="\bappello=scaber\b" break="never">
+            <action application="set" data="scaber=true" inline="true"/>
+        </condition>
+        <condition field="${sip_user_agent}" expression="scaber|Patton" break="never">
+            <action application="set" data="scaber=true" inline="true"/>
+        </condition>
+        <condition field="${scaber}" expression="^true$"/>
+        <condition field="caller_id_number" expression="(?i)anonymous|unavailable|unknown" break="on-true">
             <!--<action application="respond" data="503"/>-->
             <action application="hangup" data="REQUESTED_CHAN_UNAVAIL"/>
         </condition>
