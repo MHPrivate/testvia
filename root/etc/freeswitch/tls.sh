@@ -32,6 +32,7 @@ $cat $$-cert.pem $$-chain.pem $$-key.pem >wss.pem
 $rm -f $$-*.pem
 $chgrp daemon agent.pem cafile.pem dtls-srtp.pem tls.pem wss.pem
 
+[ -n "$noreload" ] && exit
 [ "$old" == "$(openssl x509 -noout -serial -in $check)" ]  && exit
 
 while sleep 1; do
