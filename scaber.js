@@ -79,13 +79,17 @@ if (cluster.isMaster) {
     });
     Object.assign(main.modules, { // load worker functionality
         azure: require('./lib/azure'),
+        detect2: null, // maintain alphabetic order, but load after 'worker'
         esl: require('./lib/esl'),
         mysql: require('./lib/mysql'),
         nowip: require('./lib/nowip'),
         rpscb: require('./lib/rpscb'),
         Session: require('./lib/scaber/session'),
         worker: require('./lib/scaber/worker'),
+
+        detect2: require('./lib/scaber/protocol/Detect2'),
     });
+
 }
 
 process.nextTick(function (nics) {

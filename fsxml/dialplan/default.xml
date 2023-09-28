@@ -79,26 +79,6 @@
         </condition>
     </extension>
 
-    <extension name="scheme" continue="true">
-        <!-- database lookup indicates next-hop is registered on this this cone-server -->
-        <condition field="${sofia_contact(user/{%= dialPrefix %})}" expression="sofia" break="never">
-            <action application="set" data="hangup_after_bridge=true"/>
-            <action application="set" data="continue_on_fail=true"/>
-            <action application="set" data="bridge=${sofia_contact(user/{%= dialPrefix %})}" inline="true"/>
-            <!-- Offer SRTP on outbound legs if the contact contains 'transport=tls'. -->
-            <!-- lua-regex:'gw%+[^@]+' equivalent to posix-regex:/gw\+[^@]+/ -->
-            <action application="bridge" data="{rtp_secure_media=${regex(${bridge}|(?i)transport=tls)}}${lua(~stream:write(tostring(string.gsub('${bridge}','gw%+[^@]+','${destination_number}'))))}"/>
-        </condition>
-        <!-- database lookup indicates next-hop is registered on another cone-server -->
-        <condition field="${cond(${hostname} == {%= cone %} ? true : false)}" expression="^false$" break="never">
-            <!-- skip these if _cone_ is this host -->
-            <action application="set" data="hangup_after_bridge=true"/>
-            <action application="set" data="continue_on_fail=true"/>
-            <action application="set" data="sip_h_X-AppelloExpedite={%= appelloExpedite %}"/>
-            <action application="bridge" data="{rtp_secure_media=true}sofia/ext4tls/${destination_number}@{%= cone %}:5061;transport=tls"/>
-        </condition>
-    </extension>
-
     <extension name="park">
         <condition field="${appello_dev}" expression="^true$"/>
         <condition field="destination_number" expression="^(park|7275)$">
@@ -113,7 +93,7 @@
         </condition>
     </extension>
 
-    <extension name="grouped-callback">
+    <extension name="grouped-callback" continue="false">
         <condition field="destination_number" expression="^(\+|00)\d+\D\d{4}$">
             <action application="park"/>
         </condition>
@@ -124,20 +104,12 @@
         -->
     </extension>
 
-    <extension name="assist" >
-        <condition field="destination_number" expression="^assist$|^assist-[\w-]+$">
-            <!-- fs_send_unsupported_info enables sending INFOs where 'send_info' is not listed in the X-FS-Support header -->
-            <action application="set" data="fs_send_unsupported_info=true"/>
-            <!-- fs_send_unsupported_message enables sending MESSAGEs where 'send_message' is not listed in the X-FS-Support header -->
-            <action application="set" data="fs_send_unsupported_message=true"/>
-            <action application="set" data="send_silence_when_idle=1000"/>
-            <action application="set" data="eavesdrop_group=scaber"/>
-            <action application="set" data="RECORD_STEREO=true"/>
-            <action application="set" data="record_file_path=$${recordings_dir}/${strftime(%Y-%m-%dT%H-%M-%SZ)}.${caller_id_number}.wav"/>
-            <!-- <action application="record_session" data="${record_file_path}"/> -->
+    <extension name="sip-terminal-adapter">
+        <condition field="destination_number" expression="^440000">
             <action application="park"/>
-            <!--<action application="answer"/>-->
-            <!--<action application="sleep" data="32000"/>-->
+        </condition>
+        <condition field="caller_id_number" expression="martin" break="on-true">
+            <anti-action application="hangup" data="REQUESTED_CHAN_UNAVAIL"/>
         </condition>
     </extension>
 
@@ -153,8 +125,6 @@
             <action application="set" data="record_file_path=$${recordings_dir}/${strftime(%Y-%m-%dT%H-%M-%SZ)}.${caller_id_number}.wav"/>
             <!-- <action application="record_session" data="${record_file_path}"/> -->
             <action application="park"/>
-            <!--<action application="answer"/>-->
-            <!--<action application="sleep" data="32000"/>-->
         </condition>
     </extension>
 
@@ -185,21 +155,44 @@
                     .filter(sub=>sub.endsWith('.xml') && fs.statSync(`${basedir}/${sub}`).isFile())
                     .map(sub=>include(`${dir}/${sub}`))
                     .join('')
-                : undefined
+                : undefined;
         } else if (stat && stat.isFile() && stat.size) { // substantive file
-	return include(`${dir}/${sub}.xml`)
-	}
-	})(path.dirname(__filename), 'default', query['Caller-Destination-Number']) // __dirname, 'default', '1000'
-	-%}
+            return include(`${dir}/${sub}.xml`);
+        }
+    })(path.dirname(__filename), 'default', query['Caller-Destination-Number']) // __dirname, 'default', '1000'
+-%}
 
-	<extension name="martin">
-		<condition field="username" expression="^martin">
-			<action application="multiset" data="hangup_after_bridge=true continue_on_fail=false"/>
-			<action application="bridge" data="{origination_caller_id_number=+447802827727}sofia/gateway/magrathea/${destination_number}"/>
-		</condition>
-	</extension>
+    <extension name="scheme" continue="true">
+        <!-- ensure the target is an SLS destination -->
+        <condition field="destination_number" expression="^4\d{8}$" break="on-false"/>
+        <!-- database lookup indicates next-hop is registered on this this cone-server -->
+        <condition field="${sofia_contact(*/{%= dialPrefix %})}" expression="sofia" break="never">
+            <action application="set" data="hangup_after_bridge=true"/>
+            <action application="set" data="continue_on_fail=true"/>
+            <action application="set" data="bridge=${sofia_contact(*/{%= dialPrefix %})}" inline="true"/>
+            <!-- Offer SRTP on outbound legs if the contact contains 'transport=tls'. -->
+            <!-- lua-regex:'gw%+[^@]+' equivalent to posix-regex:/gw\+[^@]+/ -->
+            <action application="bridge" data="{rtp_secure_media=${regex(${bridge}|(?i)transport=tls)}}${lua(~stream:write(tostring(string.gsub('${bridge}','gw%+[^@]+','${destination_number}'))))}"/>
+        </condition>
+        <!-- database lookup indicates next-hop is registered on another cone-server -->
+        <condition field="${cond(${hostname} == {%= cone %} ? true : false)}" expression="^false$" break="never">
+            <!-- skip these if _cone_ is this host -->
+            <action application="set" data="hangup_after_bridge=true"/>
+            <action application="set" data="continue_on_fail=true"/>
+            <action application="set" data="sip_h_X-AppelloExpedite={%= appelloExpedite %}"/>
+            <action application="bridge" data="{rtp_secure_media=true}sofia/ext4tls/${destination_number}@{%= cone %}:5061;transport=tls"/>
+        </condition>
+    </extension>
 
-	<extension name="catchall">
+    <extension name="martin">
+        <condition field="destination_number" expression="^(\+|00|0)\d+$"/>
+        <condition field="username" expression="^martin">
+            <action application="multiset" data="hangup_after_bridge=true continue_on_fail=false"/>
+            <action application="bridge" data="{origination_caller_id_number=+447802827727}sofia/gateway/magrathea/${destination_number}"/>
+        </condition>
+    </extension>
+
+    <extension name="catchall">
         <condition>
             <action application="set" data="RECORD_STEREO=true"/>
             <action application="record_session" data="/tmp/${strftime(%Y-%m-%d-%H-%M-%S)}.${caller_id_number}.wav"/>
