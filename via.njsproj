@@ -140,6 +140,7 @@
     <Content Include="lib\running.js" />
     <Content Include="lib\azure.js" />
     <Content Include="lib\scaber\communicator-callback.js" />
+    <Content Include="lib\scaber\communicator-nowip-xt2.js" />
     <Content Include="lib\scaber\communicator-null.js" />
     <Content Include="lib\scaber\communicator-assist.js" />
     <Content Include="lib\scaber\communicator-bs8521-pnc.js" />
