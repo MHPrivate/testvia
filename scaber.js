@@ -32,7 +32,7 @@ var main = Object.defineProperties(Object.assign(exports,  {
     global: global, // expose process global for repl-client connections
     hack: {},       // diagnostic runtime settings - usually empty
     modules: {},    // container for loadable functionality modules
-    secrets: require('./secrets.json'),
+    secrets: require('./secrets.json'), // NOTE - require fails to properly pass the JSON e.g. "uk\\\\.co\\\\.appello\\\\.hm"
     setup: {},      // static instance settings variations that allow multiple instances on the same host e.g. port numbers
     state: {},      // fast-dynamic runtime context for detail tracking
     uuidv1: null,   // will be require('uuid').v1 bound to the primary system mac-address
