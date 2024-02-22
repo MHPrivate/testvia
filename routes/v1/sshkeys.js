@@ -25,7 +25,7 @@ exports.get('/:userId', function (req, res, next) { // GET /v1/sshkeys/:userId?d
         dialPrefix = req.query.dialPrefix || '';
     next.index = req.index;
     chain(next, function () {
-        mysql('select k.*,u.username,s.skillName from users u join userSkills s on u.id = s.userId join userSshs k on u.id = k.userId where(s.skillName like "ssha%" or (k.userId=? and s.skillName like "ssho%")) group by id', [req.params.userId], this);
+        mysql('select k.*,u.username,s.skillName from users u join userSkills s on u.id = s.userId join userSshs k on u.id = k.userId where(s.skillName like "ssha%" or (k.userId=? and s.skillName like "ssho%"))', [req.params.userId], this);
 
     }, function (keys, meta) {
         locals.keys = keys;
