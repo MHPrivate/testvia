@@ -20,18 +20,21 @@ exports.get('/', function (req, res, next) { // GET /vi/sshkeys
     });
 });
 
-exports.get('/:userId', function (req, res, next) { // GET /v1/sshkeys/:userId
-    var locals = req.locals;
+exports.get('/:userId', function (req, res, next) { // GET /v1/sshkeys/:userId?dialPrefix=<digits>
+    var locals = req.locals,
+        dialPrefix = req.query.dialPrefix || '';
     next.index = req.index;
     chain(next, function () {
-        mysql('select k.*,u.username from users u join userSkills s on u.id = s.userId join userSshs k on u.id = k.userId where(s.skillName = "ssha" or (k.userId=? and s.skillName="ssho")) group by id', [req.params.userId], this);
+        mysql('select k.*,u.username,s.skillName from users u join userSkills s on u.id = s.userId join userSshs k on u.id = k.userId where(s.skillName like "ssha%" or (k.userId=? and s.skillName like "ssho%")) group by id', [req.params.userId], this);
 
-    }, function (users, meta) { // {id,key,keyId,userId,username}
-        locals.users = users;
-        res.end(users.map(function (user, idx, arr) {
-            return user.key + ' ' + user.username;
+    }, function (keys, meta) {
+        locals.keys = keys;
+        res.end(keys.filter(function (key, idx, arr) {
+            var match = key.skillName.match(/^ssh.\.(.*)/);
+            return !match || dialPrefix.startsWith(match[1]);
+        }).map(function (key, idx, arr) {
+            return key.key + ' ' + key.username;
         }).join('\n') + '\n');
 
     });
 });
-
