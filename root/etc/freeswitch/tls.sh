@@ -4,10 +4,13 @@ chgrp=/usr/bin/chgrp
 curl=/usr/bin/curl
 dirname=/usr/bin/dirname
 fs_cli=/usr/bin/fs_cli
+grep=/usr/bin/grep
+jq=/usr/bin/jq
 ln=/usr/bin/ln
 openssl=/usr/bin/openssl
 rm=/usr/bin/rm
 sleep=/usr/bin/sleep
+wc=/usr/bin/wc
 
 check=dtls-srtp.pem
 token=8a947e04-c590-4f6c-b40c-455e385e2ef2
@@ -35,7 +38,22 @@ $chgrp daemon agent.pem cafile.pem dtls-srtp.pem tls.pem wss.pem
 [ -n "$noreload" ] && exit
 [ "$old" == "$(openssl x509 -noout -serial -in $check)" ]  && exit
 
-while sleep 1; do
-    [ $(fs_cli -x status | grep -- '- peak' | cut -d ' ' -f 1) -eq 0 ] && break
+## for each profile with 'tls' in the name
+for profile in $($fs_cli -x 'sofia jsonstatus' | $jq -r '.profiles | keys[]' | $grep tls); do
+  echo -n "$profile: "
+  ## check no calls using said profile
+  while $($fs_cli -x 'show calls as json' | $jq . | $grep -q $profile); do
+    echo -n $($fs_cli -x 'show calls as json' | $jq . | $grep $profile | $wc -l)
+    sleep 1
+  done
+  echo $fs_cli -x "sofia profile $profile restart"
+  $fs_cli -x "sofia profile $profile restart"
+  $sleep 10
 done
-$fs_cli -x 'unload mod_sofia'; $sleep 5; $fs_cli -x 'load mod_sofia'
+exit
+
+
+#while sleep 1; do
+#    [ $(fs_cli -x status | grep -- '- peak' | cut -d ' ' -f 1) -eq 0 ] && break
+#done
+#$fs_cli -x 'unload mod_sofia'; $sleep 5; $fs_cli -x 'load mod_sofia'

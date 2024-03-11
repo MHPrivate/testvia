@@ -25,3 +25,4 @@ EOT
 # 213.166.4.128/26
 
 #tcpdump -nni ens160 net 87.238.72.0/21 or net 213.166.0.0/21
+#tcpdump -nni ens160 -s 0 -w magrathea.pcap -C 10M -z gzip net 87.238.72.0/21 or net 213.166.0.0/21 &
