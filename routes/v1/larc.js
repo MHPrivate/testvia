@@ -61,12 +61,20 @@ exports.post('/', function (req, res, next) { // POST /larc - create/update larc
                 master: req.body.master,
                 nodejs: req.body.nodejs,
                 password: locals.credentials.pass,
+                sdBroken: larcs[0].sdBroken,
+                sdCheckpoint: req.body.sdCheckpoint && new Date(req.body.sdCheckpoint),
                 seen: req._startTime,
                 started: req.body.started && new Date(req.body.started),
                 upgrade: req.body.githash ? 0 : undefined, // reset by each ping request containing a githash
                 username: locals.credentials.name,
             };
             if (larcs.length) {
+                if (larcs[0].sdBroken) // already broken - no change
+                    null;
+                else if (larcs[0].sdCheckpoint && !larc.sdCheckpoint) // previously reported but not this time suggests HQ rollback
+                    larc.sdBroken = 1;
+                else if (larcs[0].sdCheckpoint > larc.sdCheckpoint) // previously reported a later date
+                    larc.sdBroken = 1;
                 locals.upgrade = larcs[0].upgrade && req.body.githash;
                 locals.jsonConfigIds = larcs[0].jsonConfigIds ? larcs[0].jsonConfigIds.split(/,\s*/) : [];
             } else {
