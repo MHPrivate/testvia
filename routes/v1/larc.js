@@ -51,6 +51,7 @@ exports.post('/', function (req, res, next) { // POST /larc - create/update larc
             locals.ipv6 = ipaddr.IPv6.parse(req.ip);
             var larc = {
                 created: larcs.length ? undefined : req._startTime, // existing or new LARC
+                gitbranch: req.body.gitbranch,
                 gitdate: req.body.gitdate && new Date(req.body.gitdate),
                 githash: req.body.githash,
                 ipv4i: locals.ipv4i,
@@ -109,11 +110,17 @@ exports.post('/', function (req, res, next) { // POST /larc - create/update larc
             mysql('select * from schemes where id=?', [locals.larc.schemeId], this);
 
         }, function (schemes, meta) { // assign a scheme secret if blank
+            var scheme = {};
             locals.scheme = schemes[0];
             if (!locals.larc.ipv4x || !locals.scheme)
                 return this.this();
+
             if (!locals.scheme.secret)
-                locals.sqls.push(mysql.mksql('schemes', { secret: uuidv4() }, locals.scheme));
+                scheme.secret = uuidv4();
+            if (locals.scheme.live && (locals.larc.gitbranch || 'master') !== 'master')
+                scheme.live = 0;
+            if (Object.keys(scheme).length)
+                locals.sqls.push(mysql.mksql('schemes', scheme, locals.scheme));
             mysql('select * from sipUsers where scope="user" and user=?', [locals.scheme.dialPrefix], this);
 
         }, function (sipUsers, meta) {
