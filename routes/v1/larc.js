@@ -61,7 +61,7 @@ exports.post('/', function (req, res, next) { // POST /larc - create/update larc
                 master: req.body.master,
                 nodejs: req.body.nodejs,
                 password: locals.credentials.pass,
-                sdBroken: larcs[0].sdBroken,
+                sdBroken: (larcs[0] || {}).sdBroken,
                 sdCheckpoint: req.body.sdCheckpoint && new Date(req.body.sdCheckpoint),
                 seen: req._startTime,
                 started: req.body.started && new Date(req.body.started),
