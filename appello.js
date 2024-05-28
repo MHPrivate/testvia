@@ -17,6 +17,7 @@ var main = Object.defineProperties(Object.assign(exports,{
     hack: {},       // diagnostic runtime settings - usually empty
     identity: null, // typically https://<hostname>:<port> of this service instance
     modules: { // only for diagnostic accessibility - not to be used by code - use require(s) only
+        aws: require('./lib/aws'),
         esl: require('./lib/esl'),
         fsxml: require('./lib/fsxml'),
         harvest: require('./lib/harvest'),
