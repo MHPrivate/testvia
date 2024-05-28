@@ -113,7 +113,7 @@ process.running.ready.then(function onReady() {
         var address = con.remoteFamily === 'IPv6' ? `[${con.remoteAddress}]:${con.remotePort}` : `${con.remoteAddress}:${con.remotePort}`;
         debug(address, 'connected:', new Date);
         con.data = '';
-        con.on('data', function onData(data) { // _this_ is the connection
+        con.on('data', async function onData(data) { // _this_ is the connection
             con.data += data;
             var raw, msg, match, hr, msgs = con.data.split(/\u0014|\r\n/);
             while (msgs.length > 1) { // for each received message
@@ -121,7 +121,7 @@ process.running.ready.then(function onReady() {
                 match = bsiaREs[msg.length] && bsiaREs[msg.length].exec(msg);// [account,channels,status]
                 debug(address, 'MSG:', raw, JSON.stringify(match && match.groups));
                 hr = process.hrtime();
-                send(
+                await send(
                     Object.defineProperty((match || { groups: {} }).groups, 'address', { value: address })
                 ).then(function (result) {
                     console.log(address, 'ACK:', raw, result, process.hrtime(hr).reduce(function (w, n, i, a) { return w = w * 1000000000 + n }, 0) / 1000000 + 'ms', new Date);
