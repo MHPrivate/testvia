@@ -71,7 +71,7 @@ var bsiaREs = [ // CSL send 4 leading routing digits that are not part of BSIA
     null,   // 01 = 1xCSL + 00xBSIA
     null,   // 02 = 2xCSL + 00xBSIA
     null,   // 03 = 3xCSL + 00xBSIA
-    null,   // 04 = 4xCSL + 00xBSIA
+    /(?<csl>\d{4})$/,   // 04 = 4xCSL + 00xBSIA - heartbeat
     null,   // 05 = 4xCSL + 01xBSIA
     null,   // 06 = 4xCSL + 02xBSIA
     null,   // 07 = 4xCSL + 03xBSIA
@@ -84,25 +84,25 @@ var bsiaREs = [ // CSL send 4 leading routing digits that are not part of BSIA
     null,   // 14 = 4xCSL + 10xBSIA
     null,   // 15 = 4xCSL + 11xBSIA
     null,   // 16 = 4xCSL + 12xBSIA
-    /\d{4}(?<account>\d{4})(?<channels>\d{8})(?<status>\d)$/,   // 17 = 4xCSL + 13xBSIA - NNNNCCCCCCCCS
-    /\d{4}(?<account>\d{5})(?<channels>\d{8})(?<status>\d)$/,   // 18 = 4xCSL + 14xBSIA - NNNNNCCCCCCCCS
-    /\d{4}(?<account>\d{6})(?<channels>\d{8})(?<status>\d)$/,   // 19 = 4xCSL + 15xBSIA - NNNNNNCCCCCCCCS
+    /(?<csl>\d{4})(?<account>\d{4})(?<channels>\d{8})(?<status>\d)$/,   // 17 = 4xCSL + 13xBSIA - NNNNCCCCCCCCS
+    /(?<csl>\d{4})(?<account>\d{5})(?<channels>\d{8})(?<status>\d)$/,   // 18 = 4xCSL + 14xBSIA - NNNNNCCCCCCCCS
+    /(?<csl>\d{4})(?<account>\d{6})(?<channels>\d{8})(?<status>\d)$/,   // 19 = 4xCSL + 15xBSIA - NNNNNNCCCCCCCCS
     null,   // 20 = 4xCSL + 16xBSIA
     null,   // 21 = 4xCSL + 17xBSIA
     null,   // 22 = 4xCSL + 18xBSIA
     null,   // 23 = 4xCSL + 19xBSIA
     null,   // 24 = 4xCSL + 20xBSIA
-    /\d{4}(?<account>\d{4})(?<channels>\d{16})(?<status>\d)$/,   // 25 = 4xCSL + 21xBSIA - NNNNCCCCCCCCCCCCCCCCS
-    /\d{4}(?<account>\d{5})(?<channels>\d{16})(?<status>\d)$/,   // 26 = 4xCSL + 22xBSIA - NNNNNCCCCCCCCCCCCCCCCS
-    /\d{4}(?<account>\d{6})(?<channels>\d{16})(?<status>\d)$/,   // 27 = 4xCSL + 23xBSIA - NNNNNNCCCCCCCCCCCCCCCCS
+    /(?<csl>\d{4})(?<account>\d{4})(?<channels>\d{16})(?<status>\d)$/,   // 25 = 4xCSL + 21xBSIA - NNNNCCCCCCCCCCCCCCCCS
+    /(?<csl>\d{4})(?<account>\d{5})(?<channels>\d{16})(?<status>\d)$/,   // 26 = 4xCSL + 22xBSIA - NNNNNCCCCCCCCCCCCCCCCS
+    /(?<csl>\d{4})(?<account>\d{6})(?<channels>\d{16})(?<status>\d)$/,   // 27 = 4xCSL + 23xBSIA - NNNNNNCCCCCCCCCCCCCCCCS
     null,   // 28 = 4xCSL + 24xBSIA
     null,   // 29 = 4xCSL + 25xBSIA
     null,   // 30 = 4xCSL + 26xBSIA
     null,   // 31 = 4xCSL + 27xBSIA
     null,   // 32 = 4xCSL + 28xBSIA
-    /\d{4}(?<account>\d{4})(?<channels>\d{24})(?<status>\d)$/,   // 33 = 4xCSL + 29xBSIA - NNNNCCCCCCCCCCCCCCCCCCCCCCCCS
-    /\d{4}(?<account>\d{5})(?<channels>\d{24})(?<status>\d)$/,   // 34 = 4xCSL + 30xBSIA - NNNNNCCCCCCCCCCCCCCCCCCCCCCCCS
-    /\d{4}(?<account>\d{6})(?<channels>\d{24})(?<status>\d)$/,   // 35 = 4xCSL + 31xBSIA - NNNNNNCCCCCCCCCCCCCCCCCCCCCCCCS
+    /(?<csl>\d{4})(?<account>\d{4})(?<channels>\d{24})(?<status>\d)$/,   // 33 = 4xCSL + 29xBSIA - NNNNCCCCCCCCCCCCCCCCCCCCCCCCS
+    /(?<csl>\d{4})(?<account>\d{5})(?<channels>\d{24})(?<status>\d)$/,   // 34 = 4xCSL + 30xBSIA - NNNNNCCCCCCCCCCCCCCCCCCCCCCCCS
+    /(?<csl>\d{4})(?<account>\d{6})(?<channels>\d{24})(?<status>\d)$/,   // 35 = 4xCSL + 31xBSIA - NNNNNNCCCCCCCCCCCCCCCCCCCCCCCCS
 ];
 
 // only open the socket once dependencies are in place - e.g. rpscb
@@ -156,6 +156,9 @@ process.running.ready.then(function onReady() {
 
 function send(groups) {
     debug(groups.address, 'SND:', JSON.stringify(groups));
+    if (groups.csl && !groups.account && !groups.channels && !groups.status)
+        return Promise.resolve('heartbeat');
+
     if (!groups.account) // invalid message
         return Promise.reject('invalid message');
 
