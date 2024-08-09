@@ -22,9 +22,12 @@ dir=$(pwd)
 cd tls
 
 old=$([ -e "$check" ] && openssl x509 -noout -serial -in $check)
+declare -a empty
 for pem in key cert chain; do
     $curl -sH "Authorization: Bearer $token" https://localhost.appello.care/maintain/cert/appello.care?dir=$dir\&$pem >$$-$pem.pem
+    [ -s $$-$pem.pem ] || empty+=($$-$pem.pem)
 done
+[ ${#empty[*]} -gt 0 ] && echo "EMPTY: ${empty[*]}" && exit # protect against empty PEM file
 
 $cat $$-cert.pem $$-key.pem >agent.pem
 $cat $$-chain.pem >cafile.pem
