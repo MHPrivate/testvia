@@ -114,7 +114,7 @@
     </extension>
 
     <extension name="nowip" >
-        <condition field="destination_number" expression="^nowip$|^nowip-[\w-]+$|^nowipxt2$|^nowipxt2-[\w-]+$">
+        <condition field="destination_number" expression="^nowip$|^nowip-[\w-]+$|^nowip2$|^nowip2-[\w-]+$">
             <!-- fs_send_unsupported_info enables sending INFOs where 'send_info' is not listed in the X-FS-Support header -->
             <action application="set" data="fs_send_unsupported_info=true"/>
             <!-- fs_send_unsupported_message enables sending MESSAGEs where 'send_message' is not listed in the X-FS-Support header -->
