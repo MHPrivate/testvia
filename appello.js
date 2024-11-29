@@ -17,7 +17,7 @@ var main = Object.defineProperties(Object.assign(exports,{
     hack: {},       // diagnostic runtime settings - usually empty
     identity: null, // typically https://<hostname>:<port> of this service instance
     modules: { // only for diagnostic accessibility - not to be used by code - use require(s) only
-        aws: require('./lib/aws'),
+        aws: null,  //Delay load until after rpscb
         esl: require('./lib/esl'),
         fsxml: require('./lib/fsxml'),
         harvest: require('./lib/harvest'),
@@ -30,6 +30,8 @@ var main = Object.defineProperties(Object.assign(exports,{
         rpscb: require('./lib/redis'), // redis -> rpscb (redis-pub-sub-callback)
         scabs: require('./lib/mesh/scabs'),
         web: require('./lib/web'),
+
+        aws: require('./lib/aws'),
     },
     secrets: require('./secrets.json'),
     setup: { // static instance settings variations that allow multiple instances on the same host e.g. port numbers
