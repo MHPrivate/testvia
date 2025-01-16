@@ -4,21 +4,23 @@ while read; do
         echo firewall-cmd $@ --ipset=chums4 --add-entry=$cidr
 done <<EOT
  46.23.249.41/32     possum development
+51.83.23.158/32     gw2.telealarm.com
 81.171.12.244/32    gw3.telealarm.com
 85.133.122.72/32    essence + chiptech (CSL)
 85.133.122.73/32    essence + chiptech (CSL)
 85.133.122.86/32    essence + chiptech (CSL)
-162.19.197.254/32   gw1.telealarm.com
  85.214.144.155/32   gw1.telealarm.com - retired 2023-01-19
  86.179.16.27/32     possum development - pete swales
  87.86.190.23/32     careip via CSL (doro on analogue APN - arrange with CSL to switch to digital APN)
  87.86.190.25/32     careip via CSL (doro on analogue APN - arrange with CSL to switch to digital APN)
-51.83.23.158/32     gw2.telealarm.com
  94.23.55.219/32     gw2.telealarm.com - retired 2023-01-19
  155.4.133.112/32    possum development - emil bengtsson
+162.19.197.254/32   gw1.telealarm.com
 178.22.139.77/32    lon.out.simwood.com
 185.63.140.77/32    slo.out.simwood.com
 185.63.142.77/32    man.out.simwood.com
+193.240.77.88/29    mobius (2024-10-24)
+193.240.77.120/29   mobius (2024-10-24)
 195.10.99.99/32     chiptech
 217.156.234.130/32  neatnovo (mobius-additional)
 217.156.234.160/29  neatnovo (mobius-primary)
