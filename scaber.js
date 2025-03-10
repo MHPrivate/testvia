@@ -63,7 +63,7 @@ if (cluster.isMaster) {
             callback: require('./lib/scaber/communicator-callback'),
             detect: require('./lib/scaber/communicator-detect'), // bridge, guard, bs8521, tt92, ttnew, bsia, ttold
             nowip: require('./lib/scaber/communicator-nowip'),
-            nowip2: require('./lib/scaber/communicator-nowip2'),
+            nowipgrp: require('./lib/scaber/communicator-nowipgrp'),
             null: require('./lib/scaber/communicator-null'),
             scaip: require('./lib/scaber/communicator-scaip'),
             default: process.env.DEFAULT_COMMUNICATOR || 'detect',

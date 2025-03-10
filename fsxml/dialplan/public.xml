@@ -94,7 +94,7 @@
     </extension>
 
     <extension name="nowip" >
-        <condition field="destination_number" expression="^nowip$|^nowip-[\w-]+$|^nowip2$|^nowip2-[\w-]+$"/>
+        <condition field="destination_number" expression="^nowip$|^nowip-[\w-]+$|^nowipgrp$|^nowipgrp-[\w-]+$"/>
         <condition field="caller_id_number" expression="anonymous|unavailable" break="on-true">
             <action application="hangup" data="REQUESTED_CHAN_UNAVAIL"/>
         </condition>
