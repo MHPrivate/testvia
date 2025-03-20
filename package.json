@@ -9,6 +9,8 @@
     "url": "git+ssh://git@github.com/mhmeadows63/appello-via.git"
   },
   "dependencies": {
+    "@aws-sdk/client-ec2": "^3.629.0",
+    "@aws-sdk/client-route-53": "^3.554.0",
     "@azure/msal-node": "^1.8.0",
     "@parse/node-apn": "^3.1.0",
     "agentkeepalive": "^4.2.1",

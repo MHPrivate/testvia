@@ -63,7 +63,7 @@ if (cluster.isMaster) {
             callback: require('./lib/scaber/communicator-callback'),
             detect: require('./lib/scaber/communicator-detect'), // bridge, guard, bs8521, tt92, ttnew, bsia, ttold
             nowip: require('./lib/scaber/communicator-nowip'),
-            nowipxt2: require('./lib/scaber/communicator-nowip-xt2'),
+            nowipgrp: require('./lib/scaber/communicator-nowipgrp'),
             null: require('./lib/scaber/communicator-null'),
             scaip: require('./lib/scaber/communicator-scaip'),
             default: process.env.DEFAULT_COMMUNICATOR || 'detect',
@@ -79,6 +79,7 @@ if (cluster.isMaster) {
         },
     });
     Object.assign(main.modules, { // load worker functionality
+        aws: null,  //Delay loading until after rpscb
         azure: require('./lib/azure'),
         detect2: null, // maintain alphabetic order, but load after 'worker'
         esl: require('./lib/esl'),
@@ -88,6 +89,7 @@ if (cluster.isMaster) {
         Session: require('./lib/scaber/session'),
         worker: require('./lib/scaber/worker'),
 
+        aws: require('./lib/aws'),
         detect2: require('./lib/scaber/protocol/Detect2'),
     });
 
