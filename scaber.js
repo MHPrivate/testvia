@@ -79,7 +79,6 @@ if (cluster.isMaster) {
         },
     });
     Object.assign(main.modules, { // load worker functionality
-        aws: null,  //Delay loading until after rpscb
         azure: require('./lib/azure'),
         detect2: null, // maintain alphabetic order, but load after 'worker'
         esl: require('./lib/esl'),
@@ -89,7 +88,6 @@ if (cluster.isMaster) {
         Session: require('./lib/scaber/session'),
         worker: require('./lib/scaber/worker'),
 
-        aws: require('./lib/aws'),
         detect2: require('./lib/scaber/protocol/Detect2'),
     });
 
