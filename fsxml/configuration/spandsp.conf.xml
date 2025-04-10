@@ -175,68 +175,68 @@
         <!-- telecare stmf tone pairs -->
         <descriptor name="telecare-stmf">
             <tone name="telecare-stmf:0">
-                <element freq1="941" freq2="0" min="80" max="96"/>
-                <element freq1="1336" freq2="0" min="80" max="96"/>
+                <element freq1="941" freq2="0" min="60" max="120"/>
+                <element freq1="1336" freq2="0" min="60" max="120"/>
             </tone>
             <tone name="telecare-stmf:1">
-                <element freq1="697" freq2="0" min="80" max="96"/>
-                <element freq1="1209" freq2="0" min="80" max="96"/>
+                <element freq1="697" freq2="0" min="60" max="120"/>
+                <element freq1="1209" freq2="0" min="60" max="120"/>
             </tone>
             <tone name="telecare-stmf:2">
-                <element freq1="697" freq2="0" min="80" max="96"/>
-                <element freq1="1336" freq2="0" min="80" max="96"/>
+                <element freq1="697" freq2="0" min="60" max="120"/>
+                <element freq1="1336" freq2="0" min="60" max="120"/>
             </tone>
             <tone name="telecare-stmf:3">
-                <element freq1="697" freq2="0" min="80" max="96"/>
-                <element freq1="1477" freq2="0" min="80" max="96"/>
+                <element freq1="697" freq2="0" min="60" max="120"/>
+                <element freq1="1477" freq2="0" min="60" max="120"/>
             </tone>
             <tone name="telecare-stmf:4">
-                <element freq1="770" freq2="0" min="80" max="96"/>
-                <element freq1="1209" freq2="0" min="80" max="96"/>
+                <element freq1="770" freq2="0" min="60" max="120"/>
+                <element freq1="1209" freq2="0" min="60" max="120"/>
             </tone>
             <tone name="telecare-stmf:5">
-                <element freq1="770" freq2="0" min="80" max="96"/>
-                <element freq1="1336" freq2="0" min="80" max="96"/>
+                <element freq1="770" freq2="0" min="60" max="120"/>
+                <element freq1="1336" freq2="0" min="60" max="120"/>
             </tone>
             <tone name="telecare-stmf:6">
-                <element freq1="770" freq2="0" min="80" max="96"/>
-                <element freq1="1477" freq2="0" min="80" max="96"/>
+                <element freq1="770" freq2="0" min="60" max="120"/>
+                <element freq1="1477" freq2="0" min="60" max="120"/>
             </tone>
             <tone name="telecare-stmf:7">
-                <element freq1="852" freq2="0" min="80" max="96"/>
-                <element freq1="1209" freq2="0" min="80" max="96"/>
+                <element freq1="852" freq2="0" min="60" max="120"/>
+                <element freq1="1209" freq2="0" min="60" max="120"/>
             </tone>
             <tone name="telecare-stmf:8">
-                <element freq1="852" freq2="0" min="80" max="96"/>
-                <element freq1="1336" freq2="0" min="80" max="96"/>
+                <element freq1="852" freq2="0" min="60" max="120"/>
+                <element freq1="1336" freq2="0" min="60" max="120"/>
             </tone>
             <tone name="telecare-stmf:9">
-                <element freq1="852" freq2="0" min="80" max="96"/>
-                <element freq1="1477" freq2="0" min="80" max="96"/>
+                <element freq1="852" freq2="0" min="60" max="120"/>
+                <element freq1="1477" freq2="0" min="60" max="120"/>
             </tone>
             <tone name="telecare-stmf:A">
-                <element freq1="697" freq2="0" min="80" max="96"/>
-                <element freq1="1633" freq2="0" min="80" max="96"/>
+                <element freq1="697" freq2="0" min="60" max="120"/>
+                <element freq1="1633" freq2="0" min="60" max="120"/>
             </tone>
             <tone name="telecare-stmf:B">
-                <element freq1="770" freq2="0" min="80" max="96"/>
-                <element freq1="1633" freq2="0" min="80" max="96"/>
+                <element freq1="770" freq2="0" min="60" max="120"/>
+                <element freq1="1633" freq2="0" min="60" max="120"/>
             </tone>
             <tone name="telecare-stmf:C">
-                <element freq1="852" freq2="0" min="80" max="96"/>
-                <element freq1="1633" freq2="0" min="80" max="96"/>
+                <element freq1="852" freq2="0" min="60" max="120"/>
+                <element freq1="1633" freq2="0" min="60" max="120"/>
             </tone>
             <tone name="telecare-stmf:D">
-                <element freq1="941" freq2="0" min="80" max="96"/>
-                <element freq1="1633" freq2="0" min="80" max="96"/>
+                <element freq1="941" freq2="0" min="60" max="120"/>
+                <element freq1="1633" freq2="0" min="60" max="120"/>
             </tone>
             <tone name="telecare-stmf:*">
-                <element freq1="941" freq2="0" min="80" max="96"/>
-                <element freq1="1209" freq2="0" min="80" max="96"/>
+                <element freq1="941" freq2="0" min="60" max="120"/>
+                <element freq1="1209" freq2="0" min="60" max="120"/>
             </tone>
             <tone name="telecare-stmf:#">
-                <element freq1="941" freq2="0" min="80" max="96"/>
-                <element freq1="1477" freq2="0" min="80" max="96"/>
+                <element freq1="941" freq2="0" min="60" max="120"/>
+                <element freq1="1477" freq2="0" min="60" max="120"/>
             </tone>
         </descriptor>
 
