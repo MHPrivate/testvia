@@ -11,7 +11,7 @@ router.get('/cert/appello.care', locals.trusted, function (req, res, next) {
     if (!['key', 'cert', 'chain'].some(function (e, i, a) { return e in this }, req.query)) // empty shopping list means everything
         req.query = { key: '', cert: '', chain: '' };
     chain(next, function () {
-        mysql('select *,l.chain from fqdns f left join leChains l on f.chainId=l.id where fqdn=?', ['appello.care'], this);
+        mysql('select *,l.chain from fqdns f left join leChains l on f.chainId=l.id where fqdn=?', [main.secrets.fqdn || 'appello.care'], this);
 
     }, function (fqdns, meta) {
         locals.fqdns = fqdns;
